@@ -1,0 +1,44 @@
+<?php
+
+use App\Http\Controllers\IndexController;
+use App\Http\Controllers\LineController;
+use App\Http\Controllers\WashController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', [IndexController::class, 'index']);
+
+Route::any('line/fake/{type?}/{message?}', [LineController::class, 'sandBox']);
+Route::any('line/message', [LineController::class, 'lineCallback']);
+
+Route::get('wash', [WashController::class, 'index'])->name('wash.index');
+Route::get('wash/get_profile/{social_id}', [WashController::class, 'getProfile'])->name('wash.index');
+
+
+Route::post('wash',  [WashController::class, 'store'])->name('wash.store');
+
+Route::get('wash/{id}/pay',  [WashController::class, 'pay']);
+Route::post('wash/pay',  [WashController::class, 'paid']);
+
+Route::get('wash/{id}/arrange',  [WashController::class, 'arrange']);
+Route::get('wash/{id}/set_amount',  [WashController::class, 'setAmount']);
+Route::post('wash/{id}/set_amount',  [WashController::class, 'doSetAmount']);
+Route::get('wash/{id}/redirect_pay',  [WashController::class, 'redirectPay']);
+Route::get('wash/{id}/pay_webhook/{token}',  [WashController::class, 'payWebhook']);
+
+
+Route::post('wash/arrange',  [WashController::class, 'arranged']);
+
+Route::get('wash/{id}/before',  [WashController::class, 'before']);
+Route::get('wash/{id}/after',  [WashController::class, 'after']);
