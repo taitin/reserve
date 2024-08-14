@@ -87,7 +87,6 @@ class Wash extends Model
         ];
 
 
-        $data['link'] = liffUrl('wash/' . $this->id . '/arrange');
         return $data;
     }
 
