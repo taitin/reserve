@@ -77,7 +77,7 @@ class Wash extends Model
         $reserves = Wash::where('date', $today)->orderBy('time', 'desc')->get();
         $str = '';
         foreach ($reserves as $reserve) {
-            $str .= $reserve->time . ' ' . $reserve->phone . ' ' . $reserve->license . ' ' . $reserve->model . ' ' . $reserve->worker . "\n";
+            $str .= substr($reserve->time, 0, 5) . ' ' . $reserve->phone . ' ' . $reserve->license . ' ' . $reserve->model . ' ' . $reserve->worker . "\n";
         }
 
         if (empty($str)) {
