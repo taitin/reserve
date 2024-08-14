@@ -71,6 +71,21 @@ class Wash extends Model
         return [];
     }
 
+    function getTodayReserve()
+    {
+        $today = date('Y-m-d');
+        $reserves = Wash::where('date', $today)->orderBy('time', 'desc')->get();
+        $str = '';
+        foreach ($reserves as $reserve) {
+            $str .= $reserve->time . ' ' . $reserve->phone . ' ' . $reserve->license . ' ' . $reserve->model . ' ' . $reserve->worker . "\n";
+        }
+
+
+        return [
+
+            'reserves' =>  $str
+        ];
+    }
 
 
     function reject()
