@@ -80,6 +80,9 @@ class Wash extends Model
             $str .= $reserve->time . ' ' . $reserve->phone . ' ' . $reserve->license . ' ' . $reserve->model . ' ' . $reserve->worker . "\n";
         }
 
+        if (empty($str)) {
+            $str = '今日無預約';
+        }
 
         return [
 
