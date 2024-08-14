@@ -74,7 +74,7 @@ class Wash extends Model
     function getTodayReserve()
     {
         $today = date('Y-m-d');
-        $reserves = Wash::where('date', $today)->orderBy('time', 'desc')->get();
+        $reserves = Wash::where('date', $today)->orderBy('time', 'asc')->get();
         $str = '';
         foreach ($reserves as $reserve) {
             $str .= substr($reserve->time, 0, 5) . ' ' . $reserve->phone . ' ' . $reserve->license . ' ' . $reserve->model . ' ' . $reserve->worker . "\n";
