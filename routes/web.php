@@ -24,6 +24,7 @@ Route::any('line/message', [LineController::class, 'lineCallback']);
 
 Route::get('wash', [WashController::class, 'index'])->name('wash.index');
 Route::get('wash/get_profile/{social_id}', [WashController::class, 'getProfile'])->name('wash.index');
+Route::get('wash/get_available_time', [WashController::class, 'getAvailableTime']);
 
 
 Route::post('wash',  [WashController::class, 'store'])->name('wash.store');

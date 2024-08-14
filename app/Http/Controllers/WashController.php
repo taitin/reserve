@@ -43,9 +43,9 @@ class WashController extends Controller
                 'phone' => 'required',
                 'license' => 'required',
                 'model' => 'required',
-                'parking' => 'required',
-                'entry_time' => 'required',
-                'exit_time' => 'required',
+                // 'parking' => 'required',
+                'date' => 'required',
+                'time' => 'required',
                 'car_type' => 'required',
             ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -66,12 +66,9 @@ class WashController extends Controller
         $message .= "電話: " . $request->phone . "\n";
         $message .= "車牌: " . $request->license . "\n";
 
+        $message .= "預約日期: " . $request->date . "\n";
+        $message .= "預約時間: " . $request->time . "\n";
 
-        $message .= "停車位: " . $request->parking . "\n";
-        $message .= "進場時間: " . $request->entry_time . "\n";
-        $message .= "出場時間: " . $request->exit_time . "\n";
-
-        $message .= "車款: " . $request->model . "\n";
         $message .= "客戶自填車型: " . carType($request->car_type) . "\n";
         if (!empty($request->addition_services))
             $message .= "額外加值服務: " . implode(',', $request->addition_services) . "\n";
@@ -84,7 +81,7 @@ class WashController extends Controller
         $group->pushMessage([
             'message' => $message,
             'text_buttons' => [
-                ['label' => '同意安排洗車', 'text' => '@同意洗車 ' . $wash->id],
+                ['label' => '確認安排洗車', 'text' => '@同意洗車 ' . $wash->id],
                 ['label' => '同意洗車，但須調整價格', 'text' => '@調整價格 ' . $wash->id],
                 ['label' => '拒絕洗車', 'text' => '@拒絕洗車 ' . $wash->id],
             ]
@@ -114,7 +111,7 @@ class WashController extends Controller
 
 
 
-        return view('wash.close', ['message' => '洗車申請已送出']);
+        return view('wash.close', ['message' => '洗車預約已送出']);
     }
 
     public function setAmount(Request $request)
@@ -287,5 +284,31 @@ class WashController extends Controller
 
 
         return redirect()->to($wash->pay_result['data']['payment_url']);
+    }
+
+    public function getAvailableTime(Request $request)
+    {
+        $date = $request->date;
+        $day = Carbon::parse($date)->dayOfWeek;
+        //判斷若日期為今天以前 則 $day = 0 無法預約
+        strtotime($date) < strtotime(date('Y-m-d')) ? $day = 0 : $day = $day;
+
+        if ($day == 0) {
+            $available_times = ['*本日已無預約時端，請選擇其他日期'];
+        } else {
+            $available_times = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'];
+        }
+
+        //扣掉已預約的時間
+        $washes = Wash::where('date', $date)->get();
+        foreach ($washes as $wash) {
+            $key = array_search(substr($wash->time, 0, 5), $available_times);
+            if ($key !== false) {
+                unset($available_times[$key]);
+            }
+        }
+
+
+        return ['result' => true, 'available_times' => array_values($available_times)];
     }
 }

@@ -89,33 +89,17 @@
         </div>
 
         <div class="form-group">
-            <label for="parking">停車場名稱或地址</label>
-            <div style="display: flex">
-                <select id="city" style="width: 20%">
-                    @foreach ($parkings as $city => $parks)
-                        <option value="{{ $city }}">{{ $city }}</option>
-                    @endforeach
-                </select>
-                @foreach ($parkings as $city => $parks)
-                    <select class="city_options" id="select_{{ $city }}" style="width: 80%">
-                        @foreach ($parks as $park)
-                            <option value="{{ $park->address }}">
-                                {{ str_replace($city . '市', '', $park->address) }}({{ $park->name }})</option>
-                        @endforeach
-                    </select>
-                @endforeach
-            </div>
+            <label for="entryTime">洗車日期</label>
+            <input required type="date" class="form-control" id="entry_time" name="date"
+                min="{{ date('Y-m-d') }}">
         </div>
         <div class="form-group">
-            <label for="entryTime">預估進場的時間</label>
-            <input required type="datetime-local" class="form-control" id="entry_time" name="entry_time">
-        </div>
-        <div class="form-group">
-            <label for="exitTime">預估離場的時間</label>
-            <input required type="datetime-local" class="form-control" id="exit_time" name="exit_time">
-        </div>
-        <img src="{{ asset('images/price.jpg') }}" style="width: 100%">
+            <label for="exitTime">預約時間</label>
+            <select id="time" name="time">
+                <option></option>
+            </select>
 
+        </div>
         <div class="form-group">
             <label for="model">車款(廠牌及型號)</label>
             <input required type="text" placeholder="如 Toyota Rav4" class="form-control" id="model"
@@ -213,8 +197,45 @@
         $('#select_' + city).show();
         $('#select_' + city).attr('name', 'parking');
     }
+    //根據日期計算可預約時間
+    function calculateAvailableTime() {
+        var entryTime = $('#entry_time').val();
+        var date = new Date(entryTime);
+        var day = date.getDay();
+
+        $.get('/wash/get_available_time', {
+            date: entryTime
+        }, function(data) {
+            var availableTimes = [];
+            // if (day == 0) {
+            //     availableTimes = ['10:00', '11:00', '12:00'];
+            // } else {
+            //     availableTimes = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'];
+            // }
+            availableTimes = data.available_times;
+            var select = $('#time');
+            select.empty();
+            availableTimes.forEach(function(time) {
+                select.append('<option value="' + time + '">' + time + '</option>');
+            });
+        }, 'json');
+
+
+
+    }
 
     $(function() {
+
+
+        $('#entry_time').change(function() {
+            calculateAvailableTime();
+        });
+
+
+
+
+
+
         calculateTotalAmount();
         // 當表單送出時，檢查車牌格式
 
