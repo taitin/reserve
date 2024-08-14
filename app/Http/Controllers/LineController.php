@@ -48,7 +48,6 @@ class LineController extends Controller
     {
         $events = $request->events;
 
-        Log::debug($events);
         // $events = json_decode('[{"type":"message","message":{"type":"text","id":"488126177878212660","quotedMessageId":"488077650032590904","quoteToken":"IMykhWUG8-5nvyFek-koj_wqg4NQqccA5EZ0WIB9G_I839j2JexAU5Dj-jW-V38-0HysueLxUTOB44krwO8zpeFx69McAtygA6wSwHTg7hxSzc8Ok1vL0Wnr4hLTyYxAdClmCowuPagO4yBUD3S4IA","text":"@\u7a0d\u5f8c\u56de\u8986"},"webhookEventId":"01HJRGH5D0Q8K96GYB3Z1A9X5X","deliveryContext":{"isRedelivery":false},"timestamp":1703777178536,"source":{"type":"group","groupId":"C506c9fa45c2017359b3c169da8c99468","userId":"U43ce048d8409b3d0ebe641feec57ed62"},"replyToken":"799d16e3bd2b48b6acb8ed8ab9ae35a5","mode":"active"}]', true);
         $replyToken = $events[0]['replyToken'] ?? '';
         $line = new LineService();
@@ -263,8 +262,6 @@ class LineController extends Controller
 
     public function getKeywordAction($keyword, $type)
     {
-        Log::debug($keyword);
-        Log::debug($type);
         return  Action::where('keyword', $keyword)->where('from', $type)->get();
     }
 
@@ -360,12 +357,13 @@ class LineController extends Controller
             foreach ($actions as $action) {
                 if (!empty($action)) {
                     $finish = true;
-                    $value = $r->value;
+                    $values = explode(' ', $r->value);
                     $params = [];
-                    $wash = Wash::find($r->value);
+                    $wash = Wash::find(end($values));
                     if (!empty($action->do_method)) {
 
-                        $params = $wash->{$action->do_method}();
+                        if (count($values) > 1) $params = $wash->{$action->do_method}($values);
+                        else $params = $wash->{$action->do_method}();
                     }
 
                     if (!empty($action->text_buttons)) {

@@ -64,6 +64,13 @@ class Wash extends Model
     }
 
 
+    function setWorker($data)
+    {
+        $this->worker = $data[0];
+        $this->save();
+        return [];
+    }
+
 
 
     function reject()
