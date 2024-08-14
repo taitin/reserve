@@ -18,8 +18,10 @@ class Wash extends Model
     protected $guarded = ['id'];
     protected $casts = [
         'before_photos' => 'json',
-        'after_photos' => 'json', 'pay_data' => 'json',
-        'pay_result' => 'json', 'pay_auth_result' => 'json',
+        'after_photos' => 'json',
+        'pay_data' => 'json',
+        'pay_result' => 'json',
+        'pay_auth_result' => 'json',
         'addition_services' => 'json'
     ];
     protected $car_type_prices = [
@@ -70,6 +72,25 @@ class Wash extends Model
         $this->save();
         return [];
     }
+
+    function confirmBooking()
+    {
+        $this->status = 'confirmed';
+        $this->save();
+
+        $data = [
+            'phone' => $this->phone,
+            'license' => $this->license,
+            'model' => $this->model,
+            'date' => $this->date,
+            'time' => $this->time,
+        ];
+
+
+        $data['link'] = liffUrl('wash/' . $this->id . '/arrange');
+        return $data;
+    }
+
 
     function payFinish()
     {
