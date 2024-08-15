@@ -82,7 +82,7 @@ class WashController extends Controller
             'message' => $message,
             'text_buttons' => [
                 ['label' => '確認安排洗車', 'text' => '@同意洗車 ' . $wash->id],
-                ['label' => '同意洗車，但須調整價格', 'text' => '@調整價格 ' . $wash->id],
+                // ['label' => '同意洗車，但須調整價格', 'text' => '@調整價格 ' . $wash->id],
                 ['label' => '拒絕洗車', 'text' => '@拒絕洗車 ' . $wash->id],
             ]
         ]);
