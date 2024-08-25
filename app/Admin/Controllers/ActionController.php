@@ -31,6 +31,9 @@ class ActionController extends AdminController
 
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
+                $filter->like('keyword');
+                $filter->like('content');
+                $filter->like('do_method');
             });
         });
     }
