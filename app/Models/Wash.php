@@ -156,19 +156,10 @@ class Wash extends Model
     {
         $this->status = 'paid';
         $this->save();
-
-        $data = [
-            'phone' => $this->phone,
-            'license' => $this->license,
-            'model' => $this->model,
-            'parking' => $this->parking,
-            'entry_time' => $this->entry_time,
-            'exit_time' => $this->exit_time,
-            'price' => $this->price
-        ];
+        $data = $this->getNewBooking();
 
 
-        $data['link'] = liffUrl('wash/' . $this->id . '/arrange');
+        // $data['link'] = liffUrl('wash/' . $this->id . '/arrange');
         return $data;
     }
 
