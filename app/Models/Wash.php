@@ -254,7 +254,7 @@ class Wash extends Model
         // return;
     }
 
-    public function getTimeAdjust($date)
+    public function getTimeAdjust()
     {
 
         return ['link' => liffUrl('wash/' . $this->id . '/time_adjust')];
