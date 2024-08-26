@@ -292,4 +292,13 @@ class Wash extends Model
 
         ];
     }
+
+    public function setAdjustTime($t)
+    {
+        $this->date = $t[0];
+        $this->time = $t[1];
+        $this->status = 'arranged';
+        $this->save();
+        return $this->confirmBooking();
+    }
 }
