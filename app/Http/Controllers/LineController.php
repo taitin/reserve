@@ -159,7 +159,7 @@ class LineController extends Controller
         } else {
 
             if (!empty($events)) {
-                $keywords = [];
+                $keywords =  $this->fetchKeyword($inputText,  $type);
                 $line = new LineService();
                 $user = $line->getUser($socialId);
                 $input = [
