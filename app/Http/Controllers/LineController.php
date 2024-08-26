@@ -362,6 +362,8 @@ class LineController extends Controller
                 if (!empty($action)) {
                     $finish = true;
                     $values = explode(' ', $r->value);
+                    Log::debug($values);
+
                     $params = [];
                     $wash = Wash::find(end($values));
                     if (empty($wash)) $wash = new Wash();
@@ -370,7 +372,6 @@ class LineController extends Controller
                         if (count($values) > 1) $params = $wash->{$action->do_method}($values);
                         else $params = $wash->{$action->do_method}();
                     }
-                    Log::debug($params);
 
                     $text_buttons = [];
                     if (!empty($action->text_buttons)) {
