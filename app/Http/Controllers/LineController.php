@@ -382,16 +382,22 @@ class LineController extends Controller
                     }
 
 
+                    $result_params = [];
+                    foreach ($wash->params as $key => $value) {
+                        $result_params[] = $value;
+                    }
 
 
                     //將content中的 {$name} 取代為 params[$name]
                     preg_match_all('/\{(.+?)\}/', $action->content, $matches);
 
+
+
                     // foreach ($matches[1] as $match) {
                     //     $params[$match] = $r->{$match} ?? '';
                     // }
 
-                    $content = str_replace($matches[0], $params, $action->content);
+                    $content = str_replace($matches[0], $result_params, $action->content);
 
                     $message =   $content;
                     $replys = [];
