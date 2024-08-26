@@ -118,14 +118,6 @@
     </form>
 </body>
 <script>
-    function validateLicense() {
-        var license = document.getElementById('license').value;
-        if (!license.includes('-')) {
-            alert('車牌格式不正確，必須包含 "-"。');
-            return false; // 阻止表單提交
-        }
-        return true; // 允許表單提交
-    }
     // 計算總金額的函數
     function calculateTotalAmount() {
         var totalAmount = 0;

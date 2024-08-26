@@ -344,7 +344,6 @@ class WashController extends Controller
 
         $wash = \App\Models\Wash::find($request->id);
 
-        $available_times = $this->getAvailable($wash->date);
-        return    $available_times;
+        return  view('wash.adjust_time');
     }
 }
