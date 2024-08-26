@@ -220,6 +220,8 @@ class LineController extends Controller
         preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
 
         $result = [];
+        Log::debug($text);
+
         foreach ($matches as $match) {
             $key = $match[1];
             $value = trim(str_replace('@' . $key, '', $text)) ?? '';
