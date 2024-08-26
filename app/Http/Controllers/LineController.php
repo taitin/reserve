@@ -386,7 +386,7 @@ class LineController extends Controller
                     //將content中的 所有 {$name} 取出來 為array
                     preg_match_all('/\{(.+?)\}/', $action->content, $matches);
 
-
+                    dd($matches);
 
                     //將content中的 {$name} 取代為 params[$name]
                     preg_match_all('/\{(.+?)\}/', $action->content, $matches);
