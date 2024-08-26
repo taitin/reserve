@@ -235,6 +235,7 @@ class LineController extends Controller
             }
             $result[$key] = $value;
         }
+        Log::debug(['result' => $result]);
 
         $output = [];
 
