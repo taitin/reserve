@@ -404,6 +404,9 @@ class LineController extends Controller
                     // foreach ($matches[1] as $match) {
                     //     $params[$match] = $r->{$match} ?? '';
                     // }
+                    dump($matches);
+                    dump($result_params);
+
 
                     $content = str_replace($matches[0], $result_params, $action->content);
 
