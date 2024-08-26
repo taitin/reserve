@@ -166,6 +166,26 @@ class WashController extends Controller
         return view('wash.close', ['message' => '洗車金額設定失敗 請洽款管理員']);
     }
 
+
+    public function payWebhookFake(Request $request)
+    {
+
+        //洗車 form
+        $wash = \App\Models\Wash::find($request->id);
+        $wash->status = 'paid';
+        $wash->save();
+        $input = [
+            'keyword' => '付款完成',
+            'value' => $wash->id,
+        ];
+        $line = new LineController();
+        $line->actionTrigger(json_decode(json_encode($input), false), 'customer');
+
+        return view('wash.close', ['message' => '付款成功！！請返回Line繼續操作']);
+    }
+
+
+
     public function payWebhook(Request $request)
     {
         //洗車 form
