@@ -386,6 +386,6 @@ class WashController extends Controller
         $wash = \App\Models\Wash::find($request->id);
         $wash->suggest_time = $result;
 
-        return $result;
+        return view('wash.close', ['message' => '時間調整已送出']);
     }
 }
