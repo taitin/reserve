@@ -220,7 +220,10 @@ class LineController extends Controller
         preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
 
         $result = [];
+
         Log::debug($text);
+        Log::debug($matches);
+
 
         foreach ($matches as $match) {
             $key = $match[1];
