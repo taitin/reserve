@@ -236,12 +236,16 @@ class LineController extends Controller
             $result[$key] = $value;
         }
         Log::debug(['result' => $result]);
+        Log::debug(['type' => $type]);
+
 
         $output = [];
 
         foreach ($result as $key => $v) {
 
             $action =  $this->getKeywordAction($key, $type)->first();
+            Log::debug(['action' => $action]);
+
             if (!empty($action)) {
                 $output[$key] = [
                     'value' => $v,
