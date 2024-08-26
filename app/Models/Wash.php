@@ -224,7 +224,7 @@ class Wash extends Model
     public function setCarTypeHouse()
     {
         $this->changeCarType('house');
-        $this->sendAdjustMessage();
+        // $this->sendAdjustMessage();
 
         return ['price' => $this->price];
     }
@@ -232,7 +232,7 @@ class Wash extends Model
     public function setCarType5p()
     {
         $this->changeCarType('5p');
-        $this->sendAdjustMessage();
+        // $this->sendAdjustMessage();
 
         return ['price' => $this->price];
     }
