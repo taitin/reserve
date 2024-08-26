@@ -215,8 +215,6 @@ class LineController extends Controller
 
 
 
-        Log::debug($text);
-        Log::debug($type);
 
         $pattern = '/@(\S+)(?:\s+([\d\p{L}]+))?/u';
         preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
