@@ -123,3 +123,15 @@ if (!function_exists('carType')) {
         return $result;
     }
 }
+
+
+if (!function_exists('zhDate')) {
+
+    //2024-08-31 (六) 10:00
+    function zhDate($date)
+    {
+        $week = ['日', '一', '二', '三', '四', '五', '六'];
+        $day = Carbon\Carbon::parse($date)->dayOfWeek;
+        return Carbon\Carbon::parse($date)->format('Y-m-d') . ' (' . $week[$day] . ') ' . Carbon\Carbon::parse($date)->format('H:i');
+    }
+}

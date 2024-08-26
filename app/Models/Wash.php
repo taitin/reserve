@@ -36,6 +36,42 @@ class Wash extends Model
     ];
 
 
+    function getNewBooking()
+    {
+
+        $data = [
+            'phone' => $this->phone,
+            'license' => $this->license,
+            'cart_type' => carType($this->car_type),
+            'model' => $this->model,
+            'booking_time' => zhDate($this->date . ' ' . $this->time),
+            'method' => '洗車方案',
+            'addition' => implode(',', $this->getAdditions()),
+            'total' => $this->price,
+            'total_hour' => $this->total_hour ?? 1.49,
+            'get_car_time' => zhDate($this->date . ' ' . $this->time),
+        ];
+
+        return $data;
+    }
+
+    function getAdditions()
+    {
+
+        if ($this->addition_services) {
+            $additions = [];
+            foreach ($this->addition_services as $service) {
+                $additions[] =  $this->service_prices[$service];
+            }
+            return $additions;
+        }
+        return [];
+    }
+
+
+
+
+
     function getSetAmoutnLink()
     {
         return ['link' => liffUrl('wash/' . $this->id . '/set_amount')];

@@ -81,9 +81,9 @@ class WashController extends Controller
         $group->pushMessage([
             'message' => $message,
             'text_buttons' => [
-                ['label' => '確認安排洗車', 'text' => '@同意洗車 ' . $wash->id],
-                ['label' => '同意洗車，但須調整價格', 'text' => '@調整價格 ' . $wash->id],
-                ['label' => '拒絕洗車', 'text' => '@拒絕洗車 ' . $wash->id],
+                ['label' => '同意申請', 'text' => '@同意洗車 ' . $wash->id],
+                ['label' => '需調整預約申請', 'text' => '@調整價格 ' . $wash->id],
+                ['label' => '拒絕申請', 'text' => '@拒絕洗車 ' . $wash->id],
             ]
         ]);
 
