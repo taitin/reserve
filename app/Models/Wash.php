@@ -287,6 +287,10 @@ class Wash extends Model
 
     public function getAdjustTimeStr()
     {
-        return implode("\n", $this->getAdjustTime());
+        $r = $this->getAdjustTime();
+        return [
+            'adjust_time' => implode("\n", $r['adjust_time'])
+
+        ];
     }
 }
