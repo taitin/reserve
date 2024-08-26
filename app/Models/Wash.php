@@ -240,7 +240,7 @@ class Wash extends Model
     public function setCarType7p()
     {
         $this->changeCarType('7p');
-        $this->sendAdjustMessage();
+        // $this->sendAdjustMessage();
         return ['price' => $this->price];
     }
 
