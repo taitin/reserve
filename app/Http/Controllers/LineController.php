@@ -391,6 +391,7 @@ class LineController extends Controller
                         unset($params['text_buttons']);
                     }
 
+                    Log::debug($params);
 
 
 
