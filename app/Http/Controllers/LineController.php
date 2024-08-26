@@ -223,6 +223,7 @@ class LineController extends Controller
         foreach ($matches as $match) {
             $key = $match[1];
             $value = trim(str_replace('@' . $key, '', $text)) ?? '';
+            Log::debug($value);
             // = $match[2] ?? ''; // 如果沒有匹配到第二個組，則默認為空字符串
             if (is_numeric($value)) {
                 $value = intval($value); // 如果值是數字，則轉換為整數
