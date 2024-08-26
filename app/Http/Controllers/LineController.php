@@ -358,6 +358,7 @@ class LineController extends Controller
         if (!empty($r->keyword)) {
 
             $actions =  $this->getKeywordAction($r->keyword, $type);
+            Log::debug($actions);
             foreach ($actions as $action) {
                 if (!empty($action)) {
                     $finish = true;
@@ -391,7 +392,6 @@ class LineController extends Controller
                         unset($params['text_buttons']);
                     }
 
-                    Log::debug($params);
 
 
 
@@ -406,8 +406,7 @@ class LineController extends Controller
                     // foreach ($matches[1] as $match) {
                     //     $params[$match] = $r->{$match} ?? '';
                     // }
-                    Log::debug($result_params);
-                    Log::debug($matches);
+
 
                     if (!empty($matches[0]) && !empty($result_params))
                         $content = str_replace($matches[0], $result_params, $action->content);
