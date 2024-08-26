@@ -384,7 +384,7 @@ class LineController extends Controller
 
                     $result_params = [];
                     foreach ($action->params as $key => $value) {
-                        $result_params[] = $value;
+                        $result_params[] = $params[$value];
                     }
 
 
