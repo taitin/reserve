@@ -281,15 +281,14 @@ class Wash extends Model
         foreach ($this->suggest_time as $time) {
             $times[] = $time['date'] . ' ' . $time['time'];
         }
-        $data['adjust_time'] = $times;
-        return $data;
+        return $times;
     }
 
     public function getAdjustTimeStr()
     {
-        $r = $this->getAdjustTime();
+        $adjust_time = $this->getAdjustTime();
         return [
-            'adjust_time' => implode("\n", $r['adjust_time'])
+            'adjust_time' => implode("\n", $adjust_time)
 
         ];
     }
