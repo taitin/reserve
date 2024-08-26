@@ -392,7 +392,7 @@ class LineController extends Controller
                     preg_match_all('/\{(.+?)\}/', $action->content, $matches);
                     $result_params = [];
                     foreach ($matches[0] as $key => $value) {
-                        $result_params[] = $params[$value];
+                        $result_params[] = $params[$value] ?? '';
                     }
 
 
