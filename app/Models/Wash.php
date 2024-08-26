@@ -257,11 +257,6 @@ class Wash extends Model
     public function getTimeAdjust($date)
     {
 
-        $wash = new WashController();
-        $available_times = $wash->getAvailable($this->date);
-
-
-
-        return;
+        return ['link' => liffUrl('wash/' . $this->id . '/time_adjust')];
     }
 }
