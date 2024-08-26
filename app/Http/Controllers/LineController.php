@@ -249,6 +249,7 @@ class LineController extends Controller
                 ];
             }
         }
+        Log::debug(['output' => $output]);
 
         return $output;
     }
