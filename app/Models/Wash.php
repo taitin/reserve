@@ -260,4 +260,28 @@ class Wash extends Model
 
         return ['link' => liffUrl('wash/' . $this->id . '/time_adjust')];
     }
+
+    public function getAdjustTimeWithLabel()
+    {
+        $data['adjust_time'] = $this->getAdjustTime();
+
+        foreach ($data['adjust_time'] as $time) {
+            $times[] = ['label' => $time, 'text' => '@同意修改時間為 ' . str_replace(' ', '_', $time)];
+        }
+
+        $times[] = ['label' => '取消本次預約', 'text' => '@取消本次預約'];
+        $data['text_buttons'] = $times;
+        return;
+    }
+
+    public function getAdjustTime()
+    {
+
+
+        foreach ($this->suggest_time as $time) {
+            $times[] = $time['date'] . ' ' . $time['time'];
+        }
+        $data['adjust_time'] = $times;
+        return $data;
+    }
 }

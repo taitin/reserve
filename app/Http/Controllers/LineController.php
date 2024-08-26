@@ -380,6 +380,15 @@ class LineController extends Controller
                             ];
                         }
                     }
+                    if (!empty($params['text_buttons'])) {
+
+                        foreach ($params['text_buttons'] as $button) {
+                            $text_buttons[] = [
+                                'label' => $button['label'],
+                                'text' => $button['text'] . ' ' . $r->value
+                            ];
+                        }
+                    }
 
 
 

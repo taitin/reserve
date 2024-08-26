@@ -385,7 +385,7 @@ class WashController extends Controller
         $Line->saveRecord($input, $type);
         $wash = \App\Models\Wash::find($request->id);
         $wash->suggest_time = $result;
-
+        $wash->save();
         return view('wash.close', ['message' => '時間調整已送出']);
     }
 }
