@@ -388,6 +388,7 @@ class LineController extends Controller
                                 'text' => $button['text'] . ' ' . $r->value
                             ];
                         }
+                        unset($params['text_buttons']);
                     }
 
 
