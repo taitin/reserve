@@ -366,9 +366,9 @@ class LineController extends Controller
                         if (count($values) > 1) $params = $wash->{$action->do_method}($values);
                         else $params = $wash->{$action->do_method}();
                     }
-
+                    $text_buttons = [];
                     if (!empty($action->text_buttons)) {
-                        $text_buttons = [];
+
                         foreach ($action->text_buttons as $button) {
                             $text_buttons[] = [
                                 'label' => $button['label'],
