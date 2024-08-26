@@ -136,20 +136,8 @@ class Wash extends Model
 
     function confirmBooking()
     {
-        $this->status = 'confirmed';
-        $this->save();
 
-        $data = [
-            'phone' => $this->phone,
-            'license' => $this->license,
-            'model' => $this->model,
-            'date' => $this->date,
-            'time' => $this->time,
-            'link'  => 'https://www.google.com/maps/place/AKdetailing+x+%E8%80%81%E8%95%AD%E5%B0%88%E6%A5%AD%E6%97%A5%E8%A6%8F%E5%A4%96%E5%8C%AF%E8%BB%8A+%E5%8F%B0%E5%8C%97%E6%97%97%E8%89%A6%E5%BA%97/@25.0716714,121.5816533,17z/data=!3m1!4b1!4m6!3m5!1s0x3442ad848ed4b64d:0xd8ca8cf33d1abf43!8m2!3d25.0716714!4d121.5816533!16s%2Fg%2F11t1j92fxp?entry=ttu'
-        ];
-
-
-
+        return array_merge($this->getNewBooking(), $this->getPayLink());
 
         return $data;
     }

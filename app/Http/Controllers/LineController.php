@@ -360,6 +360,7 @@ class LineController extends Controller
             $actions =  $this->getKeywordAction($r->keyword, $type);
             foreach ($actions as $action) {
                 if (!empty($action)) {
+                    Log::debug($action);
                     $finish = true;
                     $values = explode(' ', $r->value);
                     $params = [];
