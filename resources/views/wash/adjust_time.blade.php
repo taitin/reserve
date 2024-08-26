@@ -13,45 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-    <script>
-        $(function() {
-            liff.init({
-                liffId: "{{ env('LINE_LIFF_ID') }}" // Use own liffId
-            }).then(() => {
-                if (!liff.isLoggedIn()) {
-                    liff.login();
-                } else {
-                    liff.getProfile()
-                        .then(profile => {
-                            const name = profile.displayName;
-                            $('#social_id').val(profile.userId);
-                            getLastProfile()
-                        })
-                        .catch((err) => {
-                            console.log('error', err);
-                        });
-                }
-            }).catch((err) => {
-                console.log('初始化失敗');
-            });
-        });
 
-        function getLastProfile() {
-            var social_id = $('#social_id').val();
-
-            $.get('/wash/get_profile/' + social_id, {}, function(data) {
-
-                if (data.result) {
-                    $('#phone').val(data.data.phone);
-                    $('#license').val(data.data.license);
-                    $('#model').val(
-                        data.data.model);
-                    $('#car_type').val(data.data.car_type);
-                    calculateTotalAmount();
-                }
-            }, 'json');
-        }
-    </script>
     <style>
         body {
             padding: 20px;
@@ -78,13 +40,14 @@
 <body>
     <form action="/wash/{{ $wash->id }}/time_adjust" method="post">
         @csrf
+        <h1>請選擇1~3組 日期時間供客戶選擇</h1>
         <div class="form-group">
-            <label for="entryTime">洗車日期</label>
+            <label for="entryTime">洗車日期1</label>
             <input required type="date" class="form-control" id="entry_time1" name="date1"
                 min="{{ date('Y-m-d') }}">
         </div>
         <div class="form-group">
-            <label for="exitTime">預約時間</label>
+            <label for="exitTime">預約時間1</label>
             <select id="time1" name="time1">
                 <option></option>
             </select>
