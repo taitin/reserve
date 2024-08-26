@@ -344,6 +344,6 @@ class WashController extends Controller
 
         $wash = \App\Models\Wash::find($request->id);
 
-        return  view('wash.adjust_time');
+        return  view('wash.adjust_time', ['wash' => $wash]);
     }
 }
