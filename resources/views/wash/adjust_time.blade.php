@@ -114,7 +114,7 @@
             </select>
 
         </div>
-        <button type="submit" class="btn btn-info btn-block submit-btn">送出預約</button>
+        <button type="submit" class="btn btn-info btn-block submit-btn">送出時間</button>
     </form>
 </body>
 <script>
