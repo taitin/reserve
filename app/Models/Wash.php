@@ -93,7 +93,7 @@ class Wash extends Model
         $this->pay_result =  $pay_result;
         $this->save();
         $data = $this->getNewBooking();
-        $data['link'] = $pay_result['pay_url'];
+        $data['link'] =  url("wash/$this->id/redirect_pay");
         return $data;
     }
 
