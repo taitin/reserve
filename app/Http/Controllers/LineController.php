@@ -212,6 +212,12 @@ class LineController extends Controller
 
     public  function fetchKeyword($text, $type = 'customer')
     {
+
+
+
+        Log::debug($text);
+        Log::debug($type);
+
         $pattern = '/@(\S+)(?:\s+([\d\p{L}]+))?/u';
         preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
 
@@ -351,7 +357,6 @@ class LineController extends Controller
     public function actionTrigger($r, $type = 'customer')
     {
         $finish = false;
-        Log::debug($r);
         if (!empty($r->keyword)) {
 
             $actions =  $this->getKeywordAction($r->keyword, $type);
