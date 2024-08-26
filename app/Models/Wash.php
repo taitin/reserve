@@ -284,4 +284,9 @@ class Wash extends Model
         $data['adjust_time'] = $times;
         return $data;
     }
+
+    public function getAdjustTimeStr()
+    {
+        return implode("\n", $this->getAdjustTime());
+    }
 }
