@@ -39,6 +39,7 @@ Route::get('wash/{id}/redirect_pay',  [WashController::class, 'redirectPay']);
 Route::get('wash/{id}/pay_webhook/{token}',  [WashController::class, 'payWebhook']);
 
 Route::get('wash/{id}/pay_trigger',  [WashController::class, 'payWebhookFake']);
+Route::get('wash/{id}/time_adjust',  [WashController::class, 'adjustTime']);
 
 
 

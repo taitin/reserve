@@ -68,7 +68,7 @@ class ActionController extends AdminController
     {
         return Form::make(new Action(), function (Form $form) {
             $form->display('id');
-            $form->text('keyword');
+            $form->text('keyword')->required();
             $form->select('from')->options([
                 'customer' => 'customer',
                 'group' => 'group',
@@ -81,8 +81,8 @@ class ActionController extends AdminController
             $form->select('type')->options([
                 'reply' => 'reply',
                 'push' => 'push',
-            ]);
-            $form->tags('params');
+            ])->default('reply');
+            // $form->tags('params');
 
 
             $form->table('text_buttons', function ($table) {

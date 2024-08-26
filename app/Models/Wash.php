@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Admin\Extensions\Tools\OrderToken;
 use App\Http\Controllers\LineController;
+use App\Http\Controllers\WashController;
 use App\Services\AutopassService;
 use Dcat\Admin\Traits\HasDateTimeFormatter;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -42,7 +43,7 @@ class Wash extends Model
         $data = [
             'phone' => $this->phone,
             'license' => $this->license,
-            'cart_type' => carType($this->car_type),
+            'car_type' => carType($this->car_type),
             'model' => $this->model,
             'booking_time' => zhDate($this->date . ' ' . $this->time),
             'method' => '洗車方案',
@@ -251,5 +252,16 @@ class Wash extends Model
         // $line->actionTrigger(json_decode(json_encode($input), false), 'group');
 
         // return;
+    }
+
+    public function getTimeAdjust($date)
+    {
+
+        $wash = new WashController();
+        $available_times = $wash->getAvailable($this->date);
+
+
+
+        return;
     }
 }

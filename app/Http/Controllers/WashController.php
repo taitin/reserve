@@ -309,6 +309,14 @@ class WashController extends Controller
     public function getAvailableTime(Request $request)
     {
         $date = $request->date;
+        $available_times =   $this->getAvailable($date);
+
+        return ['result' => true, 'available_times' => array_values($available_times)];
+    }
+
+
+    public function getAvailable($date)
+    {
         $day = Carbon::parse($date)->dayOfWeek;
         //判斷若日期為今天以前 則 $day = 0 無法預約
         strtotime($date) < strtotime(date('Y-m-d')) ? $day = 0 : $day = $day;
@@ -328,7 +336,15 @@ class WashController extends Controller
             }
         }
 
+        return $available_times;
+    }
 
-        return ['result' => true, 'available_times' => array_values($available_times)];
+    public function adjustTime(Request $request)
+    {
+
+        $wash = \App\Models\Wash::find($request->id);
+
+        $available_times = $this->getAvailable($wash->date);
+        return    $available_times;
     }
 }
