@@ -81,43 +81,6 @@
     </form>
 </body>
 <script>
-    // 計算總金額的函數
-    function calculateTotalAmount() {
-        var totalAmount = 0;
-        // 根據車型計算基本費用
-        var carType = $('select[name="car_type"]').val();
-        switch (carType) {
-            case 'house':
-                totalAmount += 1500;
-                break;
-            case '5p':
-                totalAmount += 1600;
-                break;
-            case '7p':
-                totalAmount += 1700;
-                break;
-        }
-        $('#basicAmount').html(totalAmount + '元');
-        // 加值服務的費用
-        var additionServices = document.querySelectorAll('input[name="addition_services[]"]:checked');
-        additionServices.forEach(function(service) {
-            totalAmount += parseInt($(service).data('price'));
-        });
-
-        // 顯示總金額
-
-        $('#totalAmount').html(totalAmount + '元');
-
-
-    }
-
-    function changeCity() {
-        var city = $('#city').val();
-        $('.city_options').hide();
-        $('.city_options').removeAttr('name');
-        $('#select_' + city).show();
-        $('#select_' + city).attr('name', 'parking');
-    }
     //根據日期計算可預約時間
     function calculateAvailableTime(index) {
         var entryTime = $('#entry_time' + index).val();
@@ -136,6 +99,8 @@
             availableTimes = data.available_times;
             var select = $('#time' + index);
             select.empty();
+            select.append('<option value="">--請選擇時間--</option>');
+
             availableTimes.forEach(function(time) {
                 select.append('<option value="' + time + '">' + time + '</option>');
             });
