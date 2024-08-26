@@ -23,7 +23,8 @@ class Wash extends Model
         'pay_data' => 'json',
         'pay_result' => 'json',
         'pay_auth_result' => 'json',
-        'addition_services' => 'json'
+        'addition_services' => 'json',
+        'suggest_time' => 'json',
     ];
     protected $car_type_prices = [
         'house' => 1500,

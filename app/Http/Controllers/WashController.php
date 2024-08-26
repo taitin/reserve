@@ -350,6 +350,42 @@ class WashController extends Controller
     public function saveAdjustTime(Request $request)
     {
 
-        return $request;
+        $result = [];
+        for ($i = 1; $i <= 3; $i++) {
+
+
+            if (!empty($request->input('time' . $i))) {
+
+                $data = [
+                    'date' =>  $request->input('date' . $i),
+                    'time' => $request->input('time' . $i),
+                ];
+            }
+        }
+
+        $Line = new LineController();
+        $inputText = '@送出調整時間 ' . $request->id;
+        $type = 'group';
+        $keywords =   $Line->fetchKeyword($inputText,  $type);
+        $input = [
+            'name' => 'system',
+            'group_name' =>  'system',
+            'group_id' => 0,
+            'message_type' => 'text',
+            'social_id' => 0,
+            'date' => date('Y-m-d H:i:s'),
+            'text' =>  $inputText,
+            'keyword' => implode(',', array_keys($keywords)),
+            'value' => implode(',', array_column($keywords, 'value')),
+            'message_id' =>  '',
+            'reply_token' =>  '',
+            'quotedMessageId' => ''
+
+        ];
+        $Line->saveRecord($input, $type);
+        $wash = \App\Models\Wash::find($request->id);
+        $wash->suggest_time = $result;
+
+        return $result;
     }
 }
