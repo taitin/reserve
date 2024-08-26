@@ -92,11 +92,9 @@ class Wash extends Model
         $pay_result = $autopass->makePay($data);
         $this->pay_result =  $pay_result;
         $this->save();
-        return [
-            'car_type' => carType($this->car_type),
-            'price' => $this->price,
-            'link' => url("wash/$this->id/redirect_pay")
-        ];
+        $data = $this->getNewBooking();
+        $data['link'] = $pay_result['pay_url'];
+        return $data;
     }
 
 
@@ -240,7 +238,7 @@ class Wash extends Model
     {
         $this->changeCarType('7p');
         // $this->sendAdjustMessage();
-        return ['price' => $this->price];
+        return $this->getNewBooking();
     }
 
     public function sendAdjustMessage()
