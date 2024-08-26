@@ -226,15 +226,14 @@ class Wash extends Model
         $this->changeCarType('house');
         // $this->sendAdjustMessage();
 
-        return ['price' => $this->price];
+        return $this->getNewBooking();
     }
 
     public function setCarType5p()
     {
         $this->changeCarType('5p');
         // $this->sendAdjustMessage();
-
-        return ['price' => $this->price];
+        return $this->getNewBooking();
     }
 
     public function setCarType7p()
