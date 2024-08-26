@@ -266,7 +266,7 @@ class Wash extends Model
         $data['adjust_time'] = $this->getAdjustTime();
         $times = [];
         foreach ($data['adjust_time'] as $time) {
-            $times[] = ['label' => $time, 'text' => '@同意修改時間為 ' . $time];
+            $times[] = ['label' => $time, 'text' => '@同意修改時間 ' . $time];
         }
 
         $times[] = ['label' => '取消本次預約', 'text' => '@取消本次預約'];
