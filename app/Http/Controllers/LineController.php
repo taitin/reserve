@@ -383,7 +383,7 @@ class LineController extends Controller
 
 
                     $result_params = [];
-                    foreach (json_decode($action->params) as $key => $value) {
+                    foreach ($action->params as $key => $value) {
                         $result_params[] = $value;
                     }
 
