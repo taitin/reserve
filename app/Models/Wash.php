@@ -245,13 +245,13 @@ class Wash extends Model
 
     public function sendAdjustMessage()
     {
-        $input = [
-            'keyword' => '調整完畢',
-            'value' => $this->id,
-        ];
-        $line = new LineController();
-        $line->actionTrigger(json_decode(json_encode($input), false), 'group');
+        // $input = [
+        //     'keyword' => '調整完畢',
+        //     'value' => $this->id,
+        // ];
+        // $line = new LineController();
+        // $line->actionTrigger(json_decode(json_encode($input), false), 'group');
 
-        return;
+        // return;
     }
 }
