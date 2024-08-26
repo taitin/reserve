@@ -368,7 +368,7 @@ class LineController extends Controller
                     }
 
                     if (!empty($action->text_buttons)) {
-
+                        $text_buttons = [];
                         foreach ($action->text_buttons as $button) {
                             $text_buttons[] = [
                                 'label' => $button['label'],
