@@ -40,6 +40,8 @@ Route::get('wash/{id}/pay_webhook/{token}',  [WashController::class, 'payWebhook
 
 Route::get('wash/{id}/pay_trigger',  [WashController::class, 'payWebhookFake']);
 Route::get('wash/{id}/time_adjust',  [WashController::class, 'adjustTime']);
+Route::posr('wash/{id}/time_adjust',  [WashController::class, 'saveAdjustTime']);
+
 
 
 

@@ -54,25 +54,25 @@
 
         </div>
         <div class="form-group">
-            <label for="entryTime">洗車日期</label>
+            <label for="entryTime">洗車日期2</label>
             <input required type="date" class="form-control" id="entry_time2" name="date2"
                 min="{{ date('Y-m-d') }}" value="{{ $wash->date }}">
         </div>
         <div class="form-group">
-            <label for="exitTime">預約時間</label>
+            <label for="exitTime">預約時間2</label>
             <select id="time2" name="time2">
                 <option></option>
             </select>
 
         </div>
         <div class="form-group">
-            <label for="entryTime">洗車日期</label>
+            <label for="entryTime">洗車日期3</label>
             <input required type="date" class="form-control" id="entry_time" name="date3" min="{{ date('Y-m-d') }}"
                 value="{{ $wash->date }}">
         </div>
         <div class="form-group">
-            <label for="exitTime">預約時間</label>
-            <select id="time" name="time3" value="{{ $wash->date }}">
+            <label for="exitTime">預約時間3</label>
+            <select id="time3" name="time3" value="{{ $wash->date }}">
                 <option></option>
             </select>
 
