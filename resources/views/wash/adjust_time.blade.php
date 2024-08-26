@@ -67,8 +67,8 @@
         </div>
         <div class="form-group">
             <label for="entryTime">洗車日期3</label>
-            <input required type="date" class="form-control" id="entry_time" name="date3" min="{{ date('Y-m-d') }}"
-                value="{{ $wash->date }}">
+            <input required type="date" class="form-control" id="entry_time3" name="date3"
+                min="{{ date('Y-m-d') }}" value="{{ $wash->date }}">
         </div>
         <div class="form-group">
             <label for="exitTime">預約時間3</label>
