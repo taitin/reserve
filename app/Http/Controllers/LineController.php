@@ -351,6 +351,7 @@ class LineController extends Controller
     public function actionTrigger($r, $type = 'customer')
     {
         $finish = false;
+        Log::debug($r);
         if (!empty($r->keyword)) {
 
             $actions =  $this->getKeywordAction($r->keyword, $type);
