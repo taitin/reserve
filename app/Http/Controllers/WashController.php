@@ -62,30 +62,30 @@ class WashController extends Controller
         $group =  Group::where('type', '時間到府')->first();
 
         //組織上面資料變成文字傳送 要換行
-        $message = "洗車申請\n";
-        $message .= "電話: " . $request->phone . "\n";
-        $message .= "車牌: " . $request->license . "\n";
+        // $message = "洗車申請\n";
+        // $message .= "電話: " . $request->phone . "\n";
+        // $message .= "車牌: " . $request->license . "\n";
 
-        $message .= "預約日期: " . $request->date . "\n";
-        $message .= "預約時間: " . $request->time . "\n";
+        // $message .= "預約日期: " . $request->date . "\n";
+        // $message .= "預約時間: " . $request->time . "\n";
 
-        $message .= "客戶自填車型: " . carType($request->car_type) . "\n";
-        if (!empty($request->addition_services))
-            $message .= "額外加值服務: " . implode(',', $request->addition_services) . "\n";
+        // $message .= "客戶自填車型: " . carType($request->car_type) . "\n";
+        // if (!empty($request->addition_services))
+        //     $message .= "額外加值服務: " . implode(',', $request->addition_services) . "\n";
 
-        //金額試算
-        $message .= "總金額: " . $wash->price . "\n";
+        // //金額試算
+        // $message .= "總金額: " . $wash->price . "\n";
 
 
 
-        $group->pushMessage([
-            'message' => $message,
-            'text_buttons' => [
-                ['label' => '同意申請', 'text' => '@同意洗車 ' . $wash->id],
-                ['label' => '需調整預約申請', 'text' => '@調整價格 ' . $wash->id],
-                ['label' => '拒絕申請', 'text' => '@拒絕洗車 ' . $wash->id],
-            ]
-        ]);
+        // $group->pushMessage([
+        //     'message' => $message,
+        //     'text_buttons' => [
+        //         ['label' => '同意申請', 'text' => '@同意洗車 ' . $wash->id],
+        //         ['label' => '需調整預約申請', 'text' => '@調整價格 ' . $wash->id],
+        //         ['label' => '拒絕申請', 'text' => '@拒絕洗車 ' . $wash->id],
+        //     ]
+        // ]);
 
 
         $Line = new LineController();
