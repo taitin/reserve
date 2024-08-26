@@ -48,7 +48,6 @@ Route::post('wash/{id}/time_adjust',  [WashController::class, 'saveAdjustTime'])
 
 
 
-
 Route::post('wash/arrange',  [WashController::class, 'arranged']);
 
 Route::get('wash/{id}/before',  [WashController::class, 'before']);

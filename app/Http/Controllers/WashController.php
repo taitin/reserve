@@ -347,7 +347,9 @@ class WashController extends Controller
         return  view('wash.adjust_time', ['wash' => $wash]);
     }
 
-    public function saveAdjustTime(Request $request){
+    public function saveAdjustTime(Request $request)
+    {
 
         return $request;
     }
+}
