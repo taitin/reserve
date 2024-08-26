@@ -264,7 +264,7 @@ class Wash extends Model
     public function getAdjustTimeWithLabel()
     {
         $data['adjust_time'] = $this->getAdjustTime();
-
+        $times = [];
         foreach ($data['adjust_time'] as $time) {
             $times[] = ['label' => $time, 'text' => '@同意修改時間為 ' . str_replace(' ', '_', $time)];
         }
@@ -277,7 +277,7 @@ class Wash extends Model
     public function getAdjustTime()
     {
 
-
+        $times = [];
         foreach ($this->suggest_time as $time) {
             $times[] = $time['date'] . ' ' . $time['time'];
         }

@@ -360,6 +360,7 @@ class WashController extends Controller
                     'date' =>  $request->input('date' . $i),
                     'time' => $request->input('time' . $i),
                 ];
+                $result[] = $data;
             }
         }
         $wash = \App\Models\Wash::find($request->id);
