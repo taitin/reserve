@@ -383,8 +383,8 @@ class LineController extends Controller
 
 
                     $result_params = [];
-                    dd($wash->params);
-                    foreach ($wash->params as $key => $value) {
+
+                    foreach (json_decode($wash->params) as $key => $value) {
                         $result_params[] = $value;
                     }
 
