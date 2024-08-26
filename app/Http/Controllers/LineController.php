@@ -382,15 +382,18 @@ class LineController extends Controller
                     }
 
 
-                    $result_params = [];
-                    foreach ($action->params as $key => $value) {
-                        $result_params[] = $params[$value];
-                    }
+
+                    //將content中的 所有 {$name} 取出來 為array
+                    preg_match_all('/\{(.+?)\}/', $action->content, $matches);
+
 
 
                     //將content中的 {$name} 取代為 params[$name]
                     preg_match_all('/\{(.+?)\}/', $action->content, $matches);
-
+                    $result_params = [];
+                    foreach ($matches[0] as $key => $value) {
+                        $result_params[] = $params[$value];
+                    }
 
 
                     // foreach ($matches[1] as $match) {
