@@ -370,6 +370,8 @@ class LineController extends Controller
                         if (count($values) > 1) $params = $wash->{$action->do_method}($values);
                         else $params = $wash->{$action->do_method}();
                     }
+                    Log::debug($params);
+
                     $text_buttons = [];
                     if (!empty($action->text_buttons)) {
 
@@ -410,7 +412,6 @@ class LineController extends Controller
                     if (!empty($matches[0]) && !empty($result_params))
                         $content = str_replace($matches[0], $result_params, $action->content);
 
-                    Log::debug($text_buttons);
                     $message =   $content;
                     $replys = [];
                     $reply = ['message' => $message];
