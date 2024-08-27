@@ -185,7 +185,7 @@ class Wash extends Model
         return ['link' => 'https://pklotcorp.typeform.com/to/Wdnl2Gyw'];
     }
 
-    public function projects()
+    public function project()
     {
         return $this->belongsTo(Project::class, 'project_id');
     }
@@ -199,8 +199,8 @@ class Wash extends Model
     {
 
         $hr = 0;
-        $total =   $this->projects->discount_price[$this->car_type] ?? 0;
-        $hr += $this->projects->use_time;
+        $total =   $this->project->discount_price[$this->car_type] ?? 0;
+        $hr += $this->project->use_time;
         if ($this->additions) {
             foreach ($this->additions as $service) {
                 $total += $service['discount_price'][$this->car_type] ?? 0;
