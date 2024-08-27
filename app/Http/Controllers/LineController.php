@@ -445,8 +445,7 @@ class LineController extends Controller
                         $group = Group::where('type', '時間到府')->first();
 
                         $this->replyMessage($group->group_id,   $replys, $action->target);
-                    }
-                    if ($action->target == 'master') {
+                    } elseif ($action->target == 'master') {
                         $master = $wash->master;
                         if (!empty($master))
                             $this->replyMessage($master->social_id,   $replys, $action->target);
