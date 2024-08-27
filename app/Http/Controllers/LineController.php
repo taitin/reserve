@@ -451,9 +451,12 @@ class LineController extends Controller
                         Log::debug($action->target);
 
                         Log::debug($master);
+                        Log::debug($replys);
 
-                        if (!empty($master))
-                            $this->replyMessage($master->social_id,   $replys, $action->target);
+                        if (!empty($master)) {
+                            $r =  $this->replyMessage($master->social_id,   $replys, $action->target);
+                            Log::debug($r);
+                        }
                     } else {
                         $this->replyMessage($wash->social_id, $replys, $action->target);
                     }
