@@ -446,7 +446,12 @@ class LineController extends Controller
 
                         $this->replyMessage($group->group_id,   $replys, $action->target);
                     } elseif ($action->target == 'master') {
+
                         $master = $wash->master;
+                        Log::debug($action->target);
+
+                        Log::debug($master);
+
                         if (!empty($master))
                             $this->replyMessage($master->social_id,   $replys, $action->target);
                     } else {
