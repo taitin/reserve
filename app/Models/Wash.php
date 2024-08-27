@@ -36,7 +36,7 @@ class Wash extends Model
             'car_type' => carType($this->car_type),
             'model' => $this->model,
             'booking_time' => zhDate($this->date . ' ' . $this->time),
-            'method' => '洗車方案',
+            'method' => $this->project->name,
             'addition' => implode(',', $this->getAdditions()),
             'total' => $this->price,
             'total_hour' => $this->total_hour ?? 1.49,
@@ -50,11 +50,7 @@ class Wash extends Model
     {
 
         if ($this->addition_services) {
-            $additions = [];
-            foreach ($this->addition_services as $service) {
-                $additions[] =  $this->service_prices[$service];
-            }
-            return $additions;
+            return $this->additions->pluck('name')->toArray();
         }
         return [];
     }
@@ -202,13 +198,19 @@ class Wash extends Model
     public function calculateTotalAmount()
     {
 
+        $hr = 0;
         $total =   $this->projects->discount_price[$this->car_type] ?? 0;
+        $hr += $this->projects->use_time;
         if ($this->additions) {
             foreach ($this->additions as $service) {
                 $total += $service['discount_price'][$this->car_type] ?? 0;
+                $hr += $service->use_time;
             }
         }
         $this->price = $total;
+        $this->total_hour = $hr;
+
+
         $this->save();
         return $total;
     }

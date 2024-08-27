@@ -35,6 +35,7 @@
                 console.log('初始化失敗');
             });
         });
+        var profile = [];
 
         function getLastProfile() {
             var social_id = $('#social_id').val();
@@ -47,6 +48,8 @@
                     $('#model').val(
                         data.data.model);
                     $('#car_type').val(data.data.car_type);
+                    $('#project_id').val(data.data.project_id);
+                    profile = data.data;
                     calculateTotalAmount();
                 }
             }, 'json');
@@ -186,6 +189,7 @@
                 project = projects[key];
                 select.append('<option value="' + project.id + '">' + project.name + '</option>');
             };
+            $('#project_id').val(profile.project_id);
             calculateTotalAmount()
         }, 'json');
     }
