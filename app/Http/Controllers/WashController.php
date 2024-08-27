@@ -22,7 +22,7 @@ class WashController extends Controller
 
 
         foreach ($washes as $wash) {
-            echo  '<a href="' . url("wash/$wash->id/pay_trigger") . '">pa for ' . $wash->id;
+            echo  '<h1><a href="' . url("wash/$wash->id/pay_trigger") . '">pay for ' . $wash->id . '<a><h1>';
         }
     }
     public function index()
