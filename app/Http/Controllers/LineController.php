@@ -124,6 +124,7 @@ class LineController extends Controller
 
                                 $message = '請先點選上傳照片的按鈕,再上傳照片';
                                 $replys = [["message" => $message]];
+                                return;
                             }
                         }
 
