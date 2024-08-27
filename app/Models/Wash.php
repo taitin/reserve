@@ -39,9 +39,11 @@ class Wash extends Model
             'method' => $this->project->name,
             'addition' => implode(',', $this->getAdditions()),
             'total' => $this->price,
-            'total_hour' => $this->total_hour ?? 1.49,
+            'total_hour' => number_format($this->total_hour ?? 1, '.', ''),
             'get_car_time' => zhDate($this->date . ' ' . $this->time),
         ];
+
+        // 如果是3.00 顯示 3 ,3.50 顯示 3.5
 
         return $data;
     }
