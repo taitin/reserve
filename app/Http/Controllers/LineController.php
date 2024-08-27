@@ -20,6 +20,10 @@ class LineController extends Controller
     //
     public function __construct() {}
 
+
+
+
+
     public function sandBox(Request $request)
     {
         $inputText = $request->message;

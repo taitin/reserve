@@ -21,4 +21,6 @@ Route::group([
 
     $router->resource('projects', ProjectController::class);
     $router->resource('additions', AdditionController::class);
+
+    $router->resource('masters', MasterController::class);
 });

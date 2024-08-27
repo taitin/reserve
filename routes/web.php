@@ -22,6 +22,9 @@ Route::get('/', [IndexController::class, 'index']);
 Route::any('line/fake/{type?}/{message?}', [LineController::class, 'sandBox']);
 Route::any('line/message', [LineController::class, 'lineCallback']);
 
+Route::any('line/bind', [LineController::class, 'bind']);
+
+
 Route::get('wash', [WashController::class, 'index'])->name('wash.index');
 Route::get('wash/get_profile/{social_id}', [WashController::class, 'getProfile'])->name('wash.index');
 Route::get('wash/get_available_time', [WashController::class, 'getAvailableTime']);

@@ -144,8 +144,13 @@ class Wash extends Model
         $this->status = 'paid';
         $this->save();
         $data = $this->getNewBooking();
+        $masters = Master::where('status', 1)->get();
+        $master_options = [];
+        foreach ($masters as $master) {
+            $master_options[] = ['label' => $master->name, 'text' => '@安排師傅 ' . $master->id];
+        }
 
-
+        $data['text_buttons'] = $master_options;
         // $data['link'] = liffUrl('wash/' . $this->id . '/arrange');
         return $data;
     }
