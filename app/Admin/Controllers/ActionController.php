@@ -72,10 +72,13 @@ class ActionController extends AdminController
             $form->select('from')->options([
                 'customer' => 'customer',
                 'group' => 'group',
+                'master' => 'master',
             ]);
             $form->select('target')->options([
                 'customer' => 'customer',
                 'group' => 'group',
+                'master' => 'master',
+
             ]);
             $form->textarea('content');
             $form->select('type')->options([
