@@ -18,4 +18,7 @@ Route::group([
     $router->resource('groups', GroupController::class);
     $router->resource('actions', ActionController::class);
     $router->resource('washes', WashController::class);
+
+    $router->resource('projects', ProjectController::class);
+    $router->resource('additions', AdditionController::class);
 });

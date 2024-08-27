@@ -44,6 +44,7 @@ class WashController extends Controller
                 'license' => 'required',
                 'model' => 'required',
                 // 'parking' => 'required',
+                'project_id' => 'required',
                 'date' => 'required',
                 'time' => 'required',
                 'car_type' => 'required',
@@ -389,5 +390,24 @@ class WashController extends Controller
         $Line->saveRecord($input, $type);
 
         return view('wash.close', ['message' => '時間調整已送出']);
+    }
+
+    public function getProjects()
+    {
+        $projects = \App\Models\Project::where('status', 1)->get();
+        //將 id 設為 key
+        $projects = $projects->keyBy('id');
+
+
+        return ['result' => true, 'projects' => $projects];
+    }
+
+    public function getAdditions()
+    {
+        $additions = \App\Models\Addition::where('status', 1)->get();
+        //將 id 設為 key
+        $additions = $additions->keyBy('id');
+
+        return ['result' => true, 'additions' => $additions];
     }
 }

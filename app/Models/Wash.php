@@ -26,17 +26,6 @@ class Wash extends Model
         'addition_services' => 'json',
         'suggest_time' => 'json',
     ];
-    protected $car_type_prices = [
-        'house' => 1500,
-        '5p' => 1600,
-        '7p' => 1700
-    ];
-    protected $service_prices = [
-        '車輛前檔玻璃潑水' => 600,
-        '全車玻璃潑水' => 1500,
-        '鍍膜維護劑' => 1500
-    ];
-
 
     function getNewBooking()
     {
@@ -200,12 +189,23 @@ class Wash extends Model
         return ['link' => 'https://pklotcorp.typeform.com/to/Wdnl2Gyw'];
     }
 
+    public function projects()
+    {
+        return $this->belongsTo(Project::class, 'project_id');
+    }
+
+    public function getAdditionsAttribute()
+    {
+        return Addition::whereIn('id', $this->addition_services)->get();
+    }
+
     public function calculateTotalAmount()
     {
-        $total = $this->car_type_prices[$this->car_type];
-        if ($this->addition_services) {
-            foreach ($this->addition_services as $service) {
-                $total += $this->service_prices[$service] ?? 0;
+
+        $total =   $this->projects->discount_price[$this->car_type] ?? 0;
+        if ($this->additions) {
+            foreach ($this->additions as $service) {
+                $total += $service['discount_price'][$this->car_type] ?? 0;
             }
         }
         $this->price = $total;

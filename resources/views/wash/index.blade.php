@@ -109,9 +109,15 @@
         <div class="form-group">
             <label for="model">車型</label>
             <select name="car_type" id="car_type">
-                <option value="house">轎車</option>
-                <option value="5p">5人座休旅車</option>
-                <option value="7p">7人座休旅車</option>
+                <option value="house">小型車</option>
+                <option value="5p">中大型房車 / 休旅車 </option>
+                <option value="7p">超大型房車 / 特殊車 </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="project">洗車方案</label>
+            <select name="project_id" id="project">
             </select>
         </div>
 
@@ -119,30 +125,45 @@
         <div class="form-group service-details">
             <p>
                 根據您選擇的車型，本洗車服務提供的基本費用如下：
-            <div id="basicAmount"></div>
-            此費用包含<br />
-            1.車身及玻璃深層清潔<br />
-            2.手工打蠟瓷土美容<br />
-            3.輪胎外框清潔<br />
-            4.輪胎上蠟
+            <div id="">
+                原價:<del id="orgAmount">元</del>
+                特價:<span id="basicAmount" style="color: red">元</span>
+            </div>
+
+            此費用包含
+            <div id="service_desc">
+            </div>
             </p>
             <div id="serviceDetails"></div>
         </div>
 
+
+
+
+
+
+
+
         <div class="form-group radio addition-service ">
             <label for="additionService">額外加值服務的內容</label>
-            <div><label for="service1">
-                    <input type="checkbox" data-price="600" id="service1" name="addition_services[]" value="車輛前檔玻璃潑水">
-                    車輛前檔玻璃潑水：600元</label>
+            <div id="additions">
+                <div><label for="service1">
+                        <input type="checkbox" data-price="600" id="service1" name="addition_services[]"
+                            value="車輛前檔玻璃潑水">
+                        車輛前檔玻璃潑水：600元</label>
+                </div>
+                <div><label for="service2">
+                        <input type="checkbox" data-price="1500" id="service2" name="addition_services[]"
+                            value="全車玻璃潑水">
+                        全車玻璃潑水：1500元</label>
+                </div>
+                <div><label for="service3">
+                        <input type="checkbox" data-price="1500" id="service3" name="addition_services[]"
+                            value="鍍膜維護劑">
+                        鍍膜維護劑：1500元</label>
+                </div>
             </div>
-            <div><label for="service2">
-                    <input type="checkbox" data-price="1500" id="service2" name="addition_services[]" value="全車玻璃潑水">
-                    全車玻璃潑水：1500元</label>
-            </div>
-            <div><label for="service3">
-                    <input type="checkbox" data-price="1500" id="service3" name="addition_services[]" value="鍍膜維護劑">
-                    鍍膜維護劑：1500元</label>
-            </div>
+
         </div>
         <div class="form-group ">
             <label for="totalAmount">總金額</label>
@@ -152,6 +173,44 @@
     </form>
 </body>
 <script>
+    var projects = [];
+    var additions = [];
+
+
+    function getProjects() {
+        $.get('/wash/get_projects', {}, function(data) {
+            projects = data.projects;
+            var select = $('#project');
+            select.empty();
+            for (var key in projects) {
+                project = projects[key];
+                select.append('<option value="' + project.id + '">' + project.name + '</option>');
+            };
+            calculateTotalAmount()
+        }, 'json');
+    }
+
+    function getAdditions() {
+        $.get('/wash/get_additions', {}, function(data) {
+            additions = data.additions;
+            var select = $('#additions');
+            select.empty();
+            for (var key in additions) {
+                addition = additions[key];
+                select.append('<label for="service' + addition.id +
+                    '"><input type="checkbox" data-price="0" id="service' + addition.id +
+                    '" name="addition_services[]" value="' + addition.id + '">' + addition.name +
+                    '：<span></span>元</label></div>');
+            };
+            calculateTotalAmount();
+            $('.addition-service input').on('click', function() {
+                calculateTotalAmount();
+            });
+        }, 'json');
+    }
+
+
+
     function validateLicense() {
         var license = document.getElementById('license').value;
         if (!license.includes('-')) {
@@ -165,22 +224,34 @@
         var totalAmount = 0;
         // 根據車型計算基本費用
         var carType = $('select[name="car_type"]').val();
-        switch (carType) {
-            case 'house':
-                totalAmount += 1500;
-                break;
-            case '5p':
-                totalAmount += 1600;
-                break;
-            case '7p':
-                totalAmount += 1700;
-                break;
+        var project_id = $('select[name="project_id"]').val();
+
+        if (!project_id) {
+            return;
         }
+        totalAmount += parseInt(projects[project_id].discount_price[carType]);
+
+        //js nl2br
+
+        $('#service_desc').html((addLineNumbers(projects[project_id].description)))
+
+        $('#orgAmount').html(parseInt(projects[project_id].price[carType]) + '元');
+
         $('#basicAmount').html(totalAmount + '元');
+
+        for (var key in additions) {
+
+
+            $('#service' + key).attr('data-price', additions[key].discount_price[carType]);
+            $('#service' + key).parent().find('span').html(additions[key].discount_price[carType]);
+
+
+        }
+
         // 加值服務的費用
         var additionServices = document.querySelectorAll('input[name="addition_services[]"]:checked');
         additionServices.forEach(function(service) {
-            totalAmount += parseInt($(service).data('price'));
+            totalAmount += parseInt(additions[$(service).val()].discount_price[carType]);
         });
 
         // 顯示總金額
@@ -188,6 +259,24 @@
         $('#totalAmount').html(totalAmount + '元');
 
 
+    }
+
+    function addLineNumbers(text) {
+        // 將字符串按換行符分割成多行
+        const lines = text.split('\n');
+
+        // 遍歷每一行，並在每行前面加上行號和點號
+        const numberedLines = lines.map((line, index) => `${index + 1}. ${line}`);
+
+        // 將處理後的行重新組合成一個字符串
+        return nl2br(numberedLines.join('\n'));
+    }
+
+    function nl2br(str) {
+        if (typeof str === 'string') {
+            return str.replace(/\n/g, '<br>');
+        }
+        return str;
     }
 
     function changeCity() {
@@ -226,7 +315,8 @@
 
     $(function() {
 
-
+        getProjects();
+        getAdditions();
         $('#entry_time').change(function() {
             calculateAvailableTime();
         });
@@ -242,9 +332,7 @@
         $('select').change(function() {
             calculateTotalAmount();
         });
-        $('.addition-service input').on('click', function() {
-            calculateTotalAmount();
-        });
+
         changeCity();
 
         $('#city').change(function() {
