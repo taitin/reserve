@@ -190,7 +190,7 @@ class Wash extends Model
 
     function getModel()
     {
-        return ['model' => $this->model];
+        return ['model' => $this->model, 'car_type' => carType($this->car_type)];
     }
     public function getQestionUrl()
     {
