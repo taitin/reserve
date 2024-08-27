@@ -38,6 +38,9 @@ Route::post('wash',  [WashController::class, 'store'])->name('wash.store');
 Route::get('wash/{id}/pay',  [WashController::class, 'pay']);
 Route::post('wash/pay',  [WashController::class, 'paid']);
 
+
+Route::get('wash/pay_fake',  [WashController::class, 'payFake']);
+
 Route::get('wash/{id}/arrange',  [WashController::class, 'arrange']);
 Route::get('wash/{id}/set_amount',  [WashController::class, 'setAmount']);
 Route::post('wash/{id}/set_amount',  [WashController::class, 'doSetAmount']);

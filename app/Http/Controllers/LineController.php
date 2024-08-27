@@ -448,14 +448,9 @@ class LineController extends Controller
                     } elseif ($action->target == 'master') {
 
                         $master = $wash->master;
-                        Log::debug($action->target);
-
-                        Log::debug($master);
-                        Log::debug($replys);
 
                         if (!empty($master)) {
                             $r =  $this->replyMessage($master->social_id,   $replys, $action->target);
-                            Log::debug($r);
                         }
                     } else {
                         $this->replyMessage($wash->social_id, $replys, $action->target);

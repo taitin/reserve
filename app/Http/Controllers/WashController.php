@@ -14,6 +14,17 @@ class WashController extends Controller
 {
     //
 
+    public function payFake()
+    {
+
+        //最近5比 wash
+        $washes = Wash::orderBy('id', 'desc')->take(5)->get();
+
+
+        foreach ($washes as $wash) {
+            echo  '<a href="' . url("wash/$wash->id/pay_trigger") . '">pa for ' . $wash->id;
+        }
+    }
     public function index()
     {
         //洗車 form
