@@ -373,8 +373,6 @@ class LineController extends Controller
                 if (!empty($action)) {
                     $finish = true;
                     $values = explode(' ', $r->value);
-                    Log::debug($values);
-
                     $params = [];
                     $wash = Wash::find(end($values));
                     if (empty($wash)) $wash = new Wash();
@@ -447,6 +445,11 @@ class LineController extends Controller
                         $group = Group::where('type', '時間到府')->first();
 
                         $this->replyMessage($group->group_id,   $replys, $action->target);
+                    }
+                    if ($action->target == 'master') {
+                        $master = $wash->master;
+                        if (!empty($master))
+                            $this->replyMessage($master->social_id,   $replys, $action->target);
                     } else {
                         $this->replyMessage($wash->social_id, $replys, $action->target);
                     }

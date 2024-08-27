@@ -137,6 +137,11 @@ class Wash extends Model
         return $data;
     }
 
+    function getMasterAttribute()
+    {
+        return Master::find($this->worker);
+    }
+
 
 
     function payFinish()
