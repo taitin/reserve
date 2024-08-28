@@ -38,6 +38,8 @@ class ActionController extends AdminController
                 $filter->like('content');
                 $filter->like('do_method');
             });
+
+            $grid->showQuickEditButton();
         });
     }
 
