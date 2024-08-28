@@ -380,7 +380,11 @@ class WashController extends Controller
         $wash->save();
 
         $Line = new LineController();
-        $inputText = '@送出調整時間 ' . $request->id;
+        if ($request->change_car_type) {
+            $inputText = '@送出調整時間再調整車型 ' . $request->id;
+        } else {
+            $inputText = '@送出調整時間 ' . $request->id;
+        }
         $type = 'group';
         $keywords =   $Line->fetchKeyword($inputText,  $type);
         $input = [

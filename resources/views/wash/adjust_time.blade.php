@@ -38,7 +38,7 @@
 </head>
 
 <body>
-    <form action="/wash/{{ $wash->id }}/time_adjust" method="post">
+    <form id="timeForm" action="/wash/{{ $wash->id }}/time_adjust" method="post">
         @csrf
         <h1>請提供 1- 3 組預約時段，供客戶選擇</h1>
         <div class="form-group">
@@ -74,10 +74,19 @@
             </select>
 
         </div>
-        <button type="submit" class="btn btn-info btn-block submit-btn">送出時間</button>
+        <input type="hidden" id="change_car_type" name="change_car_type" value="0">
+        <button type="button" onclick="submitForm(0)" class="btn btn-info btn-block submit-btn">送出時間</button>
+        <button type="button" onclick="submitForm(1)" class="btn btn-info btn-block submit-btn">送出時間/並繼續調整車型</button>
+
     </form>
 </body>
 <script>
+    function submitForm(change_car_type) {
+        // 改變隱藏輸入字段的值
+        $('#change_car_type').val(change_car_type);
+        // 提交表單
+        document.getElementById('timeForm').submit();
+    }
     //根據日期計算可預約時間
     function calculateAvailableTime(index) {
         var entryTime = $('#entry_time' + index).val();
@@ -89,9 +98,9 @@
         }, function(data) {
             var availableTimes = [];
             // if (day == 0) {
-            //     availableTimes = ['10:00', '11:00', '12:00'];
+            // availableTimes = ['10:00', '11:00', '12:00'];
             // } else {
-            //     availableTimes = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'];
+            // availableTimes = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'];
             // }
             availableTimes = data.available_times;
             var select = $('#time' + index);
