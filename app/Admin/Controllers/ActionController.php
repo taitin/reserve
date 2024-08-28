@@ -97,6 +97,7 @@ class ActionController extends AdminController
             });
 
             $form->text('do_method');
+            $form->text('order');
 
             $form->display('created_at');
             $form->display('updated_at');
