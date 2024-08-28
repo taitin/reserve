@@ -281,6 +281,7 @@ class Wash extends Model
 
     public function getAdjustTimeWithLabel()
     {
+        $data = $this->getNewBooking();
         $data['adjust_time'] = $this->getAdjustTime();
         $times = [];
         foreach ($data['adjust_time'] as $time) {
