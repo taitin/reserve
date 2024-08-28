@@ -41,6 +41,7 @@ class Wash extends Model
             'total' => $this->price,
             'total_hour' => number_format($this->total_hour, 1, '.', ''),
             'get_car_time' => zhDate($this->exit_date . ' ' . $this->exit_time),
+            'adjust_time' => implode("\n", $this->getAdjustTime())
         ];
 
         // 如果是3.00 顯示 3 ,3.50 顯示 3.5

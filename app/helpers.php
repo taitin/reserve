@@ -111,13 +111,13 @@ if (!function_exists('carType')) {
         $result = '';
         switch ($type) {
             case 'house':
-                $result = '轎車';
+                $result = '小型車';
                 break;
             case '5p':
-                $result = '5人座休旅車';
+                $result = '中大型房車/休旅車';
                 break;
             case '7p':
-                $result = '7人座休旅車';
+                $result = '超大型車/特殊車';
                 break;
         }
         return $result;
