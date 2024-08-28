@@ -27,7 +27,7 @@ class ActionController extends AdminController
             $grid->column('content');
             $grid->column('params');
             $grid->column('do_method');
-            $grid->column('order')->text();
+            $grid->column('order')->editable();
 
             $grid->column('created_at');
             $grid->column('updated_at')->sortable();
