@@ -20,7 +20,7 @@ class ActionController extends AdminController
         return Grid::make(new Action(), function (Grid $grid) {
             $grid->model()->orderBy('order', 'asc');
             $grid->column('id')->sortable();
-            $grid->column('keyword');
+            $grid->column('keyword')->editable();
             $grid->column('from');
 
             $grid->column('target');
