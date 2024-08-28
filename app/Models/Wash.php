@@ -37,7 +37,7 @@ class Wash extends Model
             'model' => $this->model,
             'booking_time' => zhDate($this->date . ' ' . $this->time),
             'method' => $this->project->name . '/' . number_format($this->project->use_time, 1, '.', ''),
-            'addition' => implode('\n', $this->getAdditions()),
+            'addition' => implode("\n", $this->getAdditions()),
             'total' => $this->price,
             'total_hour' => number_format($this->total_hour, 1, '.', ''),
             'get_car_time' => zhDate($this->exit_date . ' ' . $this->exit_time),
