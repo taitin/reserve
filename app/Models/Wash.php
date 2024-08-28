@@ -36,7 +36,7 @@ class Wash extends Model
             'car_type' => carType($this->car_type),
             'model' => $this->model,
             'booking_time' => zhDate($this->date . ' ' . $this->time),
-            'method' => $this->project->name . '/' . number_format($this->project->use_time, 1, '.', ''),
+            'method' => $this->project->name . '/' . number_format($this->project->use_time, 1, '.', '') . 'hr',
             'addition' => implode("\n", $this->getAdditions()),
             'total' => $this->price,
             'total_hour' => number_format($this->total_hour, 1, '.', ''),
@@ -54,7 +54,7 @@ class Wash extends Model
         $results = [];
         if ($this->addition_services) {
             foreach ($this->additions as $addition) {
-                $results[] = $addition->name . '/' . $addition->use_time;
+                $results[] = $addition->name . '/' . $addition->use_time . 'hr';
             }
         }
         return $results;
