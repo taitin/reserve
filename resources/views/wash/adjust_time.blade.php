@@ -40,38 +40,35 @@
 <body>
     <form action="/wash/{{ $wash->id }}/time_adjust" method="post">
         @csrf
-        <h1>請選擇1~3組 日期時間供客戶選擇</h1>
+        <h1>請提供 1- 3 組預約時段，供客戶選擇</h1>
         <div class="form-group">
-            <label for="entryTime">洗車日期1</label>
+            <label for="entryTime">時段申請建議 1</label>
             <input required type="date" class="form-control" id="entry_time1" name="date1"
                 min="{{ date('Y-m-d') }}" value="{{ $wash->date }}">
         </div>
         <div class="form-group">
-            <label for="exitTime">預約時間1</label>
             <select id="time1" name="time1">
                 <option></option>
             </select>
 
         </div>
         <div class="form-group">
-            <label for="entryTime">洗車日期2</label>
+            <label for="entryTime">時段申請建議2</label>
             <input required type="date" class="form-control" id="entry_time2" name="date2"
                 min="{{ date('Y-m-d') }}" value="{{ $wash->date }}">
         </div>
         <div class="form-group">
-            <label for="exitTime">預約時間2</label>
             <select id="time2" name="time2">
                 <option></option>
             </select>
 
         </div>
         <div class="form-group">
-            <label for="entryTime">洗車日期3</label>
+            <label for="entryTime">時段申請建議3</label>
             <input required type="date" class="form-control" id="entry_time3" name="date3"
                 min="{{ date('Y-m-d') }}" value="{{ $wash->date }}">
         </div>
         <div class="form-group">
-            <label for="exitTime">預約時間3</label>
             <select id="time3" name="time3" value="{{ $wash->date }}">
                 <option></option>
             </select>
