@@ -297,8 +297,10 @@ class Wash extends Model
     {
 
         $times = [];
-        foreach ($this->suggest_time as $time) {
-            $times[] = $time['date'] . ' ' . $time['time'];
+        if (!empty($this->suggest_time)) {
+            foreach ($this->suggest_time as $time) {
+                $times[] = $time['date'] . ' ' . $time['time'];
+            }
         }
         return $times;
     }
