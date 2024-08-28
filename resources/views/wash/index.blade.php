@@ -97,12 +97,24 @@
                 min="{{ date('Y-m-d') }}">
         </div>
         <div class="form-group">
-            <label for="exitTime">預約時間</label>
+            <label for="exitTime">預約進場時間</label>
             <select id="time" name="time">
                 <option></option>
             </select>
-
         </div>
+
+        <div class="form-group">
+            <label for="entryTime">最快需取車日期</label>
+            <input required type="date" class="form-control" id="exit_date" name="exit_date"
+                min="{{ date('Y-m-d') }}">
+        </div>
+        <div class="form-group">
+            <label for="exitTime">最快需取車時間</label>
+            <select id="exit_time" name="exit_time">
+                <option></option>
+            </select>
+        </div>
+
         <div class="form-group">
             <label for="model">車款(廠牌及型號)</label>
             <input required type="text" placeholder="如 Toyota Rav4" class="form-control" id="model"
@@ -293,8 +305,16 @@
     //根據日期計算可預約時間
     function calculateAvailableTime() {
         var entryTime = $('#entry_time').val();
+        $('#exit_date').val(entryTime)
         var date = new Date(entryTime);
         var day = date.getDay();
+        var select = $('#exit_time');
+        select.empty();
+        availableTimes = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
+        availableTimes.forEach(function(time) {
+            select.append('<option value="' + time + '">' + time + '</option>');
+        });
+
 
         $.get('/wash/get_available_time', {
             date: entryTime

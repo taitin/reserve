@@ -36,11 +36,11 @@ class Wash extends Model
             'car_type' => carType($this->car_type),
             'model' => $this->model,
             'booking_time' => zhDate($this->date . ' ' . $this->time),
-            'method' => $this->project->name,
-            'addition' => implode(',', $this->getAdditions()),
+            'method' => $this->project->name . '/' . number_format($this->project->use_time, 1, '.', ''),
+            'addition' => implode('\n', $this->getAdditions()),
             'total' => $this->price,
             'total_hour' => number_format($this->total_hour, 1, '.', ''),
-            'get_car_time' => zhDate($this->date . ' ' . $this->time),
+            'get_car_time' => zhDate($this->exit_date . ' ' . $this->exit_time),
         ];
 
         // 如果是3.00 顯示 3 ,3.50 顯示 3.5
@@ -51,10 +51,13 @@ class Wash extends Model
     function getAdditions()
     {
 
+        $results = [];
         if ($this->addition_services) {
-            return $this->additions->pluck('name')->toArray();
+            foreach ($this->additions as $addition) {
+                $results[] = $addition->name . '/' . $addition->use_time;
+            }
         }
-        return [];
+        return $results;
     }
 
 
