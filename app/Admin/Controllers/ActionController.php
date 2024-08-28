@@ -18,6 +18,7 @@ class ActionController extends AdminController
     protected function grid()
     {
         return Grid::make(new Action(), function (Grid $grid) {
+            $grid->model()->orderBy('order', 'asc');
             $grid->column('id')->sortable();
             $grid->column('keyword');
             $grid->column('from');
@@ -26,6 +27,8 @@ class ActionController extends AdminController
             $grid->column('content');
             $grid->column('params');
             $grid->column('do_method');
+            $grid->column('order')->text();
+
             $grid->column('created_at');
             $grid->column('updated_at')->sortable();
 
