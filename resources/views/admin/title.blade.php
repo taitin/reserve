@@ -26,7 +26,7 @@
 </style>
 
 <div class="title">
-    海洋圖鑑後臺管理系統
+    後臺管理系統
 </div>
 <div class="links">
     請點選左方選單開始操作

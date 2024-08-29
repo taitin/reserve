@@ -23,4 +23,6 @@ Route::group([
     $router->resource('additions', AdditionController::class);
 
     $router->resource('masters', MasterController::class);
+
+    $router->resource('excepts', ExceptController::class);
 });

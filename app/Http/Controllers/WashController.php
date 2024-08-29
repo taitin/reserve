@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Admin\Repositories\Parking;
+use App\Models\Except;
 use App\Models\Group;
 use App\Models\Parking as ModelsParking;
 use App\Models\Wash;
@@ -338,6 +339,16 @@ class WashController extends Controller
         } else {
             $available_times = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'];
         }
+        //扣掉 除外的時間
+        $washes = Except::where('date', $date)->get();
+        foreach ($washes as $wash) {
+            foreach ($wash->time as $time) {
+                $key = array_search($time, $available_times);
+                unset($available_times[$key]);
+            }
+        }
+
+
 
         //扣掉已預約的時間
         $washes = Wash::where('date', $date)->get();
