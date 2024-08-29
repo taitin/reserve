@@ -208,6 +208,9 @@ class Wash extends Model
 
     public function getAdditionsAttribute()
     {
+        if (empty($this->addition_services)) {
+            return [];
+        }
         return Addition::whereIn('id', $this->addition_services)->get();
     }
 
