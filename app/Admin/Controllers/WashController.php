@@ -18,22 +18,39 @@ class WashController extends AdminController
     protected function grid()
     {
         return Grid::make(new Wash(), function (Grid $grid) {
+
+            $grid->model()->orderBy('id', 'desc');
             $grid->column('id')->sortable();
-            $grid->column('social_id');
+            // $grid->column('social_id');
             $grid->column('name');
             $grid->column('phone');
             $grid->column('license');
             $grid->column('model');
-            $grid->column('parking');
-            $grid->column('entry_time');
-            $grid->column('exit_time');
-            $grid->column('status');
+            $grid->column('car_type')->display(function ($v) {
+                return carType($v);
+            });
+
+            // $grid->column('parking');
+            $grid->column('date', '進場日期');
+            $grid->column('time', '進場時間');
+            $grid->column('exit_date', '取車日期');
+            $grid->column('exit_time', '取車時間');
+            $grid->column('method', '洗車方案')->display(function ($additions) {
+                return  $this->method;
+            });
+            $grid->column('addition', '加值方案')->display(function ($additions) {
+                return  implode("\n", $this->getAdditions());
+            });
+            $grid->column('price', '總金額');
+
+            $grid->column('status')->display(function ($additions) {
+                return  config('wash.status')[$this->status] ?? '';
+            });
             $grid->column('created_at');
             $grid->column('updated_at')->sortable();
-        
+
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
-        
             });
         });
     }
@@ -81,7 +98,7 @@ class WashController extends AdminController
             $form->text('entry_time');
             $form->text('exit_time');
             $form->text('status');
-        
+
             $form->display('created_at');
             $form->display('updated_at');
         });

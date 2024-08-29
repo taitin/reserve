@@ -322,4 +322,22 @@ class Wash extends Model
         $this->save();
         return $this->confirmBooking();
     }
+
+
+    public function getNameAttribute()
+    {
+        $message = Message::where('social_id', $this->social_id)
+            ->orderBy('id', 'desc')
+            ->first();
+        return $message->name ?? '';
+    }
+
+
+    public function getMethodAttribute()
+    {
+        if (!empty($this->project)) {
+            return $this->project->name . '/' . number_format($this->project->use_time, 1, '.', '') . 'hr';
+        }
+        return '';
+    }
 }
