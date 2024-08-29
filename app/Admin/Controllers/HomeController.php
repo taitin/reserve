@@ -14,6 +14,8 @@ class HomeController extends Controller
     public function index(Content $content)
     {
         return $content
+            ->row(view('admin.title'));
+        return $content
             ->header('Dashboard')
             ->description('Description...')
             ->body(function (Row $row) {
