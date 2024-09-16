@@ -25,7 +25,8 @@ class AutopassService
             'invoice_no' => $data['invoice_no'],
             'request_amount' => $data['request_amount'],
             'callback_url' => $data['callback_url'],
-            'use_special_plate_number' => false
+            'use_special_plate_number' => false,
+            // 'request_description'=>'交易細節˙
         ];
         $ret =  Http::withToken($this->access_token)->post($url, $data);
         return $ret->json();

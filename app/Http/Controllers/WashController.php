@@ -210,7 +210,7 @@ class WashController extends Controller
         $auth_result = $autopass->getPayResult($wash->pay_data['invoice_no']);
 
         $wash->pay_auth_result = $auth_result;
-        if ($auth_result['data']['payment_state'] != 'authorized') {
+        if (in_array($auth_result['data']['payment_state'], ['authorized', 'paid'])) {
             $wash->status = 'pay_fail';
             $wash->save();
             return view('wash.close', ['message' => '付款失敗']);
