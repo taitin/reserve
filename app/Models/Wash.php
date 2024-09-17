@@ -344,6 +344,6 @@ class Wash extends Model
     {
         $this->status = 'cancel';
         $this->save();
-        return [];
+        return $this->getNewBooking();
     }
 }
