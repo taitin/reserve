@@ -283,7 +283,7 @@ class LineService
                 foreach ($data['text_buttons'] as $button) {
                     if (empty($button['label']) || empty($button['text'])) continue;
                     $actionBuilder = new MessageTemplateActionBuilder($button['label'], $button['text']);
-                    $content[] =  new ButtonComponentBuilder($actionBuilder, null, 'lg', 'sm', 'secondary', null);
+                    $content[] =  new ButtonComponentBuilder($actionBuilder, null, 'lg', 'sm',  $button['style'] ?? 'secondary', $button['color'] ?? null);
                 }
             }
             $footer = new BoxComponentBuilder('vertical', $content, null, 'md', 'md');

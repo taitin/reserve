@@ -96,6 +96,12 @@ class ActionController extends AdminController
             $form->table('text_buttons', function ($table) {
                 $table->text('label');
                 $table->text('text');
+                $table->color('color');
+                $table->select('style')->options([
+                    'link' => '連結',
+                    'primary' => '白字',
+                    'secondary' => '黑字',
+                ])->default('secondary');
             });
 
             $form->text('do_method');
