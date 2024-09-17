@@ -76,6 +76,7 @@ class Wash extends Model
     {
         $data = $this->getNewBooking();
         $data['link'] = url("wash/$this->id/redirect_pay?openExternalBrowser=1");
+        return $data;
     }
 
 
