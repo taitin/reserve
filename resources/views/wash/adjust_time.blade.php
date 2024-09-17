@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1,maximum-scale=1">
-    <title>預約洗車時間變更</title>
+    <title>預約洗車時間或車型變更</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <!-- 在<head>標籤中加入Bootstrap的CSS連結 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -43,8 +43,8 @@
         <h1>請提供 1- 3 組預約時段，供客戶選擇</h1>
         <div class="form-group">
             <label for="entryTime">時段申請建議 1</label>
-            <input required type="date" class="form-control" id="entry_time1" name="date1"
-                min="{{ date('Y-m-d') }}" value="{{ $wash->date }}">
+            <input type="date" class="form-control" id="entry_time1" name="date1" min="{{ date('Y-m-d') }}"
+                value="{{ $wash->date }}">
         </div>
         <div class="form-group">
             <select id="time1" name="time1">
@@ -54,8 +54,8 @@
         </div>
         <div class="form-group">
             <label for="entryTime">時段申請建議2</label>
-            <input required type="date" class="form-control" id="entry_time2" name="date2"
-                min="{{ date('Y-m-d') }}" value="{{ $wash->date }}">
+            <input type="date" class="form-control" id="entry_time2" name="date2" min="{{ date('Y-m-d') }}"
+                value="{{ $wash->date }}">
         </div>
         <div class="form-group">
             <select id="time2" name="time2">
@@ -65,8 +65,8 @@
         </div>
         <div class="form-group">
             <label for="entryTime">時段申請建議3</label>
-            <input required type="date" class="form-control" id="entry_time3" name="date3"
-                min="{{ date('Y-m-d') }}" value="{{ $wash->date }}">
+            <input type="date" class="form-control" id="entry_time3" name="date3" min="{{ date('Y-m-d') }}"
+                value="{{ $wash->date }}">
         </div>
         <div class="form-group">
             <select id="time3" name="time3" value="{{ $wash->date }}">
@@ -74,16 +74,31 @@
             </select>
 
         </div>
-        <input type="hidden" id="change_car_type" name="change_car_type" value="0">
-        <button type="button" onclick="submitForm(0)" class="btn btn-info btn-block submit-btn">送出時間</button>
-        <button type="button" onclick="submitForm(1)" class="btn btn-info btn-block submit-btn">送出時間/並繼續調整車型</button>
+
+        <div>
+            客戶預約車型：{{ carType($wash->car_type) }}<br />
+            客戶預約車款：{{ $wash->model }}
+        </div>
+
+        <div class="form-group">
+            <select name="car_type" value="{{ $wash->car_type }}">
+                @foreach (config('wash.car_types') as $key => $car_type)
+                    <option value="{{ $key }}">{{ $car_type }}</option>
+                @endforeach
+            </select>
+
+        </div>
+
+
+
+        <button type="button" onclick="submitForm(0)" class="btn btn-info btn-block submit-btn">確認送出</button>
+        <button type="button" onclick="windows.close()" class="btn btn-info btn-block submit-btn">返回預約申請回覆</button>
 
     </form>
 </body>
 <script>
     function submitForm(change_car_type) {
-        // 改變隱藏輸入字段的值
-        $('#change_car_type').val(change_car_type);
+
         // 提交表單
         document.getElementById('timeForm').submit();
     }

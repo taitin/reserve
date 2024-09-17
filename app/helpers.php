@@ -108,19 +108,7 @@ if (!function_exists('arrayUrl')) {
 if (!function_exists('carType')) {
     function carType($type)
     {
-        $result = '';
-        switch ($type) {
-            case 'house':
-                $result = '小型車';
-                break;
-            case '5p':
-                $result = '中大型房車/休旅車';
-                break;
-            case '7p':
-                $result = '超大型車/特殊車';
-                break;
-        }
-        return $result;
+        return config('wash.car_types.' . $type) ?? '';
     }
 }
 

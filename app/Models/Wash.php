@@ -31,6 +31,7 @@ class Wash extends Model
     {
 
         $data = [
+            'name' => $this->name,
             'phone' => $this->phone,
             'license' => $this->license,
             'car_type' => carType($this->car_type),
@@ -73,21 +74,8 @@ class Wash extends Model
 
     function getPayLink()
     {
-        $this->status = 'get_pay_link';
-        $data = [
-            'invoice_no' => $this->id . '_' . time(),
-            'request_amount' => $this->price,
-            'callback_url' => url('wash/' . $this->id . '/pay_webhook/' . OrderToken::token($this->id)),
-        ];
-        $this->pay_data = $data;
-        $this->save();
-        $autopass = new AutopassService();
-        $pay_result = $autopass->makePay($data);
-        $this->pay_result =  $pay_result;
-        $this->save();
         $data = $this->getNewBooking();
-        $data['link'] =  url("wash/$this->id/redirect_pay");
-        return $data;
+        $data['link'] = url("wash/$this->id/redirect_pay?openExternalBrowser=1");
     }
 
 
@@ -128,8 +116,9 @@ class Wash extends Model
     function confirmBooking()
     {
 
-        return array_merge($this->getNewBooking(), $this->getPayLink());
-
+        $this->status = 'confirmed';
+        $this->save();
+        $data = $this->getNewBooking();
         return $data;
     }
 
@@ -282,6 +271,13 @@ class Wash extends Model
         return ['link' => liffUrl('wash/' . $this->id . '/time_adjust')];
     }
 
+    public function getReBooking()
+    {
+
+        return ['link' => liffUrl('wash/' . $this->id . '/re_book')];
+    }
+
+
     public function getAdjustTimeWithLabel()
     {
         $data = $this->getNewBooking();
@@ -311,10 +307,9 @@ class Wash extends Model
     public function getAdjustTimeStr()
     {
         $adjust_time = $this->getAdjustTime();
-        return [
-            'adjust_time' => implode("\n", $adjust_time)
-
-        ];
+        $data = $this->getNewBooking();
+        $data['adjust_time'] = implode("\n", $adjust_time);
+        return $data;
     }
 
     public function setAdjustTime($t)
@@ -342,5 +337,12 @@ class Wash extends Model
             return $this->project->name . '/' . number_format($this->project->use_time, 1, '.', '') . 'hr';
         }
         return '';
+    }
+
+    public function setCancel()
+    {
+        $this->status = 'cancel';
+        $this->save();
+        return [];
     }
 }

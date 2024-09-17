@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin\Extensions\Tools\OrderToken;
 use App\Admin\Repositories\Parking;
 use App\Models\Except;
 use App\Models\Group;
 use App\Models\Parking as ModelsParking;
 use App\Models\Wash;
+use App\Services\AutopassService;
 use App\Services\LineService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -210,7 +212,7 @@ class WashController extends Controller
         $auth_result = $autopass->getPayResult($wash->pay_data['invoice_no']);
 
         $wash->pay_auth_result = $auth_result;
-        if (in_array($auth_result['data']['payment_state'], ['authorized', 'paid'])) {
+        if (!in_array($auth_result['data']['payment_state'], ['authorized', 'paid'])) {
             $wash->status = 'pay_fail';
             $wash->save();
             return view('wash.close', ['message' => '付款失敗']);
@@ -314,9 +316,31 @@ class WashController extends Controller
         if ($wash->status == 'paid') {
             return view('wash.close', ['message' => '付款連結失效']);
         }
+        if (in_array($wash->status, ['cancelled', 'timeout', 'pay_fail'])) {
+            return view('wash.close', ['message' => '付款連結失效']);
+        }
+
+        $wash->status = 'get_pay_link';
+        $data = [
+            'invoice_no' => $wash->id . '_' . time(),
+            'request_amount' => $wash->price,
+            'callback_url' => url('wash/' . $wash->id . '/pay_webhook/' . OrderToken::token($wash->id)),
+            'plate_number' => strtoupper($wash->license)
+        ];
+
+        $wash->pay_data = $data;
+        $wash->save();
+        $autopass = new AutopassService();
+        $pay_result = $autopass->makePay($data);
+        $wash->pay_result =  $pay_result;
+        $wash->save();
 
 
-        return redirect()->to($wash->pay_result['data']['payment_url']);
+        try {
+            return redirect()->to($wash->pay_result['data']['payment_url']);
+        } catch (\Exception $e) {
+            return view('wash.close', ['message' => '付款連線失敗，請與Autopass聯繫' . $wash->pay_result['error']]);
+        }
     }
 
     public function getAvailableTime(Request $request)
@@ -374,6 +398,7 @@ class WashController extends Controller
     {
 
         $result = [];
+        $change_time = false;
         for ($i = 1; $i <= 3; $i++) {
 
 
@@ -384,6 +409,7 @@ class WashController extends Controller
                     'time' => $request->input('time' . $i),
                 ];
                 $result[] = $data;
+                $change_time = true;
             }
         }
         $wash = \App\Models\Wash::find($request->id);
@@ -391,10 +417,21 @@ class WashController extends Controller
         $wash->save();
 
         $Line = new LineController();
-        if ($request->change_car_type) {
-            $inputText = '@送出調整時間再調整車型 ' . $request->id;
+        if ($request->car_type != $wash->car_type) {
+            $wash->car_type = $request->car_type;
+            $wash->save();
+
+            if ($change_time) {
+                $inputText = '@送出調整時間及車型 ' . $request->id;
+            } else {
+                $inputText = '@送出調整車型 ' . $request->id;
+            }
         } else {
-            $inputText = '@送出調整時間 ' . $request->id;
+            if ($change_time) {
+                $inputText = '@送出調整時間 ' . $request->id;
+            } else {
+                $inputText = '@返回預約申請回覆 ' . $request->id;
+            }
         }
         $type = 'group';
         $keywords =   $Line->fetchKeyword($inputText,  $type);
