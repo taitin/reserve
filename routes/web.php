@@ -4,6 +4,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LineController;
 use App\Http\Controllers\WashController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/schedule', function () {
+    //執行 artisan command
+    Artisan::call('wash:timeout_check');
+});
+
 
 Route::get('/', [IndexController::class, 'index']);
 

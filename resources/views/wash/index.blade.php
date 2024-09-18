@@ -57,22 +57,246 @@
     </script>
     <style>
         body {
-            padding: 20px;
+            /* padding: 20px; */
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background-color: #134B70;
+            /* 主背景色改為深藍色 */
+            color: #FFFFFF;
+            /* 全局文字顏色改為白色 */
+        }
+
+
+        .form-group label {
+            color: #FFFFFF;
+            font-weight: bold;
         }
 
         .form-control {
             border-radius: 0;
+            background-color: #FFFFFF;
+            /* 表單輸入框背景改為藍色 */
+            color: #134B70;
+            /* 表單文字顏色為白色 */
+            border: 1px solid #FFFFFF;
         }
+
 
         .btn {
             border-radius: 0;
+            background-color: #508C9B;
+            /* 按鈕背景色為黃綠色 */
+            color: #FFFFFF;
+            /* 按鈕文字顏色為深藍色 */
+            font-weight: bold;
         }
 
-        .form-group label {
+        .btn:hover {
+            background-color: #FFFFFF;
+            /* 按鈕懸停時背景色變為白色 */
+            color: #134B70;
+            /* 按鈕文字顏色深藍 */
+        }
+
+
+
+        .welcome,
+        .service-details,
+        #totalAmount {
+            background-color: #FFFFFF;
+            color: #134B70;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            font-size: 1em;
             font-weight: bold;
-            /* 確保內容靠左對齊 */
+            text-align: left;
+            padding-left: 20px;
+            /* display: flex; */
+            /* justify-content: space-between; */
+            /* align-items: flex-start; */
+        }
+
+        .service-details div {
+            width: 88%;
+        }
+
+        .welcome p {
+            color: #508C9B
+        }
+
+
+        #basicAmount {
+            margin-top: 30px;
+            font-style: 25px;
+            width: 50%;
+            font-weight: bold;
+        }
+
+        #basicAmount,
+        #totalAmount {
+            font-weight: bold;
+            color: #508C9B;
+            /* 金額顏色為黃綠色 */
+        }
+
+        #basicAmount span,
+        #totalAmount span {
+            font-weight: bold;
+            color: red;
+            /* 金額顏色為黃綠色 */
+        }
+
+        .addition-service {
+            background-color: #FFFFFF;
+            color: #134B70;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: bold;
+            text-align: left;
+            padding-left: 10px;
+            /* Reduced padding */
+        }
+
+        .addition-service label {
+            color: #134B70;
+            /* display: flex;
+            justify-content: space-between;
+            align-items: center; */
+        }
+
+        select {
+            font-size: 1.5em
+        }
+
+        /*
+        .addition-service input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(2);
+            width: 10px;
+        } */
+
+        /* .addition-service div {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            height: 45px;
+        } */
+        /*
+        .addition-service .price {
+            color: #FF4D4D;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .addition-service .desc {
+            width: 88%;
+            text-align: left
+        } */
+
+        img {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            color: #d0da4e;
+        }
+
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background-color: #EEE;
+            border: 1px solid #d0da4e;
+        }
+
+        .bottom-panel {
+            background-color: #134B70;
+            margin-top: 5px
+        }
+
+        .form-control {
+            background-color: #FFFFFF;
+            color: #134B70;
+            border: 1px solid #FFFFFF;
+            border-radius: 5px;
+        }
+
+        .btn {
+            background-color: #508C9B;
+            color: #FFFFFF;
+            border-radius: 5px;
+            width: 60%;
+            margin-left: 20%;
+            text-align: center padding: 10px;
+        }
+
+        .btn:hover {
+            background-color: #FFFFFF;
+            color: #134B70;
+        }
+
+        .parking-info {
+            background-color: #FFFFFF;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        .parking-info .place {
+            color: #134B70;
+            font-size: 18px;
+            text-align: left;
+
+        }
+
+        .white {
+            color: #FFFFFF;
+        }
+
+        .parking-info .address {
+            color: #508C9B;
+            font-size: 16px;
+            text-align: left;
+
+        }
+
+
+        .parking-info .distance {
+            color: #134B70;
+            font-size: 16px;
+            text-align: left;
+
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+
+        /* 搜尋框的樣式 */
+        #search-box {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #FFFFFF;
+            border: 1px solid #d0da4e;
+            width: 100%;
+        }
+
+        #step2 {
+            display: block;
+        }
+
+        .alert {
+            background-color: #FF4D4D;
+            color: white;
+            font-size: 20px;
+            display: none;
         }
     </style>
 </head>
@@ -82,109 +306,140 @@
     <form onsubmit="return validateLicense()" action="/wash" method="post">
         @csrf
         <input type="hidden" id="social_id" name="social_id" value="">
-        <div class="form-group">
-            <label for="phone">手機號碼</label>
-            <input required type="text" placeholder="0912345678" class="form-control" id="phone" name="phone">
-        </div>
-        <div class="form-group">
-            <label for="license">車牌(如ABC-123)</label>
-            <input required type="text" placeholder="ABC-123" class="form-control" id="license" name="license">
-        </div>
 
-        <div class="form-group">
-            <label for="entryTime">洗車日期</label>
-            <input required type="date" class="form-control" id="entry_time" name="date"
-                min="{{ date('Y-m-d') }}">
-        </div>
-        <div class="form-group">
-            <label for="exitTime">預約進場時間</label>
-            <select id="time" name="time">
-                <option></option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="entryTime">最快需取車日期</label>
-            <input required type="date" class="form-control" id="exit_date" name="exit_date"
-                min="{{ date('Y-m-d') }}">
-        </div>
-        <div class="form-group">
-            <label for="exitTime">最快需取車時間</label>
-            <select id="exit_time" name="exit_time">
-                <option></option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="model">車款(廠牌及型號)</label>
-            <input required type="text" placeholder="如 Toyota Rav4" class="form-control" id="model"
-                name="model">
-        </div>
-
-        <div class="form-group">
-            <label for="model">車型</label>
-            <select name="car_type" id="car_type">
-                <option value="house">小型車</option>
-                <option value="5p">中大型房車 / 休旅車 </option>
-                <option value="7p">超大型房車 / 特殊車 </option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="project">洗車方案</label>
-            <select name="project_id" id="project">
-            </select>
-        </div>
-
-
-        <div class="form-group service-details">
-            <p>
-                根據您選擇的車型，本洗車服務提供的基本費用如下：
-            <div id="">
-                原價:<del id="orgAmount">元</del>
-                特價:<span id="basicAmount" style="color: red">元</span>
-            </div>
-
-            此費用包含
-            <div id="service_desc">
-            </div>
-            </p>
-            <div id="serviceDetails"></div>
-        </div>
-
-
-
-
-
-
-
-
-        <div class="form-group radio addition-service ">
-            <label for="additionService">額外加值服務的內容</label>
-            <div id="additions">
-                <div><label for="service1">
-                        <input type="checkbox" data-price="600" id="service1" name="addition_services[]"
-                            value="車輛前檔玻璃潑水">
-                        車輛前檔玻璃潑水：600元</label>
-                </div>
-                <div><label for="service2">
-                        <input type="checkbox" data-price="1500" id="service2" name="addition_services[]"
-                            value="全車玻璃潑水">
-                        全車玻璃潑水：1500元</label>
-                </div>
-                <div><label for="service3">
-                        <input type="checkbox" data-price="1500" id="service3" name="addition_services[]"
-                            value="鍍膜維護劑">
-                        鍍膜維護劑：1500元</label>
+        <section id="step1">
+            <div class="form-group welcome">
+                <p>
+                    AK STUDIO A 咖專業車體美容 歡迎你！
+                <div id="">
+                    請先填寫你的基本資訊
                 </div>
             </div>
 
-        </div>
-        <div class="form-group ">
-            <label for="totalAmount">總金額</label>
-            <h3 id="totalAmount"></h3>
-        </div>
-        <button type="submit" class="btn btn-info btn-block submit-btn">送出預約</button>
+
+            <div class="form-group">
+                <label for="name">姓名</label>
+                <input required type="text" placeholder="車麻吉" class="form-control" id="name" name="name"
+                    value="{{ $wash->name ?? '' }}">
+            </div>
+            <div class="form-group">
+                <label for="phone">手機號碼</label>
+                <input required type="text" placeholder="0912345678" class="form-control" id="phone"
+                    name="phone" value="{{ $wash->phone ?? '' }}">
+
+                >
+            </div>
+            <div class="form-group">
+                <label for="license">車牌(如ABC-123)</label>
+                <input required type="text" placeholder="ABC-123" class="form-control" id="license" name="license"
+                    value="{{ $wash->license ?? '' }}">
+
+                >
+            </div>
+            <div class="form-group">
+                <label for="model">車款(廠牌及型號)</label>
+                <input required type="text" placeholder="如 Toyota Rav4" class="form-control" id="model"
+                    value="{{ $wash->model ?? '' }}">
+
+                >
+            </div>
+
+            <p class="alert" id="step1alert"></p>
+            <button type="button" class="btn" id="cont" onclick="nextStep()">繼續</button>
+        </section>
+
+        <section id="step2">
+            <div class="form-group">
+                <label for="model">車型</label>
+                <select name="car_type" id="car_type">
+                    <option value="house" {{ $wash->car_type == 'house' ? 'selected' : '' }}>小型車</option>
+                    <option value="5p" {{ $wash->car_type == 'house' ? '5p' : '' }}>中大型房車 / 休旅車 </option>
+                    <option value="7p" {{ $wash->car_type == 'house' ? '7p' : '' }}>超大型房車 / 特殊車 </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="entryTime">洗車日期</label>
+                <input required type="date" class="form-control" id="entry_time" name="date"
+                    value="{{ substr($wash->entry_time ?? '', 0, 10) }}" min="{{ date('Y-m-d') }}">
+            </div>
+            <div class="form-group">
+                <label for="exitTime">預約進場時間</label>
+                <select id="time" name="time">
+                    <option></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="entryTime">最快需取車日期</label>
+                <input required type="date" class="form-control" id="exit_date" name="exit_date"
+                    min="{{ date('Y-m-d') }}">
+            </div>
+            <div class="form-group">
+                <label for="exitTime">最快需取車時間</label>
+                <select id="exit_time" name="exit_time">
+                    <option></option>
+                </select>
+            </div>
+
+
+
+            <div class="form-group">
+                <label for="project">洗車方案</label>
+                <select name="project_id" id="project">
+                </select>
+            </div>
+
+
+            <div class="form-group service-details">
+                <p>
+                    根據您選擇的車型，本洗車服務提供的基本費用如下：
+                <div id="">
+                    原價:<del id="orgAmount">元</del>
+                    特價:<span id="basicAmount" style="color: red">元</span>
+                </div>
+
+                此費用包含
+                <div id="service_desc">
+                </div>
+                </p>
+                <div id="serviceDetails"></div>
+            </div>
+
+
+
+
+
+
+
+
+            <div class="form-group radio addition-service ">
+                <label for="additionService">額外加值服務的內容</label>
+                <div id="additions">
+                    <div><label for="service1">
+                            <input type="checkbox" data-price="600" id="service1" name="addition_services[]"
+                                value="車輛前檔玻璃潑水">
+                            車輛前檔玻璃潑水：600元</label>
+                    </div>
+                    <div><label for="service2">
+                            <input type="checkbox" data-price="1500" id="service2" name="addition_services[]"
+                                value="全車玻璃潑水">
+                            全車玻璃潑水：1500元</label>
+                    </div>
+                    <div><label for="service3">
+                            <input type="checkbox" data-price="1500" id="service3" name="addition_services[]"
+                                value="鍍膜維護劑">
+                            鍍膜維護劑：1500元</label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group ">
+                <label for="totalAmount">總金額</label>
+                <h3 id="totalAmount"></h3>
+            </div>
+            <button type="submit" class="btn btn-info btn-block submit-btn">送出預約</button>
+        </section>
     </form>
 </body>
 <script>
@@ -230,7 +485,7 @@
     function validateLicense() {
         var license = document.getElementById('license').value;
         if (!license.includes('-')) {
-            alert('車牌格式不正確，必須包含 "-"。');
+            $('#step1alert').text('車牌格式不正確，必須包含 "-"。').show();
             return false; // 阻止表單提交
         }
         return true; // 允許表單提交
@@ -337,6 +592,46 @@
 
     }
 
+    function nextStep() {
+        var name = document.getElementById('name').value;
+        var phone = document.getElementById('phone').value;
+        var license = document.getElementById('license').value;
+        var model = document.getElementById('model').value;
+
+
+        //若上述欄位有任一欄位為空值，則阻止表單提交
+        if (!name) {
+            $('#step1alert').text('請輸入姓名').show();
+            return false; // 阻止表單提交
+        }
+        if (!phone) {
+            $('#step1alert').text('請輸入手機號碼').show();
+            return false; // 阻止表單提交
+        }
+        $licence = validateLicense();;
+        if (!$licence) {
+            return false; // 阻止表單提交
+        }
+        if (!model) {
+            $('#step1alert').text('請輸入車款').show();
+            return false; // 阻止表單提交
+        }
+
+        $('#step1alert').text('').fadeOut();
+
+        $('#cont').fadeOut();
+        $('#step2').show();
+        $('#phone').focus()
+
+        //scroll to top step2
+        $('html, body').animate({
+            scrollTop: $('#step2').offset().top - 50
+        }, 1000);
+
+
+
+    }
+
     $(function() {
 
         getProjects();
@@ -344,10 +639,6 @@
         $('#entry_time').change(function() {
             calculateAvailableTime();
         });
-
-
-
-
 
 
         calculateTotalAmount();

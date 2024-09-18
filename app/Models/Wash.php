@@ -343,8 +343,24 @@ class Wash extends Model
 
     public function setCancel()
     {
-        $this->status = 'cancel';
+        $this->status = 'canceled';
         $this->save();
         return $this->getNewBooking();
+    }
+
+
+    function setReject()
+    {
+        $this->status = 'rejected';
+        $this->save();
+        return $this->getNewBooking();
+    }
+
+
+    function setTimeOut()
+    {
+        $this->status = 'timeout';
+        $this->save();
+        return  $this->getNewBooking();
     }
 }

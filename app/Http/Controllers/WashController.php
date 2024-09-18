@@ -28,12 +28,13 @@ class WashController extends Controller
             echo  '<h1><a href="' . url("wash/$wash->id/pay_trigger") . '">pay for ' . $wash->id . '<a></h1>';
         }
     }
-    public function index()
+    public function index(Request $request)
     {
         //洗車 form
 
         $parkings = ModelsParking::all();
         $data['parkings'] = $parkings->groupBy('city');
+        $data['wash'] = Wash::find($request->id);
 
         return view('wash.index', $data);
     }
@@ -472,5 +473,19 @@ class WashController extends Controller
         $additions = $additions->keyBy('id');
 
         return ['result' => true, 'additions' => $additions];
+    }
+
+    public function payFailed(Wash $wash)
+    {
+        //洗車 form
+        $wash->status = 'pay_fail';
+        $wash->save();
+        $input = [
+            'keyword' => '付款失敗',
+            'value' => $wash->id,
+        ];
+        $line = new LineController();
+        $line->actionTrigger(json_decode(json_encode($input), false), 'customer');
+        return view('wash.close', ['message' => '付款失敗']);
     }
 }
