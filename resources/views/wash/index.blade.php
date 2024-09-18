@@ -337,7 +337,7 @@
             <div class="form-group">
                 <label for="model">車款(廠牌及型號)</label>
                 <input required type="text" placeholder="如 Toyota Rav4" class="form-control" id="model"
-                    value="{{ $wash->model ?? '' }}">
+                    name="model" value="{{ $wash->model ?? '' }}">
 
             </div>
 
