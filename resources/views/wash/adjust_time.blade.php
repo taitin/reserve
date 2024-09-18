@@ -83,7 +83,8 @@
         <div class="form-group">
             <select name="car_type" value="{{ $wash->car_type }}">
                 @foreach (config('wash.car_types') as $key => $car_type)
-                    <option value="{{ $key }}">{{ $car_type }}</option>
+                    <option value="{{ $key }}" {{ $key == $wash->car_type ? 'selected' : '' }}>
+                        {{ $car_type }}</option>
                 @endforeach
             </select>
 
