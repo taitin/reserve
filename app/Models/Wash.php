@@ -288,7 +288,8 @@ class Wash extends Model
             $times[] = ['label' => $time, 'text' => '@同意修改時間 ' . $time];
         }
 
-        $times[] = ['label' => '取消本次預約', 'text' => '@取消本次預約'];
+        $times[] = ['label' => '預約其他時間', 'text' => '@預約其他時間'];
+        $times[] = ['label' => '取消預約', 'text' => '@取消預約'];
         $data['text_buttons'] = $times;
         return  $data;
     }

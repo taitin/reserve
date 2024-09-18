@@ -452,7 +452,7 @@ class WashController extends Controller
         ];
         $Line->saveRecord($input, $type);
 
-        return view('wash.close', ['message' => '時間調整已送出']);
+        return view('wash.close', ['message' => '調整已送出']);
     }
 
     public function getProjects()
