@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'access_token' => 'rfsfFWJj8JH8GPFgZd4eW2xvLH_TxV8tuU74q2s7nVI',
+    'access_token' => 'UMEidLHH450A_9PKxFRWHt44wLhW4e-fc1eQ_PMWFU8',
     'url' => 'https://partner-api.autopass.xyz',
 ];
