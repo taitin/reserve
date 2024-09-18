@@ -327,21 +327,18 @@
                 <input required type="text" placeholder="0912345678" class="form-control" id="phone"
                     name="phone" value="{{ $wash->phone ?? '' }}">
 
-                >
             </div>
             <div class="form-group">
                 <label for="license">車牌(如ABC-123)</label>
                 <input required type="text" placeholder="ABC-123" class="form-control" id="license" name="license"
                     value="{{ $wash->license ?? '' }}">
 
-                >
             </div>
             <div class="form-group">
                 <label for="model">車款(廠牌及型號)</label>
                 <input required type="text" placeholder="如 Toyota Rav4" class="form-control" id="model"
                     value="{{ $wash->model ?? '' }}">
 
-                >
             </div>
 
             <p class="alert" id="step1alert"></p>
