@@ -352,9 +352,9 @@
             <div class="form-group">
                 <label for="model">車型</label>
                 <select name="car_type" id="car_type">
-                    <option value="house" {{ $wash->car_type == 'house' ? 'selected' : '' }}>小型車</option>
-                    <option value="5p" {{ $wash->car_type == 'house' ? '5p' : '' }}>中大型房車 / 休旅車 </option>
-                    <option value="7p" {{ $wash->car_type == 'house' ? '7p' : '' }}>超大型房車 / 特殊車 </option>
+                    <option value="house">小型車</option>
+                    <option value="5p">中大型房車 / 休旅車 </option>
+                    <option value="7p">超大型房車 / 特殊車 </option>
                 </select>
             </div>
 
@@ -371,12 +371,12 @@
             </div>
 
             <div class="form-group">
-                <label for="entryTime">最快需取車日期</label>
+                <label for="entryTime">預計取車日期(隔日不加價)</label>
                 <input required type="date" class="form-control" id="exit_date" name="exit_date"
                     min="{{ date('Y-m-d') }}">
             </div>
             <div class="form-group">
-                <label for="exitTime">最快需取車時間</label>
+                <label for="exitTime">預計取車時間</label>
                 <select id="exit_time" name="exit_time">
                     <option></option>
                 </select>
