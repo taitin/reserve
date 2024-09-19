@@ -236,6 +236,17 @@ class WashController extends Controller
         return view('wash.close', ['message' => '付款完成']);
     }
 
+    public function setReturn(Request $request)
+    {
+        $input = [
+            'keyword' => '返回預約申請回覆',
+            'value' => $request->wash_id,
+        ];
+        $line = new LineController();
+        $line->actionTrigger(json_decode(json_encode($input), false), 'group');
+        return ['result' => true];
+    }
+
     public function arrange($id)
     {
         $wash = \App\Models\Wash::find($id);

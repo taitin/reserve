@@ -98,6 +98,16 @@
     </form>
 </body>
 <script>
+    function setReturn() {
+        $.post('/wash/set_return', {
+            wash_id: {{ $wash->id }}
+        }, function(data) {
+            console.log(data);
+        }, 'json');
+
+    }
+
+
     function submitForm(change_car_type) {
 
         // 提交表單

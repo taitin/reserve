@@ -46,6 +46,7 @@ Route::post('wash',  [WashController::class, 'store'])->name('wash.store');
 
 Route::get('wash/{id}/pay',  [WashController::class, 'pay']);
 Route::post('wash/pay',  [WashController::class, 'paid']);
+Route::post('wash/set_return',  [WashController::class, 'setReturn']);
 
 
 Route::get('wash/pay_fake',  [WashController::class, 'payFake']);
