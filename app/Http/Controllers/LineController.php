@@ -390,8 +390,8 @@ class LineController extends Controller
                             $text_buttons[] = [
                                 'label' => $button['label'],
                                 'text' => $button['text'] . ' ' . $r->value,
-                                'style' => $button['style'] ?? '',
-                                'color' => $button['color'] ?? ''
+                                'color' => $button['color'] ?? null,
+                                'style' => $button['style'] ?? null
                             ];
                         }
                     }
