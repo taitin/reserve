@@ -435,6 +435,12 @@
                 <label for="totalAmount">總金額</label>
                 <h3 id="totalAmount"></h3>
             </div>
+
+            <p class="alert" id="step2alert">
+                @if ($errors->any())
+                    {{ $errors->first() }}
+                @endif
+            </p>
             <button type="submit" class="btn btn-info btn-block submit-btn">送出預約</button>
         </section>
     </form>

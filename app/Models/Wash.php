@@ -45,6 +45,37 @@ class Wash extends Model
             'adjust_time' => implode("\n", $this->getAdjustTime())
         ];
 
+        $data['info_str'] =
+            implode("\n", [
+                '姓名:' . $this->name,
+                '電話:' . $this->phone,
+                '車款:' . $this->model,
+                '車牌:' . $this->license,
+
+                '服務項目:' . $this->project->name . '/' . number_format($this->project->use_time, 1, '.', '') . 'hr',
+                '附加服務:' . implode("\n", $this->getAdditions()),
+                '總金額:' . $this->price,
+                '總時數:' . number_format($this->total_hour, 1, '.', ''),
+            ]);
+
+        $data['time_str'] =
+            implode("\n", [
+                '預約時間:',
+                $data['booking_time'],
+                '取車時間:,',
+                $data['get_car_time']
+            ]);
+
+        $data['project_str']    =
+            implode("\n", [
+                '服務方案:',
+                $data['method'],
+                $data['addition'],
+                '本次費用 ' . $this->price . ' 元 ',
+                '預計工時 ' . $data['total_hour'] . ' 小時 ',
+            ]);
+
+
         // 如果是3.00 顯示 3 ,3.50 顯示 3.5
 
         return $data;
