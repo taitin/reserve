@@ -351,7 +351,7 @@ class Wash extends Model
     }
 
 
-    public function getNameAttribute()
+    public function getSocialNameAttribute()
     {
         $message = Message::where('social_id', $this->social_id)
             ->orderBy('id', 'desc')
