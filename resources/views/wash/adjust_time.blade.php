@@ -40,7 +40,12 @@
 <body>
     <form id="timeForm" action="/wash/{{ $wash->id }}/time_adjust" method="post">
         @csrf
-        <h1>請提供 1- 3 組預約時段，供客戶選擇</h1>
+        <h1>預約申請調整</h1>
+        <h2>請選擇欲調整「車型」或「預約進場時間」供客戶重新確認</h2>
+        <div class="gray">
+            <h3>客戶預約時間：{{ zhDate($wash->date . ' ' . $wash->time) }}</h3>
+            <h3>客戶取車時間：{{ zhDate($wash->exit_date . ' ' . $wash->exit_time) }}</h3>
+        </div>
         <div class="form-group">
             <label for="entryTime">時段申請建議 1</label>
             <input type="date" class="form-control" id="entry_time1" name="date1" min="{{ date('Y-m-d') }}"
