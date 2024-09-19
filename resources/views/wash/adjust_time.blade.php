@@ -101,7 +101,8 @@
 <script>
     function setReturn() {
         $.post('/wash/set_return', {
-            wash_id: {{ $wash->id }}
+            wash_id: {{ $wash->id }},
+            '_token': '{{ csrf_token() }}'
         }, function(data) {
             console.log(data);
         }, 'json');
