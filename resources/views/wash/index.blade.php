@@ -289,7 +289,7 @@
         }
 
         #step2 {
-            display: block;
+            display: none;
         }
 
         .alert {
