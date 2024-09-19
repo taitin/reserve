@@ -389,7 +389,9 @@ class LineController extends Controller
                         foreach ($action->text_buttons as $button) {
                             $text_buttons[] = [
                                 'label' => $button['label'],
-                                'text' => $button['text'] . ' ' . $r->value
+                                'text' => $button['text'] . ' ' . $r->value,
+                                'style' => $button['style'] ?? '',
+                                'color' => $button['color'] ?? ''
                             ];
                         }
                     }
