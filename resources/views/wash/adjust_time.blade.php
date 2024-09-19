@@ -93,7 +93,8 @@
 
 
         <button type="button" onclick="submitForm(0)" class="btn btn-info btn-block submit-btn">確認送出</button>
-        <button type="button" onclick="closeWindow()" class="btn btn-info btn-block submit-btn">返回預約申請回覆</button>
+        <button type="button" onclick="setReturn();closeWindow()"
+            class="btn btn-info btn-block submit-btn">返回預約申請回覆</button>
 
     </form>
 </body>
