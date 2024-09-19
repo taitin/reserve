@@ -309,12 +309,12 @@ class Wash extends Model
     public function getAdjustTimeWithLabel()
     {
         $data = $this->getNewBooking();
-        $data['adjust_time'] = $this->getAdjustTimeStr();
+        $adjust_time = $this->getAdjustTime();
         $times = [];
-        foreach ($data['adjust_time'] as $time) {
+        foreach ($adjust_time as $time) {
             $times[] = ['label' => $time, 'text' => '@同意修改時間 ' . $time];
         }
-
+        $data['adjust_time'] = $this->getAdjustTimeStr();
         $times[] = ['label' => '預約其他時間', 'text' => '@預約其他時間'];
         $times[] = ['label' => '取消預約', 'text' => '@取消預約'];
         $data['text_buttons'] = $times;
