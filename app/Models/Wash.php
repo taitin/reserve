@@ -51,11 +51,6 @@ class Wash extends Model
                 '電話:' . $this->phone,
                 '車款:' . $this->model,
                 '車牌:' . $this->license,
-
-                '服務項目:' . $this->project->name . '/' . number_format($this->project->use_time, 1, '.', '') . 'hr',
-                '附加服務:' . implode("\n", $this->getAdditions()),
-                '總金額:' . $this->price,
-                '總時數:' . number_format($this->total_hour, 1, '.', ''),
             ]);
 
         $data['time_str'] =
