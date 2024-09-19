@@ -47,7 +47,7 @@
             <h3>客戶取車時間：{{ zhDate($wash->exit_date . ' ' . $wash->exit_time) }}</h3>
         </div>
         <div class="form-group">
-            <label for="entryTime">時段申請建議 1</label>
+            <label for="entryTime">預約進場時間建議 - 1</label>
             <input type="date" class="form-control" id="entry_time1" name="date1" min="{{ date('Y-m-d') }}"
                 value="{{ $wash->date }}">
         </div>
@@ -58,7 +58,7 @@
 
         </div>
         <div class="form-group">
-            <label for="entryTime">時段申請建議2</label>
+            <label for="entryTime">預約進場時間建議 - 2</label>
             <input type="date" class="form-control" id="entry_time2" name="date2" min="{{ date('Y-m-d') }}"
                 value="{{ $wash->date }}">
         </div>
@@ -69,7 +69,7 @@
 
         </div>
         <div class="form-group">
-            <label for="entryTime">時段申請建議3</label>
+            <label for="entryTime">預約進場時間建議 - 3</label>
             <input type="date" class="form-control" id="entry_time3" name="date3" min="{{ date('Y-m-d') }}"
                 value="{{ $wash->date }}">
         </div>
@@ -80,9 +80,9 @@
 
         </div>
 
-        <div>
-            客戶預約車型：{{ carType($wash->car_type) }}<br />
-            客戶預約車款：{{ $wash->model }}
+        <div class="gray">
+            <h3>客戶預約車型：{{ carType($wash->car_type) }}</h3>
+            <h3>客戶預約車款：{{ $wash->model }}</h3>
         </div>
 
         <div class="form-group">
