@@ -66,6 +66,7 @@ class Wash extends Model
                 '服務方案:',
                 $data['method'],
                 $data['addition'],
+                '',
                 '本次費用 ' . $this->price . ' 元 ',
                 '預計工時 ' . $data['total_hour'] . ' 小時 ',
             ]);
