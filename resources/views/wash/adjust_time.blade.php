@@ -116,8 +116,8 @@
     }
 
     function closeWindow() {
-        liff.closeWindow();
-        window.close();
+        // liff.closeWindow();
+        // window.close();
     }
     //根據日期計算可預約時間
     function calculateAvailableTime(index) {
