@@ -345,6 +345,13 @@ class Wash extends Model
         $this->date = $t[0];
         $this->time = $t[1];
         $this->status = 'arranged';
+
+        $this->total_hour;
+
+        $this->exit_date = date('Y-m-d', strtotime($this->date));
+        $this->exit_time = date('H:i', strtotime($this->date . ' ' . $this->time) + $this->total_hour * 3600);
+
+
         $this->save();
         return $this->confirmBooking();
     }
