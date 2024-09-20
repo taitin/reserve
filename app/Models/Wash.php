@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class Wash extends Model
 {
@@ -326,6 +327,7 @@ class Wash extends Model
         $times = [];
         if (!empty($this->suggest_time)) {
             foreach ($this->suggest_time as $time) {
+                Log::debug($time);
                 if (str_contains($time['time'], '無預約')) {
                     continue;
                 }
