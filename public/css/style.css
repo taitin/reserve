@@ -50,3 +50,25 @@
  .gray {
      background-color: #f0f0f0;
  }
+
+
+
+ .close {
+     background-color: #134B70;
+     color: white;
+ }
+
+ .close h3 {
+     color: #508C9B;
+ }
+
+ .close h2 {
+     color: #134B70;
+ }
+
+ .close .frame {
+     background-color: white;
+     padding: 20px;
+     width: 90%;
+     text-align: center;
+ }

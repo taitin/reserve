@@ -13,7 +13,10 @@
 
 <body>
 
-    <h1>{{ $message }}</h1>
+    <div class="frame">
+        <h3>{!! nl2br($message) !!}</h3>
+    </div>
+
     <input type="button" value="關閉頁面" onclick="closeWindow()">
 
 
