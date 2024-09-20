@@ -101,7 +101,7 @@ class WashController extends Controller
 
 
 
-        return view('wash.close', ['message' => '洗車預約已送出']);
+        return view('wash.close', ['message' => "洗車預約已送出\n請稍候於 LINE 等候回覆"]);
     }
 
     public function setAmount(Request $request)

@@ -11,10 +11,10 @@
 
 </head>
 
-<body>
+<body class="close">
 
     <div class="frame">
-        <h3>{!! nl2br($message) !!}</h3>
+        <h2>{!! nl2br($message) !!}</h2>
     </div>
 
     <input type="button" value="關閉頁面" onclick="closeWindow()">
