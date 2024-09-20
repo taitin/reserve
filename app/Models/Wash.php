@@ -327,11 +327,12 @@ class Wash extends Model
         $times = [];
         if (!empty($this->suggest_time)) {
             foreach ($this->suggest_time as $time) {
-                Log::debug($time);
                 if (str_contains($time['time'], '無預約')) {
                     continue;
                 }
+
                 $times[] = $time['date'] . ' ' . $time['time'];
+                Log::debug($times);
             }
         }
         return $times;
