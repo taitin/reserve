@@ -107,7 +107,7 @@
             padding: 10px;
             margin-bottom: 15px;
             border-radius: 5px;
-            font-size: 0.8em;
+            font-size: 1em;
             font-weight: bold;
             text-align: left;
             padding-left: 20px;
@@ -167,17 +167,17 @@
         }
 
         select {
-            font-size: 0.8em
+            font-size: 1em
         }
 
         label {
             margin-bottom: .1rem;
-            font-size: 0.8em;
+            font-size: 1em;
 
         }
 
         .form-control {
-            font-size: 0.8em;
+            font-size: 1em;
 
         }
 
