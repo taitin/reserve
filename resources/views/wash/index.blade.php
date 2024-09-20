@@ -107,7 +107,7 @@
             padding: 10px;
             margin-bottom: 15px;
             border-radius: 5px;
-            font-size: 1em;
+            font-size: 0.8em;
             font-weight: bold;
             text-align: left;
             padding-left: 20px;
@@ -120,14 +120,14 @@
             width: 88%;
         }
 
-        .welcome p {
+        .main {
             color: #508C9B
         }
 
 
         #basicAmount {
             margin-top: 30px;
-            font-style: 25px;
+            font-style: 1.2em;
             width: 50%;
             font-weight: bold;
         }
@@ -167,7 +167,22 @@
         }
 
         select {
-            font-size: 1.5em
+            font-size: 0.8em
+        }
+
+        label {
+            margin-bottom: .1rem;
+            font-size: 0.8em;
+
+        }
+
+        .form-control {
+            font-size: 0.8em;
+
+        }
+
+        .form-group {
+            margin-bottom: 0.6rem;
         }
 
         /*
@@ -309,8 +324,8 @@
 
         <section id="step1">
             <div class="form-group welcome">
-                <p>
-                    AK STUDIO A 咖專業車體美容 歡迎你！
+                <div class="main">
+                    AK STUDIO A 咖專業車體美容 歡迎你！</div>
                 <div id="">
                     請先填寫你的基本資訊
                 </div>
@@ -329,13 +344,13 @@
 
             </div>
             <div class="form-group">
-                <label for="license">車牌(如ABC-123)</label>
+                <label for="license">車牌</label>
                 <input required type="text" placeholder="ABC-123" class="form-control" id="license" name="license"
                     value="{{ $wash->license ?? '' }}">
 
             </div>
             <div class="form-group">
-                <label for="model">車款(廠牌及型號)</label>
+                <label for="model">車款</label>
                 <input required type="text" placeholder="如 Toyota Rav4" class="form-control" id="model"
                     name="model" value="{{ $wash->model ?? '' }}">
 
@@ -368,7 +383,7 @@
             </div>
 
             <div class="form-group">
-                <label for="entryTime">預計取車日期(隔日不加價)</label>
+                <label for="entryTime">預計取車日期（留車不加價）</label>
                 <input required type="date" class="form-control" id="exit_date" name="exit_date"
                     min="{{ date('Y-m-d') }}">
             </div>
@@ -389,18 +404,19 @@
 
 
             <div class="form-group service-details">
-                <p>
-                    根據您選擇的車型，本洗車服務提供的基本費用如下：
+                <div class="main">
+                    依據您的車型，本次服務費用：
+                </div>
                 <div id="">
-                    原價:<del id="orgAmount">元</del>
-                    特價:<span id="basicAmount" style="color: red">元</span>
+                    原價：<del id="orgAmount">元</del>
+                    特價：<span id="basicAmount" style="color: red"> 元</span>
                 </div>
 
                 此費用包含
                 <div id="service_desc">
                 </div>
-                </p>
-                <div id="serviceDetails"></div>
+            </div>
+            <div id="serviceDetails"></div>
             </div>
 
 
@@ -416,17 +432,17 @@
                     <div><label for="service1">
                             <input type="checkbox" data-price="600" id="service1" name="addition_services[]"
                                 value="車輛前檔玻璃潑水">
-                            車輛前檔玻璃潑水：600元</label>
+                            車輛前檔玻璃潑水：600 元</label>
                     </div>
                     <div><label for="service2">
                             <input type="checkbox" data-price="1500" id="service2" name="addition_services[]"
                                 value="全車玻璃潑水">
-                            全車玻璃潑水：1500元</label>
+                            全車玻璃潑水：1500 元</label>
                     </div>
                     <div><label for="service3">
                             <input type="checkbox" data-price="1500" id="service3" name="addition_services[]"
                                 value="鍍膜維護劑">
-                            鍍膜維護劑：1500元</label>
+                            鍍膜維護劑：1500 元</label>
                     </div>
                 </div>
 
@@ -474,7 +490,7 @@
                 select.append('<label for="service' + addition.id +
                     '"><input type="checkbox" data-price="0" id="service' + addition.id +
                     '" name="addition_services[]" value="' + addition.id + '">' + addition.name +
-                    '：<span></span>元</label></div>');
+                    '：<span></span></label></div>');
             };
             calculateTotalAmount();
             $('.addition-service input').on('click', function() {
@@ -511,13 +527,13 @@
 
         $('#orgAmount').html(parseInt(projects[project_id].price[carType]) + '元');
 
-        $('#basicAmount').html(totalAmount + '元');
+        $('#basicAmount').html(totalAmount + ' 元');
 
         for (var key in additions) {
 
 
             $('#service' + key).attr('data-price', additions[key].discount_price[carType]);
-            $('#service' + key).parent().find('span').html(additions[key].discount_price[carType]);
+            $('#service' + key).parent().find('span').html(additions[key].discount_price[carType] + ' 元');
 
 
         }
@@ -530,7 +546,7 @@
 
         // 顯示總金額
 
-        $('#totalAmount').html(totalAmount + '元');
+        $('#totalAmount').html(totalAmount + ' 元');
 
 
     }
