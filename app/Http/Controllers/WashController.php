@@ -345,7 +345,7 @@ class WashController extends Controller
         strtotime($date) < strtotime(date('Y-m-d')) ? $day = 0 : $day = $day;
 
         if ($day == 0) {
-            $available_times = ['*本日已無預約時端，請選擇其他日期'];
+            $available_times = ['*本日已無預約時段，請選擇其他日期'];
         } else {
             $available_times = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'];
         }
