@@ -71,8 +71,8 @@ class ExceptController extends AdminController
             $times = array_combine($times, $times);
 
             $form->html('
-    <button type="button" id="select-all">Select All</button>
-    <button type="button" id="deselect-all">Deselect All</button>
+    <button type="button" id="select-all">全選</button>
+    <button type="button" id="deselect-all">全消</button>
 ');
             $form->multipleSelect('time')->options(
                 $times
@@ -82,12 +82,19 @@ class ExceptController extends AdminController
             $form->display('updated_at');
             Admin::script('
     Dcat.ready(function () {
+          $("#deselect-all").hide();
         $("#select-all").click(function () {
-        alert("select-all");
             $("#multiple-select").val(' . json_encode(array_keys($times)) . ').trigger("change");
+          $("#deselect-all").show();
+          $("#select-all").hide();
+
+
+
         });
         $("#deselect-all").click(function () {
             $("#multiple-select").val([]).trigger("change");
+           $("#deselect-all").hide();
+          $("#select-all").show();
         });
     });
 ');
