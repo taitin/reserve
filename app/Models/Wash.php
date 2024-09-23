@@ -45,7 +45,6 @@ class Wash extends Model
             'get_car_time' => zhDate($this->exit_date . ' ' . $this->exit_time),
             'adjust_time' => implode("\n", $this->getAdjustTime())
         ];
-s
         $data['info_str'] =
             implode("\n", [
                 '訂單編號：' . $this->id,
