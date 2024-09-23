@@ -84,7 +84,7 @@ class Wash extends Model
         $results = [];
         if ($this->addition_services) {
             foreach ($this->additions as $addition) {
-                $results[] = $addition->name . ' / ' . $addition->use_time . ' hr';
+                $results[] = $addition->name . ' / ' . round($addition->use_time, 1) . ' hr';
             }
         }
         return $results;
