@@ -43,6 +43,8 @@
             $.get('/wash/get_profile/' + social_id, {}, function(data) {
 
                 if (data.result) {
+                    $('#phone').val(data.data.name);
+
                     $('#phone').val(data.data.phone);
                     $('#license').val(data.data.license);
                     $('#model').val(
