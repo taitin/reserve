@@ -20,7 +20,7 @@ class WashController extends AdminController
         return Grid::make(new Wash(), function (Grid $grid) {
 
             $grid->model()->orderBy('id', 'desc');
-            $grid->column('id')->sortable();
+            $grid->column('id', '訂單編號')->sortable();
             // $grid->column('social_id');
             $grid->column('name');
             $grid->column('phone');
