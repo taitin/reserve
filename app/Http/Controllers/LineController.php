@@ -433,7 +433,7 @@ class LineController extends Controller
                     }
 
 
-                    $bg_colors = config('wash.bg_color');
+                    $bg_colors = config('wash.bg_colors');
                     $reply['bg_color'] =  $bg_colors[$wash->id % count($bg_colors)] ?? '#FFFFFF';
 
 
