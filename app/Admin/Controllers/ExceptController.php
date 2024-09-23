@@ -84,7 +84,7 @@ class ExceptController extends AdminController
     Dcat.ready(function () {
         $("#select-all").click(function () {
         alert("select-all");
-            $("#multiple-select").val(' . json_encode($times) . ').trigger("change");
+            $("#multiple-select").val(' . json_encode(array_keys($times)) . ').trigger("change");
         });
         $("#deselect-all").click(function () {
             $("#multiple-select").val([]).trigger("change");
