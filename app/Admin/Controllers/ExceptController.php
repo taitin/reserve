@@ -83,7 +83,7 @@ class ExceptController extends AdminController
             Admin::script('
     Dcat.ready(function () {
         $("#select-all").click(function () {
-            $("#multiple-select").val(["1", "2", "3"]).trigger("change");
+            $("#multiple-select").val(' . json_encode($times) . ').trigger("change");
         });
         $("#deselect-all").click(function () {
             $("#multiple-select").val([]).trigger("change");
