@@ -33,6 +33,7 @@ Route::any('line/bind', [LineController::class, 'bind']);
 
 
 Route::get('wash', [WashController::class, 'index'])->name('wash.index');
+Route::get('wash/check_member/{license}', [WashController::class, 'checkMember'])->name('wash.show');
 Route::get('wash/{id}/re_book',  [WashController::class, 'index']);
 
 Route::get('wash/get_profile/{social_id}', [WashController::class, 'getProfile'])->name('wash.index');

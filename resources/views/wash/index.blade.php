@@ -19,7 +19,7 @@
                 liffId: "{{ env('LINE_LIFF_ID') }}" // Use own liffId
             }).then(() => {
                 if (!liff.isLoggedIn()) {
-                    liff.login();
+                    // liff.login();
                 } else {
                     liff.getProfile()
                         .then(profile => {
@@ -349,6 +349,7 @@
                 <label for="license">車牌</label>
                 <input required type="text" placeholder="ABC-123" class="form-control" id="license" name="license"
                     value="{{ $wash->license ?? '' }}">
+                <input type="hidden" id="is_member" name="is_member" value="0">
 
             </div>
             <div class="form-group">
@@ -409,7 +410,7 @@
                 <div class="main">
                     依據您的車型，本次服務費用：
                 </div>
-                <div id="">
+                <div id="price-cavas">
                     原價：<del id="orgAmount">元</del>
                     特價：<span id="basicAmount" style="color: red"> 元</span>
                 </div>
@@ -469,7 +470,9 @@
 
 
     function getProjects() {
-        $.get('/wash/get_projects', {}, function(data) {
+        $.get('/wash/get_projects', {
+
+        }, function(data) {
             projects = data.projects;
             var select = $('#project');
             select.empty();
@@ -489,7 +492,7 @@
             select.empty();
             for (var key in additions) {
                 addition = additions[key];
-                select.append('<label for="service' + addition.id +
+                select.append('<label onclick="calculateTotalAmount()" for="service' + addition.id +
                     '"><input type="checkbox" data-price="0" id="service' + addition.id +
                     '" name="addition_services[]" value="' + addition.id + '">' + addition.name +
                     '：<span></span></label></div>');
@@ -521,8 +524,24 @@
         if (!project_id) {
             return;
         }
-        totalAmount += parseInt(projects[project_id].discount_price[carType]);
 
+        if ($('#is_member').val() == 1) {
+            var use_price = 'discount_price';
+            $('#price-cavas').html(
+                '原價：<del id="orgAmount">元</del> 特價：<span id="basicAmount" style="color: red"> 元</span>');
+        } else {
+            var use_price = 'price';
+            $('#price-cavas').html('<span id="basicAmount" style="color: red"> 元</span>');
+
+        }
+
+
+        totalAmount += parseInt(projects[project_id][use_price][carType]);
+
+
+        var user_time = 0;
+        //計算總需時間
+        user_time += parseFloat(projects[project_id]['use_time']);
         //js nl2br
 
         $('#service_desc').html((addLineNumbers(projects[project_id].description)))
@@ -534,8 +553,8 @@
         for (var key in additions) {
 
 
-            $('#service' + key).attr('data-price', additions[key].discount_price[carType]);
-            $('#service' + key).parent().find('span').html(additions[key].discount_price[carType] + ' 元');
+            $('#service' + key).attr('data-price', additions[key][use_price][carType]);
+            $('#service' + key).parent().find('span').html(additions[key][use_price][carType] + ' 元');
 
 
         }
@@ -543,12 +562,56 @@
         // 加值服務的費用
         var additionServices = document.querySelectorAll('input[name="addition_services[]"]:checked');
         additionServices.forEach(function(service) {
-            totalAmount += parseInt(additions[$(service).val()].discount_price[carType]);
+            totalAmount += parseInt(additions[$(service).val()][use_price][carType]);
+            user_time += parseFloat(additions[$(service).val()]['use_time']);
         });
+
+        //exit time 必須 > entry time+user_time
+
+
+        $entry_date = $('#entry_time').val();
+        $entry_time = $('#time').val();
+
+        //最小可離開時間 為 $entry_time + user_time
+        min_exit_time = new Date($entry_date + ' ' + $entry_time);
+        min_exit_time.setHours(min_exit_time.getHours() + user_time);
+        $('#exit_date').attr('min', min_exit_time.toISOString().slice(0, 10));
+
+        $exit_date = $('#exit_date').val();
+        $exit_time = $('#exit_time').val();
+        //離場時間選項，必須扣除 進場時間+user_time 之前的選項
+        var select = $('#exit_time');
+        select.empty();
+        availableTimes = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
+        availableTimes.forEach(function(time) {
+            select_time = new Date($exit_date + ' ' + time);
+            console.log({
+                time,
+                select_time,
+                min_exit_time,
+                select
+            })
+            if (select_time.getTime() >= min_exit_time.getTime()) {
+                console.log({
+                    time
+                })
+
+                select.append('<option value="' + time + '">' + time + '</option>');
+            }
+
+        });
+
+
+
+
+
+
+
+
 
         // 顯示總金額
 
-        $('#totalAmount').html(totalAmount + ' 元');
+        $('#totalAmount').html(totalAmount + ' 元 / 需時' + user_time + '小時');
 
 
     }
@@ -584,12 +647,12 @@
         $('#exit_date').val(entryTime)
         var date = new Date(entryTime);
         var day = date.getDay();
-        var select = $('#exit_time');
-        select.empty();
-        availableTimes = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
-        availableTimes.forEach(function(time) {
-            select.append('<option value="' + time + '">' + time + '</option>');
-        });
+        // var select = $('#exit_time');
+        // select.empty();
+        // availableTimes = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
+        // availableTimes.forEach(function(time) {
+        //     select.append('<option value="' + time + '">' + time + '</option>');
+        // });
 
 
         $.get('/wash/get_available_time', {
@@ -607,6 +670,7 @@
             availableTimes.forEach(function(time) {
                 select.append('<option value="' + time + '">' + time + '</option>');
             });
+            calculateTotalAmount();
         }, 'json');
 
 
@@ -638,6 +702,17 @@
             return false; // 阻止表單提交
         }
 
+        $.get('/wash/check_member/' + license, {}, function(data) {
+            if (data.result) {
+                $('#is_member').val(1);
+            } else {
+                $('#is_member').val(0);
+            }
+            calculateTotalAmount()
+        }, 'json');
+
+
+
         $('#step1alert').text('').fadeOut();
 
         $('#cont').fadeOut();
@@ -660,6 +735,12 @@
         $('#entry_time').change(function() {
             calculateAvailableTime();
         });
+
+        $('#exit_date').change(function() {
+            calculateTotalAmount();
+        });
+
+
 
 
         calculateTotalAmount();

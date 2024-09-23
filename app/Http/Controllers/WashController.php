@@ -63,6 +63,7 @@ class WashController extends Controller
                 'date' => 'required',
                 'time' => 'required',
                 'car_type' => 'required',
+                'is_member' => 'required',
             ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
             //dd($e->errors());
@@ -472,5 +473,27 @@ class WashController extends Controller
         $line = new LineController();
         $line->actionTrigger(json_decode(json_encode($input), false), 'customer');
         return view('wash.close', ['message' => '付款失敗']);
+    }
+
+    public function checkMember($license)
+    {
+        $data = [
+            'invoice_no' => time() . $license,
+            'request_amount' => 1,
+            'callback_url' => url(''),
+            'use_special_plate_number' => true,
+            'plate_number' => strtoupper($license)
+
+        ];
+        $autopass = new AutopassService();
+
+        $r =  $autopass->makePay($data);
+        if (isset($r['error'])) {
+            return ['result' => false, 'message' => $r['error']['message']];
+        }
+
+
+        $cancel = $autopass->cancelPay($data['invoice_no']);
+        return ['result' => true];
     }
 }
