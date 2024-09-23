@@ -18,10 +18,10 @@ return [
     ],
     'bg_colors' => [
         '#A6FFA6',
-        '#B9B9FF',
-        '#FF9D6F',
+        '#FFAAD5',
         '#FFF4C1',
         '#D0D0D0',
+        '#FF9D6F',
         '#FFFFFF'
     ]
 

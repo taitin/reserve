@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\Except;
+use Dcat\Admin\Admin;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
@@ -69,12 +70,26 @@ class ExceptController extends AdminController
             $times = config('wash.business_times');
             $times = array_combine($times, $times);
 
+            $form->html('
+    <button type="button" id="select-all">Select All</button>
+    <button type="button" id="deselect-all">Deselect All</button>
+');
             $form->multipleSelect('time')->options(
                 $times
-            );
+            )->attribute(['id' => 'multiple-select']);
 
             $form->display('created_at');
             $form->display('updated_at');
+            Admin::script('
+    Dcat.ready(function () {
+        $("#select-all").click(function () {
+            $("#multiple-select").val(["1", "2", "3"]).trigger("change");
+        });
+        $("#deselect-all").click(function () {
+            $("#multiple-select").val([]).trigger("change");
+        });
+    });
+');
         });
     }
 }
