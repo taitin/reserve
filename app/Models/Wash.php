@@ -38,33 +38,34 @@ class Wash extends Model
             'car_type' => carType($this->car_type),
             'model' => $this->model,
             'booking_time' => zhDate($this->date . ' ' . $this->time),
-            'method' => $this->project->name . '/' . number_format($this->project->use_time, 1, '.', '') . 'hr',
+            'method' => $this->project->name . ' / ' . number_format($this->project->use_time, 1, '.', '') . ' hr',
             'addition' => implode("\n", $this->getAdditions()),
             'total' => $this->price,
             'total_hour' => number_format($this->total_hour, 1, '.', ''),
             'get_car_time' => zhDate($this->exit_date . ' ' . $this->exit_time),
             'adjust_time' => implode("\n", $this->getAdjustTime())
         ];
-
+s
         $data['info_str'] =
             implode("\n", [
-                '姓名:' . $this->name,
-                '電話:' . $this->phone,
-                '車款:' . $this->model,
-                '車牌:' . $this->license,
+                '訂單編號：' . $this->id,
+                '姓名：' . $this->name,
+                '電話：' . $this->phone,
+                '車款：' . $this->model,
+                '車牌：' . $this->license,
             ]);
 
         $data['time_str'] =
             implode("\n", [
-                '預約時間:',
+                '預約時間：',
                 $data['booking_time'],
-                '取車時間:,',
+                '取車時間：',
                 $data['get_car_time']
             ]);
 
         $data['project_str']    =
             implode("\n", [
-                '服務方案:',
+                '服務方案：',
                 $data['method'],
                 $data['addition'],
                 '',
@@ -84,7 +85,7 @@ class Wash extends Model
         $results = [];
         if ($this->addition_services) {
             foreach ($this->additions as $addition) {
-                $results[] = $addition->name . '/' . $addition->use_time . 'hr';
+                $results[] = $addition->name . ' / ' . $addition->use_time . ' hr';
             }
         }
         return $results;
