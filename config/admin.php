@@ -200,7 +200,7 @@ return [
     |--------------------------------------------------------------------------
     */
     'helpers' => [
-        'enable' => true,
+        'enable' => env('ADMIN_HELPERS_ENABLE', false),
     ],
 
     /*
