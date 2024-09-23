@@ -291,7 +291,7 @@ class LineService
             $footer = new BoxComponentBuilder('vertical', $content, null, 'md', 'md');
 
 
-            $body_stye = new BlockStyleBuilder('#FF0000');
+            $body_stye = new BlockStyleBuilder($data['bg_color'] ?? null);
             $style = new BubbleStylesBuilder(null, null, $body_stye, null);
             $containerBuilder = new ServicesBubbleContainerBuilder('ltr', null, null, $body, $footer,  $style);
 

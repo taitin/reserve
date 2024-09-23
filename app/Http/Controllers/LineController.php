@@ -431,6 +431,12 @@ class LineController extends Controller
                     if (isset($text_buttons)) {
                         $reply['text_buttons'] = $text_buttons;
                     }
+
+
+                    $bg_colors = config('wash.bg_color');
+                    $reply['bg_color'] =  $bg_colors[$wash->id % count($bg_colors)] ?? '#FFFFFF';
+
+
                     if (isset($params['link'])) {
                         $reply['url'] = $params['link'];
                     }
