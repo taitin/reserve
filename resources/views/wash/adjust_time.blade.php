@@ -98,8 +98,7 @@
 
 
         <button type="button" onclick="submitForm(0)" class="btn btn-info btn-block submit-btn">確認送出</button>
-        <button type="button" onclick="setReturn();closeWindow()"
-            class="btn btn-info btn-block submit-btn">返回預約申請回覆</button>
+        <button type="button" onclick="setReturn();" class="btn btn-info btn-block submit-btn">返回預約申請回覆</button>
 
     </form>
 </body>
@@ -109,6 +108,7 @@
             wash_id: {{ $wash->id }},
             '_token': '{{ csrf_token() }}'
         }, function(data) {
+            closeWindow()
             console.log(data);
         }, 'json');
 
