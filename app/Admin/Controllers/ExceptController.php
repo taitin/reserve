@@ -71,8 +71,8 @@ class ExceptController extends AdminController
             $times = array_combine($times, $times);
 
             $form->html('
-    <button type="button" id="select-all">全選</button>
-    <button type="button" id="deselect-all">全消</button>
+    <button class="btn btn-primary" type="button" id="select-all">全選</button>
+    <button class="btn btn-primary"  type="button" id="deselect-all">全消</button>
 ');
             $form->multipleSelect('time')->options(
                 $times
