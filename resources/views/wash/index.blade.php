@@ -568,12 +568,20 @@
 
         //exit time 必須 > entry time+user_time
 
-
+        if (user_time == 0) {
+            user_time = 2;
+        }
         $entry_date = $('#entry_time').val();
         $entry_time = $('#time').val();
 
         //最小可離開時間 為 $entry_time + user_time
         min_exit_time = new Date($entry_date + ' ' + $entry_time);
+        //如果user_time>=48 則天從
+        if (user_time >= 48) {
+            min_exit_time = new Date($entry_date + ' 9:00');
+            min_exit_time.setDate(min_exit_time.getDate() + 1);
+        }
+
         min_exit_time.setHours(min_exit_time.getHours() + user_time);
         $('#exit_date').attr('min', min_exit_time.toISOString().slice(0, 10));
 
@@ -582,7 +590,7 @@
         //離場時間選項，必須扣除 進場時間+user_time 之前的選項
         var select = $('#exit_time');
         select.empty();
-        availableTimes = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
+        availableTimes = {{ config('wash.business_times') }};
         availableTimes.forEach(function(time) {
             select_time = new Date($exit_date + ' ' + time);
             console.log({
