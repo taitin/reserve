@@ -181,10 +181,17 @@ class WashController extends Controller
     {
         //洗車 form
         $wash = \App\Models\Wash::find($request->id);
-        $autopass = new \App\Services\AutopassService();
+
         if (empty($wash->pay_data['invoice_no'])) {
             return view('wash.close', ['message' => '付款失敗']);
         }
+
+        return $this->paidCheck($wash);
+    }
+
+    public function paidCheck($wash)
+    {
+        $autopass = new \App\Services\AutopassService();
         $auth_result = $autopass->getPayResult($wash->pay_data['invoice_no']);
 
         $wash->pay_auth_result = $auth_result;
@@ -204,6 +211,14 @@ class WashController extends Controller
         $line->actionTrigger(json_decode(json_encode($input), false), 'customer');
 
         return view('wash.close', ['message' => '付款成功！！請返回Line繼續操作']);
+    }
+
+    public function callBack(Request $request)
+    {
+        $invoice_no = $request->invoice_no;
+        $id = explode('_', $invoice_no)[0];
+        $wash = \App\Models\Wash::find($id);
+        return $this->paidCheck($wash);
     }
 
 

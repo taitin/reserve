@@ -57,6 +57,9 @@ Route::get('wash/{id}/set_amount',  [WashController::class, 'setAmount']);
 Route::post('wash/{id}/set_amount',  [WashController::class, 'doSetAmount']);
 Route::get('wash/{id}/redirect_pay',  [WashController::class, 'redirectPay']);
 Route::get('wash/{id}/pay_webhook/{token}',  [WashController::class, 'payWebhook']);
+Route::get('wash/autopass/callback',  [WashController::class, 'payWebhook']);
+
+
 Route::get('wash/{id}/pay_trigger',  [WashController::class, 'payWebhookFake']);
 Route::get('wash/{id}/time_adjust',  [WashController::class, 'adjustTime']);
 Route::post('wash/{id}/time_adjust',  [WashController::class, 'saveAdjustTime']);
