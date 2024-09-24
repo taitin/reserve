@@ -21,7 +21,7 @@ class AutopassService
         $url = $this->url . '/invoices';
         $data = [
             'transaction_type' => 'wash_car',
-            'capture_method' => 'manual',
+            'capture_method' => $data['capture_method'] ?? 'manual',
             // 'capture_method' => 'automatic',
 
             'invoice_no' => $data['invoice_no'],

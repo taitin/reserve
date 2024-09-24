@@ -327,7 +327,8 @@ class WashController extends Controller
             'invoice_no' => $wash->id . '_' . time(),
             'request_amount' => $wash->price,
             'callback_url' => url('wash/' . $wash->id . '/pay_webhook/' . OrderToken::token($wash->id)),
-            'plate_number' => strtoupper($wash->license)
+            'plate_number' => strtoupper($wash->license),
+            'capture_method' => 'automatic',
         ];
 
         $wash->pay_data = $data;
