@@ -272,8 +272,9 @@ class LineService
 
         $content = [];
         if (isset($data['url']) || isset($data['text_buttons'])) {
-            $content[] =  new TextComponentBuilder($data['message'], null, 'sm', null, 'start', null, true, null, null);
+            $header = new BoxComponentBuilder('vertical', '', null, 'md', 'md');
 
+            $content[] =  new TextComponentBuilder($data['message'], null, 'sm', null, 'start', null, true, null, null);
             $body = new BoxComponentBuilder('vertical', $content, null, 'md', 'md');
             $content = [];
             if (!empty($data['url'])) {
@@ -291,9 +292,9 @@ class LineService
             $footer = new BoxComponentBuilder('vertical', $content, null, 'md', 'md');
 
 
-            $body_stye = new BlockStyleBuilder($data['bg_color'] ?? null);
-            $style = new BubbleStylesBuilder(null, null, $body_stye, null);
-            $containerBuilder = new ServicesBubbleContainerBuilder('ltr', null, null, $body, $footer,  $style);
+            $head_style = new BlockStyleBuilder($data['bg_color'] ?? null);
+            $style = new BubbleStylesBuilder($head_style, null, null, null);
+            $containerBuilder = new ServicesBubbleContainerBuilder('ltr', $header, null, $body, $footer,  $style);
 
             $messageBuilder = new FlexMessageBuilder($data['message'], $containerBuilder);
             // $buttonTemplateBuilder   =  new ButtonTemplateBuilder(
