@@ -41,7 +41,7 @@
     <form id="timeForm" action="/wash/{{ $wash->id }}/time_adjust" method="post">
         @csrf
         <h1>預約申請調整</h1>
-        <h2>請選擇欲調整「車型」或「預約進場時間」供客戶重新確認</h2>
+        <p>請選擇欲調整「車型」或「預約進場時間」供客戶重新確認</p>
         <div class="gray">
             <h3>客戶預約時間：{{ zhDate($wash->date . ' ' . $wash->time) }}</h3>
             <h3>客戶取車時間：{{ zhDate($wash->exit_date . ' ' . $wash->exit_time) }}</h3>
