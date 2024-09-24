@@ -272,7 +272,7 @@ class LineService
 
         $content = [];
         if (isset($data['url']) || isset($data['text_buttons'])) {
-            $head =   new TextComponentBuilder('', null, 'sm', null, 'start', null, true, null, null);
+            $head[] =   new TextComponentBuilder('', null, 'sm', null, 'start', null, true, null, null);
             $header = new BoxComponentBuilder('vertical', $head, null, 'md', 'md');
 
             $content[] =  new TextComponentBuilder($data['message'], null, 'sm', null, 'start', null, true, null, null);
