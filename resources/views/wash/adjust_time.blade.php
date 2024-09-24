@@ -43,8 +43,8 @@
         <h1>預約申請調整</h1>
         <p>請選擇欲調整「車型」或「預約進場時間」供客戶重新確認</p>
         <div class="gray">
-            <h3>客戶預約時間：<br />{{ zhDate($wash->date . ' ' . $wash->time) }}</h3>
-            <h3>客戶取車時間：<br />{{ zhDate($wash->exit_date . ' ' . $wash->exit_time) }}</h3>
+            <h3>客戶預約時間：{{ zhDate($wash->date . ' ' . $wash->time) }}<br />
+                客戶取車時間：{{ zhDate($wash->exit_date . ' ' . $wash->exit_time) }}</h3>
         </div>
         <div class="form-group">
             <label for="entryTime">預約進場時間建議 - 1</label>
@@ -81,8 +81,7 @@
         </div>
 
         <div class="gray">
-            <h3>客戶預約車型：<br />{{ carType($wash->car_type) }}</h3>
-            <h3>客戶預約車款：<br />{{ $wash->model }}</h3>
+            <h3>客戶預約車型：{{ carType($wash->car_type) }}<br />客戶預約車款：{{ $wash->model }}</h3>
         </div>
 
         <div class="form-group">
