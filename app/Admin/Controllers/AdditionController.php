@@ -21,6 +21,7 @@ class AdditionController extends AdminController
             $grid->column('id')->sortable();
             $grid->column('name');
             $grid->column('description');
+            $grid->column('use_time');
             $grid->column('price');
             $grid->column('discount_price');
             $grid->column('status');

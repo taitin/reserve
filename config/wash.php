@@ -22,7 +22,7 @@ return [
         '#FFF4C1',
         '#D0D0D0',
         '#FF9D6F',
-        '#FFFFFF'
+
     ]
 
 
