@@ -81,7 +81,7 @@ class ExceptController extends AdminController
             $form->display('created_at');
             $form->display('updated_at');
             Admin::script('
-    Dcat.ready(function () {
+    $(function () {
           $("#deselect-all").hide();
         $("#select-all").click(function () {
             $("#multiple-select").val(' . json_encode(array_keys($times)) . ').trigger("change");
