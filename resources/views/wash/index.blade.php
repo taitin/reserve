@@ -19,7 +19,7 @@
                 liffId: "{{ env('LINE_LIFF_ID') }}" // Use own liffId
             }).then(() => {
                 if (!liff.isLoggedIn()) {
-                    // liff.login();
+                    liff.login();
                 } else {
                     liff.getProfile()
                         .then(profile => {
@@ -590,7 +590,7 @@
         //離場時間選項，必須扣除 進場時間+user_time 之前的選項
         var select = $('#exit_time');
         select.empty();
-        availableTimes = {{ json_encode(config('wash.business_times')) }};
+        availableTimes = {!! json_encode(config('wash.business_times')) !!};
         availableTimes.forEach(function(time) {
             select_time = new Date($exit_date + ' ' + time);
             console.log({
