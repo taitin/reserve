@@ -19,7 +19,7 @@
                 liffId: "{{ env('LINE_LIFF_ID') }}" // Use own liffId
             }).then(() => {
                 if (!liff.isLoggedIn()) {
-                    // liff.login();
+                    liff.login();
                 } else {
                     liff.getProfile()
                         .then(profile => {
@@ -588,11 +588,11 @@
         }
 
         min_exit_time.setHours(min_exit_time.getHours() + user_time);
-        $('#exit_date').attr('min', min_exit_time.toISOString().slice(0, 10));
+        $('#exit_date').attr('min', formatDate(min_exit_time));
 
         select_exit_time = new Date($('#exit_date').val() + ' 9:00');
         if (min_exit_time.getTime() > select_exit_time.getTime()) {
-            $('#exit_date').val(min_exit_time.toISOString().slice(0, 10));
+            $('#exit_date').val(formatDate(min_exit_time));
         }
         $exit_date = $('#exit_date').val();
         $exit_time = $('#exit_time').val();
@@ -629,6 +629,14 @@
 
 
 
+    }
+
+    // 格式化日期為 YYYY-MM-DD
+    function formatDate(date) {
+        var year = date.getFullYear();
+        var month = (date.getMonth() + 1).toString().padStart(2, '0');
+        var day = date.getDate().toString().padStart(2, '0');
+        return `${year}-${month}-${day}`;
     }
 
     function addLineNumbers(text) {
