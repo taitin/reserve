@@ -477,6 +477,15 @@ class WashController extends Controller
 
     public function checkMember($license)
     {
+
+        $wash = Wash::where('license', $license)->where('is_member', 1)->first();
+        if (!empty($wash)) {
+            return ['result' => true, 'message' => '會員'];
+        }
+
+
+
+
         $data = [
             'invoice_no' => time() . $license,
             'request_amount' => 1,
