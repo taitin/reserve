@@ -590,7 +590,7 @@
         //離場時間選項，必須扣除 進場時間+user_time 之前的選項
         var select = $('#exit_time');
         select.empty();
-        availableTimes = {{ config('wash.business_times') }};
+        availableTimes = {{ json_decode(config('wash.business_times')) }};
         availableTimes.forEach(function(time) {
             select_time = new Date($exit_date + ' ' + time);
             console.log({
