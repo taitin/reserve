@@ -582,7 +582,10 @@ class LineController extends Controller
         } else {
 
             $message = Message::where('social_id', $social_id)
-                ->whereNull('group_id')
+                ->where(function ($query) {
+                    $query->whereNull('group_id')
+                        ->orWhere('group_id', 0);
+                })
                 ->whereNull('replied_at')
                 ->where('created_at', '>', date('Y-m-d H:i:s', strtotime('-19 minute')))
                 ->orderBy('created_at', 'asc')->first();
