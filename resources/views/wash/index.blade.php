@@ -565,7 +565,9 @@
             totalAmount += parseInt(additions[$(service).val()][use_price][carType]);
             user_time += parseFloat(additions[$(service).val()]['use_time']);
         });
+        // 顯示總金額
 
+        $('#totalAmount').html(totalAmount + ' 元 / 需時' + user_time + '小時');
         //exit time 必須 > entry time+user_time
 
         if (user_time == 0) {
@@ -585,6 +587,10 @@
         min_exit_time.setHours(min_exit_time.getHours() + user_time);
         $('#exit_date').attr('min', min_exit_time.toISOString().slice(0, 10));
 
+        select_exit_time = new Date($('#exit_date').val() + ' 9:00');
+        if (min_exit_time.getTime() > select_exit_time.getTime()) {
+            $('#exit_date').val('min', min_exit_time.toISOString().slice(0, 10));
+        }
         $exit_date = $('#exit_date').val();
         $exit_time = $('#exit_time').val();
         //離場時間選項，必須扣除 進場時間+user_time 之前的選項
@@ -617,9 +623,7 @@
 
 
 
-        // 顯示總金額
 
-        $('#totalAmount').html(totalAmount + ' 元 / 需時' + user_time + '小時');
 
 
     }
