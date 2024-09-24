@@ -19,7 +19,7 @@
                 liffId: "{{ env('LINE_LIFF_ID') }}" // Use own liffId
             }).then(() => {
                 if (!liff.isLoggedIn()) {
-                    // liff.login();
+                    liff.login();
                 } else {
                     liff.getProfile()
                         .then(profile => {
