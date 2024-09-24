@@ -435,6 +435,7 @@ class LineController extends Controller
 
                     $bg_colors = config('wash.bg_colors');
                     $reply['bg_color'] =  $bg_colors[$wash->id % count($bg_colors)] ?? '#FFFFFF';
+                    $reply['header'] = '訂單編號:' . $wash->id;
 
 
                     if (isset($params['link'])) {

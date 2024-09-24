@@ -47,7 +47,7 @@ class Wash extends Model
         ];
         $data['info_str'] =
             implode("\n", [
-                '訂單編號：' . $this->id,
+                // '訂單編號：' . $this->id,
                 '姓名：' . $this->name,
                 '電話：' . $this->phone,
                 '車款：' . $this->model,
