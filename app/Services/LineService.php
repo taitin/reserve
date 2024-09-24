@@ -294,7 +294,7 @@ class LineService
 
             $head_style = new BlockStyleBuilder($data['bg_color'] ?? null);
             $style = new BubbleStylesBuilder($head_style, null, null, null);
-            $containerBuilder = new ServicesBubbleContainerBuilder('ltr', $header, null, $body, $footer,  $style);
+            $containerBuilder = new ServicesBubbleContainerBuilder('ltr', null, null, $body, $footer,  $style);
 
             $messageBuilder = new FlexMessageBuilder($data['message'], $containerBuilder);
             // $buttonTemplateBuilder   =  new ButtonTemplateBuilder(
