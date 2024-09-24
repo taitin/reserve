@@ -574,6 +574,9 @@
             user_time = 2;
         }
         $entry_date = $('#entry_time').val();
+        if (!$entry_date) {
+            return;
+        }
         $entry_time = $('#time').val();
 
         //最小可離開時間 為 $entry_time + user_time
@@ -589,7 +592,7 @@
 
         select_exit_time = new Date($('#exit_date').val() + ' 9:00');
         if (min_exit_time.getTime() > select_exit_time.getTime()) {
-            $('#exit_date').val('min', min_exit_time.toISOString().slice(0, 10));
+            $('#exit_date').val(min_exit_time.toISOString().slice(0, 10));
         }
         $exit_date = $('#exit_date').val();
         $exit_time = $('#exit_time').val();
