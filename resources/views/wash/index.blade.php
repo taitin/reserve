@@ -583,14 +583,14 @@
         min_exit_time = new Date($entry_date + ' ' + $entry_time);
         //如果user_time>=48 則天從
         if (user_time >= 48) {
-            min_exit_time = new Date($entry_date + ' 9:00');
+            min_exit_time = new Date($entry_date + ' 09:00');
             min_exit_time.setDate(min_exit_time.getDate() + 1);
         }
 
         min_exit_time.setHours(min_exit_time.getHours() + user_time);
         $('#exit_date').attr('min', formatDate(min_exit_time));
 
-        select_exit_time = new Date($('#exit_date').val() + ' 9:00');
+        select_exit_time = new Date($('#exit_date').val() + ' 09:00');
         if (min_exit_time.getTime() > select_exit_time.getTime()) {
             $('#exit_date').val(formatDate(min_exit_time));
         }
