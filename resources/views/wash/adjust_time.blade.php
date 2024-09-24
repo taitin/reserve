@@ -81,8 +81,8 @@
         </div>
 
         <div class="gray">
-            <h3>客戶預約車型：{{ carType($wash->car_type) }}</h3>
-            <h3>客戶預約車款：{{ $wash->model }}</h3>
+            <h3>客戶預約車型：<br />{{ carType($wash->car_type) }}</h3>
+            <h3>客戶預約車款：<br />{{ $wash->model }}</h3>
         </div>
 
         <div class="form-group">
