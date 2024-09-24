@@ -40,6 +40,11 @@
      font-weight: bold;
  }
 
+ h1 {
+     color: #2F4F4F;
+     text-align: center;
+ }
+
  h3 {
      font-size: 1em;
      padding: 10px;

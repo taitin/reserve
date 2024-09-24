@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1,maximum-scale=1">
     <title>預約洗車時間或車型變更</title>
-    <link rel="stylesheet" href="{{ asset('css/style.css?v=20240925001') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css?v=20240925002') }}">
     <!-- 在<head>標籤中加入Bootstrap的CSS連結 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
