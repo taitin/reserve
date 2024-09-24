@@ -40,6 +40,11 @@
      font-weight: bold;
  }
 
+ h3 {
+     font-size: 1em;
+     padding: 10px;
+     margin-bottom: 10px;
+ }
 
  @media (max-width: 600px) {
      body {
