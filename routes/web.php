@@ -36,6 +36,7 @@ Route::any('line/message', [LineController::class, 'lineCallback']);
 
 Route::any('line/bind', [LineController::class, 'bind']);
 
+Route::get('test', [WashController::class, 'test']);
 
 Route::get('wash', [WashController::class, 'index'])->name('wash.index');
 Route::get('wash/check_member/{license}', [WashController::class, 'checkMember'])->name('wash.show');

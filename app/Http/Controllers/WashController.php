@@ -18,6 +18,12 @@ class WashController extends Controller
 {
     //
 
+    public function test()
+    {
+        $wash = Wash::find(159);
+        $this->paidCheck($wash);
+    }
+
     public function payFake()
     {
 
@@ -77,8 +83,7 @@ class WashController extends Controller
 
         //reply user
 
-        //push to group
-        $group =  Group::where('type', '時間到府')->first();
+
 
         $Line = new LineController();
         $inputText = '@送出洗車表單 ' . $wash->id;
