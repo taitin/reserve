@@ -249,7 +249,7 @@
             border-radius: 5px;
             width: 60%;
             margin-left: 20%;
-            text-align: center padding: 10px;
+
         }
 
         .btn:hover {

@@ -363,11 +363,34 @@ class LineController extends Controller
             }
         }
     }
+    public function cancelMessage($input)
+    {
+
+
+        $replys = [
+            ['message' => '此訂單已經關閉，請點選其他操作']
+        ];
+
+        if ($input->group_type == 'group') {
+            $this->replyMessage($input->group_id,   $replys, $input->group_type);
+        } else {
+            $this->replyMessage($input->social_id, $replys, $input->group_type);
+        }
+    }
+
+
 
     public function actionTrigger($r, $type = 'customer')
     {
         $finish = false;
         if (!empty($r->keyword)) {
+            $str = $r->value;
+            $values = explode(' ', $str);
+            $wash = Wash::find(end($values));
+            if (empty($wash)) $wash = new Wash();
+            if (in_array($wash->status, ['timeout', 'canceled', 'rejected', 'finished'])) {
+                return $this->cancelMessage($r);
+            }
 
             $actions =  $this->getKeywordAction($r->keyword, $type);
             foreach ($actions as $action) {
@@ -389,7 +412,7 @@ class LineController extends Controller
                         foreach ($action->text_buttons as $button) {
                             $text_buttons[] = [
                                 'label' => $button['label'],
-                                'text' => $button['text'] . ' ' . $r->value,
+                                'text' => $button['text'] . ' ' . end($values),
                                 'color' => $button['color'] ?? null,
                                 'style' => $button['style'] ?? null
                             ];

@@ -77,7 +77,7 @@ class WashController extends Controller
             return redirect()->back()->withErrors($e->errors());
         }
         $wash = new \App\Models\Wash($request->all());
-
+【
         $wash->calculateTotalAmount();
         $wash->save();
 
@@ -447,6 +447,7 @@ class WashController extends Controller
         $Line = new LineController();
         if ($request->car_type != $wash->car_type) {
             $wash->car_type = $request->car_type;
+            $wash->calculateTotalAmount();
             $wash->save();
 
             if ($change_time) {
