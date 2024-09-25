@@ -12,6 +12,7 @@ use App\Services\AutopassService;
 use App\Services\LineService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class WashController extends Controller
 {
@@ -215,9 +216,12 @@ class WashController extends Controller
 
     public function callBack(Request $request)
     {
-        $invoice_no = $request->invoice_no;
+        $input = $request->input();
+        Log::debug($input);
+        $invoice_no = $input['invoice_no'];
         $id = explode('_', $invoice_no)[0];
         $wash = \App\Models\Wash::find($id);
+        Log::debug($wash);
         return $this->paidCheck($wash);
     }
 
