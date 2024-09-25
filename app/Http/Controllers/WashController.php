@@ -389,7 +389,7 @@ class WashController extends Controller
         if ($day == 0) {
             $available_times = ['*本日已無預約時段，請選擇其他日期'];
         } else {
-            $available_times = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'];
+            $available_times = config('wash.business_times');
         }
         //扣掉 除外的時間
         $washes = Except::where('date', $date)->get();
