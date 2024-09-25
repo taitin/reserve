@@ -198,12 +198,9 @@ class WashController extends Controller
     public function paidCheck($wash)
     {
         $autopass = new \App\Services\AutopassService();
-        Log::debug('in paidCheck');
-        Log::debug($wash);
-        Log::debug($wash->pay_data['invoice_no']);
+
 
         $auth_result = $autopass->getPayResult($wash->pay_data['invoice_no']);
-        Log::debug($auth_result);
 
         $wash->pay_auth_result = $auth_result;
         if (!in_array($auth_result['data']['payment_state'], ['authorized', 'paid'])) {
@@ -227,12 +224,26 @@ class WashController extends Controller
     public function callBack(Request $request)
     {
         $input = $request->input();
-        Log::debug($input);
+
         $invoice_no = $input['invoice_no'];
         $id = explode('_', $invoice_no)[0];
         $wash = \App\Models\Wash::find($id);
-        Log::debug($wash);
-        return $this->paidCheck($wash);
+
+
+        $wash->pay_auth_result = $input;
+
+
+        $wash->status = 'paid';
+        $wash->save();
+        $input = [
+            'keyword' => '付款完成',
+            'value' => $wash->id,
+        ];
+        $line = new LineController();
+        $line->actionTrigger(json_decode(json_encode($input), false), 'customer');
+
+        return 'ok';
+        // return $this->paidCheck($wash);
     }
 
 
