@@ -391,6 +391,17 @@ class WashController extends Controller
         } else {
             $available_times = config('wash.business_times');
         }
+
+        // 如果 $date 是今天 則扣掉過去的時間
+        if ($date == date('Y-m-d')) {
+            $now = date('H:i');
+            foreach ($available_times as $key => $time) {
+                if ($time < $now) {
+                    unset($available_times[$key]);
+                }
+            }
+        }
+
         //扣掉 除外的時間
         $washes = Except::where('date', $date)->get();
         foreach ($washes as $wash) {
@@ -409,6 +420,10 @@ class WashController extends Controller
             if ($key !== false) {
                 unset($available_times[$key]);
             }
+        }
+
+        if(empty($available_times)){
+            $available_times = ['*本日已無預約時段，請選擇其他日期'];
         }
 
         return $available_times;
