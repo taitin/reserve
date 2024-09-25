@@ -155,7 +155,7 @@ class Wash extends Model
     {
 
         $data = $this->getNewBooking();
-        $data['link'] = 'https://www.google.com/maps/place/AKdetailing+x+%E8%80%81%E8%95%AD%E5%B0%88%E6%A5%AD%E6%97%A5%E8%A6%8F%E5%A4%96%E5%8C%AF%E8%BB%8A+%E5%8F%B0%E5%8C%97%E6%97%97%E8%89%A6%E5%BA%97/@25.0716714,121.5816533,17z/data=!3m1!4b1!4m6!3m5!1s0x3442ad848ed4b64d:0xd8ca8cf33d1abf43!8m2!3d25.0716714!4d121.5816533!16s%2Fg%2F11t1j92fxp?entry=ttu';;
+        $data['link'] = 'https://www.google.com/maps/place/AK+STUDIO+-+A%E5%92%96%E5%B0%88%E6%A5%AD%E8%BB%8A%E9%AB%94%E7%BE%8E%E5%AE%B9%EF%BC%88%E6%B4%97%E8%BB%8A%E6%89%93%E8%A0%9F%2F%E9%8D%8D%E8%86%9C%2F%E6%B1%BD%E8%BB%8A%E7%BE%8E%E5%AE%B9%EF%BC%89/@25.0716714,121.579073,17z/data=!3m1!4b1!4m6!3m5!1s0x3442addffedbf703:0x3f3a4a8525361143!8m2!3d25.0716714!4d121.5816533!16s%2Fg%2F11vwwb7y66?entry=ttu&g_ep=EgoyMDI0MDkyMi4wIKXMDSoASAFQAw%3D%3D';;
         return $data;
     }
 
