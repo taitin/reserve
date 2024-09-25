@@ -583,6 +583,7 @@ class LineController extends Controller
         } else {
 
             $message = Message::where('social_id', $social_id)
+                ->where('group_type', '!=', 'group')
                 ->where(function ($query) {
                     $query->whereNull('group_id')
                         ->orWhere('group_id', 0);
