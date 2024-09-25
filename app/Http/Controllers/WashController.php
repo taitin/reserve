@@ -198,7 +198,12 @@ class WashController extends Controller
     public function paidCheck($wash)
     {
         $autopass = new \App\Services\AutopassService();
+        Log::debug('in paidCheck');
+        Log::debug($wash);
+        Log::debug($wash->pay_data['invoice_no']);
+
         $auth_result = $autopass->getPayResult($wash->pay_data['invoice_no']);
+        Log::debug($auth_result);
 
         $wash->pay_auth_result = $auth_result;
         if (!in_array($auth_result['data']['payment_state'], ['authorized', 'paid'])) {
