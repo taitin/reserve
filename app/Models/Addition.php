@@ -12,6 +12,7 @@ class Addition extends Model
     use SoftDeletes;
     protected $casts = [
         'price' => 'json',
-        'discount_price' => 'json'
+        'discount_price' => 'json',
+        'use_times' => 'json',
     ];
 }
