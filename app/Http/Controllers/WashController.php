@@ -192,6 +192,7 @@ class WashController extends Controller
         $wash = \App\Models\Wash::find($request->id);
 
         if (empty($wash->pay_data['invoice_no'])) {
+            $this->payFailed($wash);
             return view('wash.close', ['message' => '付款失敗']);
         }
 
@@ -200,6 +201,11 @@ class WashController extends Controller
 
     public function paidCheck($wash)
     {
+
+        if (empty($wash->pay_data['invoice_no'])) {
+            $this->payFailed($wash);
+            return view('wash.close', ['message' => '付款失敗']);
+        }
         $autopass = new \App\Services\AutopassService();
 
 
@@ -207,7 +213,7 @@ class WashController extends Controller
 
         $wash->pay_auth_result = $auth_result;
         if (!in_array($auth_result['data']['payment_state'], ['authorized', 'paid'])) {
-            $wash->status = 'pay_fail';
+            $this->payFailed($wash);
             $wash->save();
             return view('wash.close', ['message' => '付款失敗']);
         }
@@ -223,6 +229,8 @@ class WashController extends Controller
 
         return view('wash.close', ['message' => '付款成功！！請返回Line繼續操作']);
     }
+
+
 
     public function callBack(Request $request)
     {
