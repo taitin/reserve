@@ -43,6 +43,7 @@ class Wash extends Model
             'addition' => implode("\n", $this->getAdditions()),
             'total' => $this->price,
             'org_total' => $this->getTotal($this->org_car_type)['total'],
+            'org_total_hour' => number_format($this->getTotal($this->org_car_type)['hr'], 1, '.', ''),
             'total_hour' => number_format($this->total_hour, 1, '.', ''),
             'get_car_time' => zhDate($this->exit_date . ' ' . $this->exit_time),
             'adjust_time' => implode("\n", $this->getAdjustTime())
@@ -74,8 +75,17 @@ class Wash extends Model
                 '預計工時 ' . $data['total_hour'] . ' 小時 ',
             ]);
 
+        $data['adjust_type']  = '';
 
-        // 如果是3.00 顯示 3 ,3.50 顯示 3.5
+        if ($data['org_car_type'] != $data['car_type']) {
+            $data['adjust_type'] .= '⚠️{org_car_type} > {car_type}';
+        }
+        if ($data['org_total'] != $data['total']) {
+            $data['adjust_type'] .= '⚠️{org_total} 元 > {total} 元';
+        }
+        if ($data['org_total_hour'] != $data['total_hour']) {
+            $data['adjust_type'] .= '⚠️{org_total_hour} hr > {total_hour} hr';
+        }
 
         return $data;
     }
