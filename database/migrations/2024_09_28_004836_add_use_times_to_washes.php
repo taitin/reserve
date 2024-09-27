@@ -15,7 +15,7 @@ class AddUseTimesToWashes extends Migration
     {
         Schema::table('washes', function (Blueprint $table) {
             //
-            $table->text('use_times')->default(1)->comment('時長');
+            $table->text('use_times')->nullable()->comment('時長');
         });
     }
 
