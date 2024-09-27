@@ -77,7 +77,6 @@ class WashController extends Controller
             return redirect()->back()->withErrors($e->errors());
         }
         $wash = new \App\Models\Wash($request->all());
-【
         $wash->calculateTotalAmount();
         $wash->save();
 
@@ -422,7 +421,7 @@ class WashController extends Controller
             }
         }
 
-        if(empty($available_times)){
+        if (empty($available_times)) {
             $available_times = ['*本日已無預約時段，請選擇其他日期'];
         }
 
