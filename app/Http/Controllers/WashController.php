@@ -504,21 +504,33 @@ class WashController extends Controller
         return view('wash.close', ['message' => '調整已送出']);
     }
 
-    public function getProjects()
+    public function getProjects(Request $request)
     {
-        $projects = \App\Models\Project::where('status', 1)->get();
+        $rets = \App\Models\Project::where('status', 1)->get();
         //將 id 設為 key
-        $projects = $projects->keyBy('id');
-
+        foreach ($rets as $ret) {
+            if ($request->car_type) {
+                if (!empty($ret->price[$request->car_type])) $projects[$ret->id] = $ret;
+            } else $projects[$ret->id] = $ret;
+        }
 
         return ['result' => true, 'projects' => $projects];
     }
 
-    public function getAdditions()
+    public function getAdditions(Request $request)
     {
-        $additions = \App\Models\Addition::where('status', 1)->get();
+        $rets  = \App\Models\Addition::where('status', 1)->get();
         //將 id 設為 key
-        $additions = $additions->keyBy('id');
+        foreach ($rets as $ret) {
+            if ($request->car_type) {
+                if (!empty($ret->price[$request->car_type])) $additions[$ret->id] = $ret;
+            } else {
+                $additions[$ret->id] = $ret;
+            }
+        }
+
+
+
 
         return ['result' => true, 'additions' => $additions];
     }

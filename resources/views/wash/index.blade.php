@@ -367,9 +367,9 @@
             <div class="form-group">
                 <label for="model">車型</label>
                 <select name="car_type" id="car_type">
-                    <option value="house">小型車</option>
-                    <option value="5p">中大型房車 / 休旅車 </option>
-                    <option value="7p">超大型房車 / 特殊車 </option>
+                    @foreach (config('wash.car_types') as $key => $value)
+                        <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
                 </select>
             </div>
 
@@ -471,7 +471,7 @@
 
     function getProjects() {
         $.get('/wash/get_projects', {
-
+            car_type: $('#car_type').val()
         }, function(data) {
             projects = data.projects;
             var select = $('#project');
@@ -486,7 +486,9 @@
     }
 
     function getAdditions() {
-        $.get('/wash/get_additions', {}, function(data) {
+        $.get('/wash/get_additions', {
+            car_type: $('#car_type').val()
+        }, function(data) {
             additions = data.additions;
             var select = $('#additions');
             select.empty();
@@ -764,6 +766,10 @@
         });
 
 
+        $('#car_type').change(function() {
+            getProjects();
+            getAdditions();
+        });
 
 
         calculateTotalAmount();
