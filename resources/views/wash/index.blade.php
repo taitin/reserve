@@ -54,7 +54,6 @@
                     profile = data.data;
                     getProjects();
                     getAdditions();
-                    calculateTotalAmount();
                 }
             }, 'json');
         }
