@@ -464,6 +464,8 @@ class WashController extends Controller
 
         $Line = new LineController();
         if ($request->car_type != $wash->car_type) {
+            if (empty($wash->org_car_type))
+                $wash->org_car_type = $wash->car_type;
             $wash->car_type = $request->car_type;
             $wash->calculateTotalAmount();
             $wash->save();
