@@ -45,6 +45,10 @@ class WashController extends Controller
 
         return view('wash.index', $data);
     }
+    public function portal()
+    {
+        return '這是洗車系統 導引頁';
+    }
 
     public function getProfile($social_id)
     {
