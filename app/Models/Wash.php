@@ -39,7 +39,7 @@ class Wash extends Model
             'org_car_type' => carType($this->org_car_type),
             'model' => $this->model,
             'booking_time' => zhDate($this->date . ' ' . $this->time),
-            'method' => $this->project->name . ' / ' . number_format($this->project->use_time, 1, '.', '') . ' hr',
+            'method' => $this->project->name . ' / ' . number_format($this->project->use_times[$this->car_type], 1, '.', '') . ' hr',
             'addition' => implode("\n", $this->getAdditions()),
             'total' => $this->price,
             'org_total' => $this->getTotal($this->org_car_type)['total'],
