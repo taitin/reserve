@@ -73,7 +73,7 @@ class ProjectController extends AdminController
             });
             $form->embeds('price', function (Form\EmbeddedForm $form) {
                 foreach (config('wash.car_types') as $key => $value) {
-                    $form->number($key, $value);
+                    $form->decimal($key, $value);
                 }
             });
 
