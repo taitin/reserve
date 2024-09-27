@@ -543,7 +543,7 @@
 
         var user_time = 0;
         //計算總需時間
-        user_time += parseFloat(projects[project_id]['use_time']);
+        user_time += parseFloat(projects[project_id]['use_times'][carType]);
         //js nl2br
 
         $('#service_desc').html((addLineNumbers(projects[project_id].description)))
