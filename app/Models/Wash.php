@@ -255,7 +255,7 @@ class Wash extends Model
     {
         $hr = 0;
         $total =   $this->project->discount_price[$car_type] ?? 0;
-        $hr += $this->project->use_time;
+        $hr += $this->project->use_times[$car_type] ?? 0;
         if ($this->additions) {
             foreach ($this->additions as $service) {
                 $total += $service['discount_price'][$car_type] ?? 0;
