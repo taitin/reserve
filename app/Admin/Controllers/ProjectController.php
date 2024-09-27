@@ -67,15 +67,15 @@ class ProjectController extends AdminController
             $form->textarea('description');
             $form->decimal('use_time');
             $form->embeds('price', function (Form\EmbeddedForm $form) {
-                $form->number('house');
-                $form->number('5p');
-                $form->number('7p');
+                foreach (config('wash.car_types') as $key => $value) {
+                    $form->number($key, $value);
+                }
             });
 
             $form->embeds('discount_price', function (Form\EmbeddedForm $form) {
-                $form->number('house');
-                $form->number('5p');
-                $form->number('7p');
+                foreach (config('wash.car_types') as $key => $value) {
+                    $form->number($key, $value);
+                }
             });
 
             $form->switch('status')->default(1);
