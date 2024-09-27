@@ -13,6 +13,7 @@ class Project extends Model
 
     protected $casts = [
         'price' => 'json',
-        'discount_price' => 'json'
+        'discount_price' => 'json',
+        'use_times' => 'json',
     ];
 }
