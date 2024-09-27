@@ -52,6 +52,8 @@
                     $('#car_type').val(data.data.car_type);
                     $('#project_id').val(data.data.project_id);
                     profile = data.data;
+                    getProjects();
+                    getAdditions();
                     calculateTotalAmount();
                 }
             }, 'json');
@@ -755,8 +757,7 @@
 
     $(function() {
 
-        getProjects();
-        getAdditions();
+
         $('#entry_time').change(function() {
             calculateAvailableTime();
         });
