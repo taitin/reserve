@@ -78,14 +78,20 @@ class Wash extends Model
         $data['adjust_type']  = '';
 
         if ($data['org_car_type'] != $data['car_type']) {
-            $data['adjust_type'] .= '⚠️{org_car_type} > {car_type}';
+            $data['adjust_type'] .= "⚠️{$data['org_car_type']} > {$data['car_type']}";
         }
         if ($data['org_total'] != $data['total']) {
-            $data['adjust_type'] .= '⚠️{org_total} 元 > {total} 元';
+            $data['adjust_type'] .= "⚠️{$data['org_total']} 元 > {$data['total']} 元";
         }
         if ($data['org_total_hour'] != $data['total_hour']) {
-            $data['adjust_type'] .= '⚠️{org_total_hour} hr > {total_hour} hr';
+            $data['adjust_type'] .= "⚠️{$data['org_total_hour']} hr > {$data['total_hour']} hr";
         }
+        // if ($data['org_total'] != $data['total']) {
+        //     $data['adjust_type'] .= '⚠️{org_total} 元 > {total} 元';
+        // }
+        // if ($data['org_total_hour'] != $data['total_hour']) {
+        //     $data['adjust_type'] .= '⚠️{org_total_hour} hr > {total_hour} hr';
+        // }
 
         return $data;
     }
