@@ -26,6 +26,7 @@ class Wash extends Model
         'pay_auth_result' => 'json',
         'addition_services' => 'json',
         'suggest_time' => 'json',
+        'use_times' => 'json',
     ];
 
     function getNewBooking()
