@@ -560,23 +560,23 @@ class WashController extends Controller
 
 
 
-        $data = [
-            'invoice_no' => time() . $license,
-            'request_amount' => 1,
-            'callback_url' => url(''),
-            'use_special_plate_number' => true,
-            'plate_number' => strtoupper($license)
+        // $data = [
+        //     'invoice_no' => time() . $license,
+        //     'request_amount' => 1,
+        //     'callback_url' => url(''),
+        //     'use_special_plate_number' => true,
+        //     'plate_number' => strtoupper($license)
 
-        ];
-        $autopass = new AutopassService();
+        // ];
+        // $autopass = new AutopassService();
 
-        $r =  $autopass->makePay($data);
-        if (isset($r['error'])) {
-            return ['result' => false, 'message' => $r['error']['message']];
-        }
+        // $r =  $autopass->makePay($data);
+        // if (isset($r['error'])) {
+        //     return ['result' => false, 'message' => $r['error']['message']];
+        // }
 
 
-        $cancel = $autopass->cancelPay($data['invoice_no']);
+        // $cancel = $autopass->cancelPay($data['invoice_no']);
         return ['result' => true];
     }
 }
