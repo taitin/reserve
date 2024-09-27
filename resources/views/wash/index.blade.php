@@ -473,7 +473,7 @@
     function getProjects() {
         $(body).append('getProjects')
 
-        $(body).append($('#car_type').val())
+        alert($('#car_type').val())
         $.get('/wash/get_projects', {
             car_type: $('#car_type').val()
         }, function(data) {
