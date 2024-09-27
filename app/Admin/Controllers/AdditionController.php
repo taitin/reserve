@@ -66,13 +66,13 @@ class AdditionController extends AdminController
             $form->display('id');
             $form->text('name')->required();
             $form->text('description');
-            // $form->decimal('use_time');
+            $form->decimal('use_time');
 
-            $form->embeds('use_times', function (Form\EmbeddedForm $form) {
-                foreach (config('wash.car_types') as $key => $value) {
-                    $form->decimal($key, $value);
-                }
-            });
+            // $form->embeds('use_times', function (Form\EmbeddedForm $form) {
+            //     foreach (config('wash.car_types') as $key => $value) {
+            //         $form->decimal($key, $value);
+            //     }
+            // });
             $form->embeds('price', function (Form\EmbeddedForm $form) {
                 foreach (config('wash.car_types') as $key => $value) {
                     $form->number($key, $value);
