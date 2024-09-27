@@ -36,11 +36,13 @@ class Wash extends Model
             'phone' => $this->phone,
             'license' => $this->license,
             'car_type' => carType($this->car_type),
+            'org_car_type' => carType($this->org_car_type),
             'model' => $this->model,
             'booking_time' => zhDate($this->date . ' ' . $this->time),
             'method' => $this->project->name . ' / ' . number_format($this->project->use_time, 1, '.', '') . ' hr',
             'addition' => implode("\n", $this->getAdditions()),
             'total' => $this->price,
+            'org_total' => $this->getTotal($this->org_car_type)['total'],
             'total_hour' => number_format($this->total_hour, 1, '.', ''),
             'get_car_time' => zhDate($this->exit_date . ' ' . $this->exit_time),
             'adjust_time' => implode("\n", $this->getAdjustTime())
@@ -232,24 +234,31 @@ class Wash extends Model
         return Addition::whereIn('id', $this->addition_services)->get();
     }
 
-    public function calculateTotalAmount()
+    public function getTotal($car_type)
     {
-
         $hr = 0;
-        $total =   $this->project->discount_price[$this->car_type] ?? 0;
+        $total =   $this->project->discount_price[$car_type] ?? 0;
         $hr += $this->project->use_time;
         if ($this->additions) {
             foreach ($this->additions as $service) {
-                $total += $service['discount_price'][$this->car_type] ?? 0;
+                $total += $service['discount_price'][$car_type] ?? 0;
                 $hr += $service->use_time;
             }
         }
-        $this->price = $total;
-        $this->total_hour = $hr;
+        return ['total' => $total, 'hr' => $hr];
+    }
+
+
+    public function calculateTotalAmount()
+    {
+
+        $r =  $this->getTotal($this->car_type);
+        $this->price = $r['total'];
+        $this->total_hour = $r['hr'];
 
 
         $this->save();
-        return $total;
+        return $this->price;
     }
 
 
