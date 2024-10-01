@@ -756,7 +756,7 @@
 
     $(function() {
 
-
+        getProjects();
         $('#entry_time').change(function() {
             calculateAvailableTime();
         });
