@@ -19,7 +19,7 @@
                 liffId: "{{ myConfig('line_message.LINE_LIFF_ID') }}" // Use own liffId
             }).then(() => {
                 if (!liff.isLoggedIn()) {
-                    // liff.login();
+                    liff.login();
                 } else {
                     liff.getProfile()
                         .then(profile => {
@@ -518,6 +518,7 @@
     }
     // 計算總金額的函數
     function calculateTotalAmount() {
+
         var totalAmount = 0;
         // 根據車型計算基本費用
         var carType = $('select[name="car_type"]').val();
