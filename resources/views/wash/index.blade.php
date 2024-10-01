@@ -16,7 +16,7 @@
     <script>
         $(function() {
             liff.init({
-                liffId: "{{ env('LINE_LIFF_ID') }}" // Use own liffId
+                liffId: "{{ myConfig('line_message.LINE_LIFF_ID') }}" // Use own liffId
             }).then(() => {
                 if (!liff.isLoggedIn()) {
                     liff.login();

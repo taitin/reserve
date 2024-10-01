@@ -19,8 +19,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Log::debug(Request()->url());
-Log::debug(Request());
 
 
 Route::get('/schedule', function () {
