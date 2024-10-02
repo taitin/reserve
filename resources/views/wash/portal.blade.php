@@ -39,6 +39,7 @@
         function setMember(social_id) {
 
 
+            alert(social_id);
             $.post('/wash/set_member/', {
                 social_id
             }, function(data) {

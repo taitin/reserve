@@ -561,12 +561,20 @@ class WashController extends Controller
     public function setMember(Request $request)
     {
 
+        try{
         $member = new AutpoassMember();
-        $member->social_id = $request->social_id;
+        $member->social_id = $request->social_id ?? '';
         $member->save();
         return [
             'result' => true,
             'message' => '設定會員成功',
+            'line_url' => config('wash.line_url')
+        ];
+    }
+    catch (\Exception $e) {
+        return [
+            'result' => false,
+            'message' => '設定會員失敗',
             'line_url' => config('wash.line_url')
         ];
     }
