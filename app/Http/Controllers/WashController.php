@@ -563,6 +563,7 @@ class WashController extends Controller
 
         try {
             $member = AutpoassMember::firstOrCreate(['social_id' => $request->social_id]);
+            dd($member);
             return [
                 'result' => true,
                 'message' => '設定會員成功',
