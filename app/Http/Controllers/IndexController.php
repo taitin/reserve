@@ -17,7 +17,6 @@ class IndexController extends Controller
 
         if (isset($_SERVER['QUERY_STRING'])) {
             $r = explode('liff.state=', $_SERVER['QUERY_STRING']);
-            dd($r);
             if (isset($r[1])) {
                 $url = explode('&', $r[1]);
                 if (isset($url[0])) {
