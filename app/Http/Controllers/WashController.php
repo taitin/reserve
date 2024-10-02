@@ -560,15 +560,14 @@ class WashController extends Controller
     }
     public function setMember(Request $request)
     {
-
-        try {
+        if (!empty($request->social_id)) {
             $member = AutpoassMember::firstOrCreate(['social_id' => $request->social_id]);
             return [
                 'result' => true,
                 'message' => '設定會員成功',
                 'line_url' => config('wash.line_url')
             ];
-        } catch (\Exception $e) {
+        } else {
             return [
                 'result' => false,
                 'message' => '設定會員失敗',
