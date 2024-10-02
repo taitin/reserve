@@ -11,6 +11,10 @@ class IndexController extends Controller
     public function index(Request $request)
     {
         if ($request->to) return redirect($request->to);
+        return redirect()->to('wash/portal?' . $_SERVER['QUERY_STRING']);
+
+
+
         if (isset($_SERVER['QUERY_STRING'])) {
             $r = explode('liff.state=', $_SERVER['QUERY_STRING']);
             dd($r);
