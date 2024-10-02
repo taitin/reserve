@@ -42,33 +42,13 @@
             $.post('/wash/set_member', {
                 social_id: social_id
             }, function(data) {
-                alert(data.line_url);
+                location.href = data.line_url;
 
             }, 'json');
         }
 
 
         var profile = [];
-
-        function getLastProfile() {
-            var social_id = $('#social_id').val();
-
-            $.get('/wash/get_profile/' + social_id, {}, function(data) {
-
-                if (data.result) {
-                    $('#name').val(data.data.name);
-
-                    $('#phone').val(data.data.phone);
-                    $('#license').val(data.data.license);
-                    $('#model').val(
-                        data.data.model);
-                    $('#car_type').val(data.data.car_type);
-                    $('#project_id').val(data.data.project_id);
-                    profile = data.data;
-                    getProjects();
-                }
-            }, 'json');
-        }
     </script>
     <style>
         body {
