@@ -563,7 +563,7 @@ class WashController extends Controller
 
         try {
             $member = new AutpoassMember();
-            $member->social_id = $request->social_id ?? '';
+            $member->social_id = $request->social_id;
             $member->save();
             return [
                 'result' => true,

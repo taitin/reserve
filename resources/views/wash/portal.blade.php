@@ -39,9 +39,8 @@
         function setMember(social_id) {
 
 
-            alert(social_id);
             $.post('/wash/set_member/', {
-                social_id
+                social_id: social_id
             }, function(data) {
                 location.href = data.line_url;
 
