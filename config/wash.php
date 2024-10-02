@@ -26,7 +26,7 @@ return [
         '#FF9D6F',
 
     ],
-    'line_url' => 'https://line.me/ti/p/~@akstudio'
+    'line_url' => 'https://lin.ee/xM9CgpoI'
 
 
 ];
