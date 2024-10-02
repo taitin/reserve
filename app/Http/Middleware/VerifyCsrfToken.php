@@ -14,6 +14,7 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'line/*',
         'wash/autopass/*',
+        'wash/set_member'
         //
     ];
 }
