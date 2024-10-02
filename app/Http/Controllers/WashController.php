@@ -580,7 +580,7 @@ class WashController extends Controller
     {
         $member = AutpoassMember::where('license', $social_id)->first();
         if (!empty($member)) {
-            return ['result' => true, 'message' => '會員'];
+            return ['result' => true, 'message' => '會員', 'social_id' => $social_id];
         }
 
         // $data = [
