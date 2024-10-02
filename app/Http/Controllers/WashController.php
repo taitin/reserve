@@ -564,10 +564,11 @@ class WashController extends Controller
         $member = new AutpoassMember();
         $member->social_id = $request->social_id;
         $member->save();
-        return view('wash.close', [
+        return [
+            'result' => true,
             'message' => '設定會員成功',
             'line_url' => config('wash.line_url')
-        ]);
+        ];
     }
 
 
