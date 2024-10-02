@@ -578,17 +578,9 @@ class WashController extends Controller
 
     public function checkMember($social_id)
     {
-
-        $wash = Wash::where('social_id', $social_id)->where('is_member', 1)->first();
-        if (!empty($wash)) {
-
-
+        $member = AutpoassMember::where('license', $social_id)->first();
+        if (!empty($member)) {
             return ['result' => true, 'message' => '會員'];
-        } else {
-            $member = AutpoassMember::where('license', $social_id)->first();
-            if (!empty($member)) {
-                return ['result' => true, 'message' => '會員'];
-            }
         }
 
         // $data = [
