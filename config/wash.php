@@ -25,7 +25,8 @@ return [
         '#D0D0D0',
         '#FF9D6F',
 
-    ]
+    ],
+    'linr_url' => 'https://line.me/ti/p/~@akstudio'
 
 
 ];

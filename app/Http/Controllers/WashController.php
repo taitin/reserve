@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Admin\Extensions\Tools\OrderToken;
 use App\Admin\Repositories\Parking;
+use App\Models\AutpoassMember;
 use App\Models\Except;
 use App\Models\Group;
 use App\Models\Parking as ModelsParking;
@@ -47,7 +48,7 @@ class WashController extends Controller
     }
     public function portal()
     {
-        return '這是洗車系統 導引頁';
+        return view('wash.portal');
     }
 
     public function getProfile($social_id)
@@ -557,14 +558,30 @@ class WashController extends Controller
         $line->actionTrigger(json_decode(json_encode($input), false), 'customer');
         return view('wash.close', ['message' => '付款失敗']);
     }
-
-    public function checkMember($license)
+    public function setMember(Request $request)
     {
 
-        $wash = Wash::where('license', $license)->where('is_member', 1)->first();
+        $member = new AutpoassMember();
+        $member->social_id = $request->social_id;
+        $member->save();
+        return view('wash.close', ['message' => '設定會員成功'
+    ,'line_url'=>config('wash.line_url')]);
+    }
+
+
+    public function checkMember($social_id)
+    {
+
+        $wash = Wash::where('social_id', $social_id)->where('is_member', 1)->first();
         if (!empty($wash)) {
+
+
             return ['result' => true, 'message' => '會員'];
-        }
+        } else {
+            $member = AutpoassMember::where('license', $social_id)->first();
+            if (!empty($member)) {
+                return ['result' => true, 'message' => '會員'];
+            }
 
 
 
@@ -586,6 +603,6 @@ class WashController extends Controller
 
 
         // $cancel = $autopass->cancelPay($data['invoice_no']);
-        return ['result' => true];
+        return ['result' => false];
     }
 }
