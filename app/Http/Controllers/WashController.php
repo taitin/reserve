@@ -562,9 +562,7 @@ class WashController extends Controller
     {
 
         try {
-            $member = new AutpoassMember();
-            $member->social_id = $request->social_id;
-            $member->save();
+            $member = AutpoassMember::firstOrCreate(['social_id' => $request->social_id]);
             return [
                 'result' => true,
                 'message' => '設定會員成功',

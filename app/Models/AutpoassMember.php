@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class AutpoassMember extends Model
 {
-	use HasDateTimeFormatter;
+    use HasDateTimeFormatter;
     use SoftDeletes;
 
     protected $table = 'autpoass_members';
-    
+    protected $guarded = ['id'];
 }
