@@ -40,7 +40,7 @@ Route::get('wash', [WashController::class, 'index'])->name('wash.index');
 
 Route::get('wash/portal', [WashController::class, 'portal']);;
 
-Route::get('wash/set_member', [WashController::class, 'setMember'])->name('wash.show');
+Route::post('wash/set_member', [WashController::class, 'setMember']);
 
 Route::get('wash/check_member/{social_id}', [WashController::class, 'checkMember'])->name('wash.show');
 Route::get('wash/{id}/re_book',  [WashController::class, 'index']);
