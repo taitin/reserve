@@ -51,6 +51,15 @@
         var profile = [];
     </script>
     <style>
+        body {
+            /* padding: 20px; */
+            font-family: Arial, sans-serif;
+            background-color: #134B70;
+            /* 主背景色改為深藍色 */
+            color: #FFFFFF;
+            /* 全局文字顏色改為白色 */
+        }
+
         .loader {
             border: 16px solid #f3f3f3;
             /* Light grey */
@@ -60,6 +69,7 @@
             width: 120px;
             height: 120px;
             animation: spin 2s linear infinite;
+            margin: 0 auto;
         }
 
         @keyframes spin {
