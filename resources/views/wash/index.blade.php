@@ -728,7 +728,7 @@
             return false; // 阻止表單提交
         }
 
-        $.get('/wash/check_member/' + license, {}, function(data) {
+        $.get('/wash/check_member/' + $('#social_id').val(), {}, function(data) {
             if (data.result) {
                 $('#is_member').val(1);
             } else {
