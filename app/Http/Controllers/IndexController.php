@@ -11,7 +11,7 @@ class IndexController extends Controller
     public function index(Request $request)
     {
         if ($request->to) return redirect($request->to);
-        return redirect()->to('wash/portal?' . $_SERVER['QUERY_STRING']);
+
 
 
 
@@ -27,5 +27,7 @@ class IndexController extends Controller
                 }
             }
         }
+
+        return redirect()->to('wash/portal?' . $_SERVER['QUERY_STRING']);
     }
 }
