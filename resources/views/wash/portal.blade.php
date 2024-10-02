@@ -42,7 +42,7 @@
             $.post('/wash/set_member/', {
                 social_id: social_id
             }, function(data) {
-                location.href = data.line_url;
+                alert(data.line_url);
 
             }, 'json');
         }
