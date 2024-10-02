@@ -51,268 +51,39 @@
         var profile = [];
     </script>
     <style>
-        body {
-            /* padding: 20px; */
-            font-family: Arial, sans-serif;
-            background-color: #134B70;
-            /* 主背景色改為深藍色 */
-            color: #FFFFFF;
-            /* 全局文字顏色改為白色 */
+        .loader {
+            border: 16px solid #f3f3f3;
+            /* Light grey */
+            border-top: 16px solid #3498db;
+            /* Blue */
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
         }
 
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
 
-        .form-group label {
-            color: #FFFFFF;
-            font-weight: bold;
-        }
-
-        .form-control {
-            border-radius: 0;
-            background-color: #FFFFFF;
-            /* 表單輸入框背景改為藍色 */
-            color: #134B70;
-            /* 表單文字顏色為白色 */
-            border: 1px solid #FFFFFF;
-        }
-
-
-        .btn {
-            border-radius: 0;
-            background-color: #508C9B;
-            /* 按鈕背景色為黃綠色 */
-            color: #FFFFFF;
-            /* 按鈕文字顏色為深藍色 */
-            font-weight: bold;
-        }
-
-        .btn:hover {
-            background-color: #FFFFFF;
-            /* 按鈕懸停時背景色變為白色 */
-            color: #134B70;
-            /* 按鈕文字顏色深藍 */
-        }
-
-
-
-        .welcome,
-        .service-details,
-        #totalAmount {
-            background-color: #FFFFFF;
-            color: #134B70;
-            padding: 10px;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            font-size: 1em;
-            font-weight: bold;
-            text-align: left;
-            padding-left: 20px;
-            /* display: flex; */
-            /* justify-content: space-between; */
-            /* align-items: flex-start; */
-        }
-
-        .service-details div {
-            width: 88%;
-        }
-
-        .main {
-            color: #508C9B
-        }
-
-
-        #basicAmount {
-            margin-top: 30px;
-            font-style: 1.2em;
-            width: 50%;
-            font-weight: bold;
-        }
-
-        #basicAmount,
-        #totalAmount {
-            font-weight: bold;
-            color: #508C9B;
-            /* 金額顏色為黃綠色 */
-        }
-
-        #basicAmount span,
-        #totalAmount span {
-            font-weight: bold;
-            color: red;
-            /* 金額顏色為黃綠色 */
-        }
-
-        .addition-service {
-            background-color: #FFFFFF;
-            color: #134B70;
-            padding: 10px;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            font-size: 1em;
-            font-weight: bold;
-            text-align: left;
-            padding-left: 10px;
-            /* Reduced padding */
-        }
-
-        .addition-service label {
-            color: #134B70;
-            /* display: flex;
-            justify-content: space-between;
-            align-items: center; */
-        }
-
-        select {
-            font-size: 1em
-        }
-
-        label {
-            margin-bottom: .1rem;
-            font-size: 1em;
-
-        }
-
-        .form-control {
-            font-size: 1em;
-
-        }
-
-        .form-group {
-            margin-bottom: 0.6rem;
-        }
-
-        /*
-        .addition-service input[type="checkbox"] {
-            margin-right: 10px;
-            transform: scale(2);
-            width: 10px;
-        } */
-
-        /* .addition-service div {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            height: 45px;
-        } */
-        /*
-        .addition-service .price {
-            color: #FF4D4D;
-            font-weight: bold;
-            margin-left: 10px;
-        }
-
-        .addition-service .desc {
-            width: 88%;
-            text-align: left
-        } */
-
-        img {
-            margin-top: 15px;
-            margin-bottom: 15px;
-        }
-
-        h3 {
-            color: #d0da4e;
-        }
-
-        .map-container {
-            position: relative;
-            width: 100%;
-            height: 400px;
-            background-color: #EEE;
-            border: 1px solid #d0da4e;
-        }
-
-        .bottom-panel {
-            background-color: #134B70;
-            margin-top: 5px
-        }
-
-        .form-control {
-            background-color: #FFFFFF;
-            color: #134B70;
-            border: 1px solid #FFFFFF;
-            border-radius: 5px;
-        }
-
-        .btn {
-            background-color: #508C9B;
-            color: #FFFFFF;
-            border-radius: 5px;
-            width: 60%;
-            margin-left: 20%;
-
-        }
-
-        .btn:hover {
-            background-color: #FFFFFF;
-            color: #134B70;
-        }
-
-        .parking-info {
-            background-color: #FFFFFF;
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            text-align: left;
-        }
-
-        .parking-info .place {
-            color: #134B70;
-            font-size: 18px;
-            text-align: left;
-
-        }
-
-        .white {
-            color: #FFFFFF;
-        }
-
-        .parking-info .address {
-            color: #508C9B;
-            font-size: 16px;
-            text-align: left;
-
-        }
-
-
-        .parking-info .distance {
-            color: #134B70;
-            font-size: 16px;
-            text-align: left;
-
-        }
-
-        #map {
-            height: 400px;
-            width: 100%;
-        }
-
-        /* 搜尋框的樣式 */
-        #search-box {
-            margin-top: 10px;
-            padding: 10px;
-            background-color: #FFFFFF;
-            border: 1px solid #d0da4e;
-            width: 100%;
-        }
-
-        #step2 {
-            display: none;
-        }
-
-        .alert {
-            background-color: #FF4D4D;
-            color: white;
-            font-size: 20px;
-            display: none;
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
 </head>
 
 <body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="loader"></div>
+
+            </div>
+        </div>
 
 </body>
 <script>
