@@ -31,7 +31,7 @@ class WashController extends Controller
 
         dump(countMatchingItems($fingerprints[0], $fingerprints[1]));
         dump(countMatchingItems($fingerprints[1], $fingerprints[2]));
-        dump(countMatchingItems($fingerprints[1], $fingerprints[3]));
+        dump(countMatchingItems($fingerprints[2], $fingerprints[3]));
     }
 
     public function payFake()
