@@ -608,6 +608,19 @@ class WashController extends Controller
             ->get();
         if (!empty($portals)) {
             foreach ($portals as $portal) {
+                $matches = countMatchingItems(explode(' ', $portal->agent), $_SERVER['HTTP_USER_AGENT']);
+                if ($matches > 6) {
+
+                    $member  = new AutpoassMember();
+                    $member->social_id = $social_id;
+                    $member->ip = $_SERVER['REMOTE_ADDR'];
+                    $member->agent = $_SERVER['HTTP_USER_AGENT'];
+                    $member->save();
+
+                    $portal->virefied = true;
+                    $portal->save();
+                    return ['result' => true, 'message' => '會員', 'social_id' => $social_id];
+                }
             }
         } else {
             return ['result' => false];
