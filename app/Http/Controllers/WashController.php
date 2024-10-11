@@ -608,7 +608,7 @@ class WashController extends Controller
             ->get();
         if (!empty($portals)) {
             foreach ($portals as $portal) {
-                $matches = countMatchingItems(explode(' ', $portal->agent), $_SERVER['HTTP_USER_AGENT']);
+                $matches = countMatchingItems(explode(' ', $portal->agent), explode(' ', $_SERVER['HTTP_USER_AGENT']));
                 if ($matches > 6) {
 
                     $member  = new AutpoassMember();
