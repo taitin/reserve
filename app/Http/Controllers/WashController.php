@@ -579,6 +579,7 @@ class WashController extends Controller
     public function checkMember($social_id)
     {
         $member = AutpoassMember::where('social_id', $social_id)->first();
+        Log::debug($member);
         if (!empty($member)) {
             return ['result' => true, 'message' => '會員', 'social_id' => $social_id];
         }
