@@ -540,8 +540,8 @@ class WashController extends Controller
         //將 id 設為 key
         foreach ($rets as $ret) {
             if ($request->car_type) {
-                if (!empty($ret->price[$request->car_type])) $projects[$ret->id] = $ret;
-            } else $projects[$ret->id] = $ret;
+                if (!empty($ret->price[$request->car_type])) $projects[] = $ret;
+            } else $projects[] = $ret;
         }
 
         return ['result' => true, 'projects' => $projects];
