@@ -123,3 +123,18 @@ if (!function_exists('zhDate')) {
         return Carbon\Carbon::parse($date)->format('Y-m-d') . ' (' . $week[$day] . ') ' . Carbon\Carbon::parse($date)->format('H:i');
     }
 }
+
+
+if (!function_exists('countMatchingItems')) {
+
+    function countMatchingItems(array $array1, array $array2): int
+    {
+        $count = 0;
+        foreach ($array1 as $item) {
+            if (in_array($item, $array2)) {
+                $count++;
+            }
+        }
+        return $count;
+    }
+}

@@ -22,8 +22,15 @@ class WashController extends Controller
 
     public function test()
     {
-        $wash = Wash::find(159);
-        $this->paidCheck($wash);
+
+        $portals = PortalUser::all();
+        $fingerprints = [];
+        foreach ($portals as $portal) {
+            $fingerprints[] = explode(' ', $portal->agent);
+        }
+
+        dump(countMatchingItems($fingerprints[0], $fingerprints[1]));
+        dump(countMatchingItems($fingerprints[1], $fingerprints[2]));
     }
 
     public function payFake()
@@ -589,18 +596,21 @@ class WashController extends Controller
     public function checkMember($social_id)
     {
 
-        $p = new PortalUser();
-        $p->ip = $_SERVER['REMOTE_ADDR'];
-        $p->agent = $_SERVER['HTTP_USER_AGENT'];
-        $p->save();
-
 
         $member = AutpoassMember::where('social_id', $social_id)->first();
         if (!empty($member)) {
             return ['result' => true, 'message' => '會員', 'social_id' => $social_id];
         }
 
-        PortalUser::where('ip', $_SERVER['REMOTE_ADDR'])->first();;
+        $portals = PortalUser::where('ip', $_SERVER['REMOTE_ADDR'])
+            ->where('created_at', '>', Carbon::now()->subMinutes(180))
+            ->get();
+        if (!empty($portals)) {
+            foreach ($portals as $portal) {
+            }
+        } else {
+            return ['result' => false];
+        }
 
 
 
@@ -621,6 +631,5 @@ class WashController extends Controller
 
 
         // $cancel = $autopass->cancelPay($data['invoice_no']);
-        return ['result' => false];
     }
 }
