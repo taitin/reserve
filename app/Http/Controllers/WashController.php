@@ -534,7 +534,9 @@ class WashController extends Controller
 
     public function getProjects(Request $request)
     {
-        $rets = \App\Models\Project::where('status', 1)->get();
+        $rets = \App\Models\Project::where('status', 1)
+            ->orderBy('order')
+            ->get();
         //將 id 設為 key
         foreach ($rets as $ret) {
             if ($request->car_type) {
