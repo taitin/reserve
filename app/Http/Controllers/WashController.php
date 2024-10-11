@@ -8,6 +8,7 @@ use App\Models\AutpoassMember;
 use App\Models\Except;
 use App\Models\Group;
 use App\Models\Parking as ModelsParking;
+use App\Models\PortalUser;
 use App\Models\Wash;
 use App\Services\AutopassService;
 use App\Services\LineService;
@@ -48,6 +49,15 @@ class WashController extends Controller
     }
     public function portal()
     {
+
+        //user 的 finger print
+
+        $p = new PortalUser();
+        $p->ip = $_SERVER['REMOTE_ADDR'];
+        $p->agent = $_SERVER['HTTP_USER_AGENT'];
+        $p->save();
+        return redirect()->to(config('wash.line_url'));
+
         return view('wash.portal');
     }
 
