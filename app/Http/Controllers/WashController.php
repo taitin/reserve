@@ -588,11 +588,21 @@ class WashController extends Controller
 
     public function checkMember($social_id)
     {
+
+        $p = new PortalUser();
+        $p->ip = $_SERVER['REMOTE_ADDR'];
+        $p->agent = $_SERVER['HTTP_USER_AGENT'];
+        $p->save();
+
+
         $member = AutpoassMember::where('social_id', $social_id)->first();
-        Log::debug($member);
         if (!empty($member)) {
             return ['result' => true, 'message' => '會員', 'social_id' => $social_id];
         }
+
+        PortalUser::where('ip', $_SERVER['REMOTE_ADDR'])->first();;
+
+
 
         // $data = [
         //     'invoice_no' => time() . $license,
