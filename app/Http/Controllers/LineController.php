@@ -464,7 +464,7 @@ class LineController extends Controller
                     $reply['bg_color'] =  $bg_colors[$wash->id % count($bg_colors)] ?? '#FFFFFF';
                     if (!empty($wash->id))
                         $reply['header'] = '訂單編號:' . $wash->id;
-                    else $reply['header'] = '';
+                    else $reply['header'] = ' ';
 
 
                     if (isset($params['link'])) {
