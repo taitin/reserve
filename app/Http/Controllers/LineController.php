@@ -400,7 +400,10 @@ class LineController extends Controller
                     $values = explode(' ', $r->value);
                     $params = [];
                     $wash = Wash::find(end($values));
-                    if (empty($wash)) $wash = new Wash();
+                    if (empty($wash)) {
+                        $wash = new Wash();
+                        $wash->social_id = $r->social_id;
+                    }
                     if (!empty($action->do_method)) {
 
                         if (count($values) > 1) $params = $wash->{$action->do_method}($values);
@@ -474,7 +477,7 @@ class LineController extends Controller
                             $reply = [];
                         }
                     } else  $replys[] = $reply;
-                    Log::debug($replys);
+
                     if ($action->target == 'group') {
                         $group = Group::where('type', '時間到府')->first();
 
