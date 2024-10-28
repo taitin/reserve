@@ -174,7 +174,7 @@ class LineController extends Controller
                     'social_id' => $socialId,
                     'date' => date('Y-m-d H:i:s', $events[0]['timestamp'] / 1000),
                     'text' =>  $inputText,
-                    'message_type' => $events[0]['message']['type'],
+                    'message_type' => $events[0]['message']['type'] ?? '',
                     'keyword' => implode(',', array_keys($keywords)),
                     'value' => implode(',', array_column($keywords, 'value')),
                     'message_id' => $events[0]['message']['id'] ?? '',
@@ -393,6 +393,7 @@ class LineController extends Controller
             }
 
             $actions =  $this->getKeywordAction($r->keyword, $type);
+            dump($actions);
             foreach ($actions as $action) {
                 if (!empty($action)) {
                     $finish = true;
