@@ -393,7 +393,7 @@ class LineController extends Controller
             }
 
             $actions =  $this->getKeywordAction($r->keyword, $type);
-            dump($actions);
+
             foreach ($actions as $action) {
                 if (!empty($action)) {
                     $finish = true;
@@ -474,7 +474,7 @@ class LineController extends Controller
                             $reply = [];
                         }
                     } else  $replys[] = $reply;
-
+                    dump($replys);
                     if ($action->target == 'group') {
                         $group = Group::where('type', '時間到府')->first();
 
