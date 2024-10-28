@@ -474,7 +474,7 @@ class LineController extends Controller
                             $reply = [];
                         }
                     } else  $replys[] = $reply;
-                    dump($replys);
+                    Log::debug($replys);
                     if ($action->target == 'group') {
                         $group = Group::where('type', '時間到府')->first();
 
