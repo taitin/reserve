@@ -462,7 +462,7 @@ class LineController extends Controller
 
                     $bg_colors = config('wash.bg_colors');
                     $reply['bg_color'] =  $bg_colors[$wash->id % count($bg_colors)] ?? '#FFFFFF';
-                    if ($wash->id)
+                    if (!empty($wash->id))
                         $reply['header'] = '訂單編號:' . $wash->id;
                     else $reply['header'] = '';
 
