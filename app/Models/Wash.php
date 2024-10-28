@@ -172,6 +172,11 @@ class Wash extends Model
         return $data;
     }
 
+
+    function getBookingUrl()
+    {
+        return ['link' => liffUrl('wash')];
+    }
     function getFinishLink()
     {
 
