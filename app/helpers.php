@@ -81,7 +81,7 @@ if (!function_exists('liffUrl')) {
     function liffUrl($url)
     {
         $append = str_replace('//', '/',  '/' . $url);
-        return 'https://liff.line.me/' . env('LINE_LIFF_ID') . $append;;
+        return 'https://liff.line.me/' .  myConfig('line_message.LINE_LIFF_ID') . $append;;
     }
 }
 
