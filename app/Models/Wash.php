@@ -175,7 +175,7 @@ class Wash extends Model
 
     function getBookingUrl()
     {
-        return ['link' => liffUrl('wash')];
+        return ['link' => liffUrl('wash'), 'url_text' => '點我預約洗車'];
     }
     function getFinishLink()
     {
