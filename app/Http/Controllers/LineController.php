@@ -470,6 +470,9 @@ class LineController extends Controller
                     if (isset($params['link'])) {
                         $reply['url'] = $params['link'];
                     }
+                    if (isset($params['url_text'])) {
+                        $reply['url_text'] = $params['url_text'];
+                    }
                     if (isset($params['photos'])) {
                         //將array cunk 成 5張一組 > arrayUrl($photos)
                         $photos = array_chunk($params['photos'], 5);
