@@ -100,6 +100,7 @@ class WashController extends Controller
             return redirect()->back()->withErrors($e->errors());
         }
         $wash = new \App\Models\Wash($request->all());
+        $wash->status = 'created';
         $wash->calculateTotalAmount();
         $wash->save();
 
