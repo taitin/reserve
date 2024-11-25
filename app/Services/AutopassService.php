@@ -11,8 +11,13 @@ class AutopassService
 
     public function __construct()
     {
-        $this->url = config('autopass.url') . '/v2/';
-        $this->access_token = config('autopass.access_token');
+        if (env('AUTOPASS_ENV', 'production') == 'sandbox') {
+            $this->url = config('autopass.sandbox_url') . '/v2';
+            $this->access_token = config('autopass.sandbox_token');
+        } else {
+            $this->url = config('autopass.url') . '/v2';
+            $this->access_token = config('autopass.access_token');
+        }
     }
 
     public function makePay($data)
