@@ -52,7 +52,7 @@ class ReplyCheck extends Command
 
         //在時間內建立，但5分鐘內未回覆 則重新提醒
         //updated_at==created_at 視為未回覆
-        $washes = \App\Models\Wash::where('created_at', '<', date('Y-m-d H:i:s', strtotime('-15 minute')))
+        $washes = \App\Models\Wash::where('created_at', '<', date('Y-m-d H:i:s', strtotime('-10 minute')))
             // ->where('updated_at', '=', \App\Models\Wash::CREATED_AT)
             ->where('status', 'created')
             ->get();
@@ -66,7 +66,7 @@ class ReplyCheck extends Command
                 //除去 秒數 如果時間剛好是 15分鐘 或是 155+15N分鐘 才執行
 
                 $diff = strtotime(date('Y-m-d H:i')) - strtotime(date('Y-m-d H:i', strtotime($wash->created_at)));
-                if ($diff == 5 * 60 || ($diff - 5 * 60) % (15 * 60) == 0) {
+                if ($diff == 5 * 60 || ($diff - 5 * 60) % (10 * 60) == 0) {
 
                     $input = (object) [
                         'keyword' => $keyword,
