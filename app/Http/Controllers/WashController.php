@@ -190,8 +190,12 @@ class WashController extends Controller
     public function payWebhookFake(Request $request)
     {
 
+
         //洗車 form
         $wash = \App\Models\Wash::find($request->id);
+        if ($wash->status == 'paid') {
+            return view('wash.close', ['message' => '已經付過款囉']);
+        }
         $wash->status = 'paid';
         $wash->save();
         $input = [
@@ -237,15 +241,17 @@ class WashController extends Controller
             $wash->save();
             return view('wash.close', ['message' => '付款失敗']);
         }
+        if ($wash->status != 'paid') {
 
-        $wash->status = 'paid';
-        $wash->save();
-        $input = [
-            'keyword' => '付款完成',
-            'value' => $wash->id,
-        ];
-        $line = new LineController();
-        $line->actionTrigger(json_decode(json_encode($input), false), 'customer');
+            $wash->status = 'paid';
+            $wash->save();
+            $input = [
+                'keyword' => '付款完成',
+                'value' => $wash->id,
+            ];
+            $line = new LineController();
+            $line->actionTrigger(json_decode(json_encode($input), false), 'customer');
+        }
 
         return view('wash.close', ['message' => '付款成功！！請返回Line繼續操作']);
     }
