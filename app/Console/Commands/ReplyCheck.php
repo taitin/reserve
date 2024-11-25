@@ -57,7 +57,7 @@ class ReplyCheck extends Command
             ->where('status', 'created')
             ->get();
 
-
+        dd($washes);
 
 
         $line = new \App\Http\Controllers\LineController();
