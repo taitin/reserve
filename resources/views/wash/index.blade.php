@@ -578,6 +578,7 @@
         if (user_time == 0) {
             user_time = 2;
         }
+
         $entry_date = $('#entry_time').val();
         if (!$entry_date) {
             return;
@@ -592,7 +593,7 @@
             min_exit_time.setDate(min_exit_time.getDate() + 1);
         }
 
-        min_exit_time.setHours(min_exit_time.getHours() + user_time);
+        min_exit_time.setHours(min_exit_time.getHours() + Math.ceil(user_time));
         $('#exit_date').attr('min', formatDate(min_exit_time));
 
         select_exit_time = new Date($('#exit_date').val() + ' 09:00');
