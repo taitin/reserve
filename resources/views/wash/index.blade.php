@@ -621,6 +621,15 @@
 
         });
 
+        if ($exit_time && $exit_time >= min_exit_time.getTime()) {
+            select_time = new Date($exit_date + ' ' + exit_time)
+            if (select_time.getTime() >= min_exit_time.getTime()) {
+                select.val($exit_time);
+            }
+
+
+        }
+
 
 
 
