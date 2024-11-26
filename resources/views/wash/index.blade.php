@@ -13,50 +13,52 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-    <script>
-        $(function() {
-            liff.init({
-                liffId: "{{ myConfig('line_message.LINE_LIFF_ID') }}" // Use own liffId
-            }).then(() => {
-                if (!liff.isLoggedIn()) {
-                    liff.login();
-                } else {
-                    liff.getProfile()
-                        .then(profile => {
-                            const name = profile.displayName;
-                            $('#social_id').val(profile.userId);
-                            getLastProfile()
-                        })
-                        .catch((err) => {
-                            console.log('error', err);
-                        });
-                }
-            }).catch((err) => {
-                console.log('初始化失敗');
+    @if (env('APP_ENV') != 'local')
+        <script>
+            $(function() {
+                liff.init({
+                    liffId: "{{ myConfig('line_message.LINE_LIFF_ID') }}" // Use own liffId
+                }).then(() => {
+                    if (!liff.isLoggedIn()) {
+                        liff.login();
+                    } else {
+                        liff.getProfile()
+                            .then(profile => {
+                                const name = profile.displayName;
+                                $('#social_id').val(profile.userId);
+                                getLastProfile()
+                            })
+                            .catch((err) => {
+                                console.log('error', err);
+                            });
+                    }
+                }).catch((err) => {
+                    console.log('初始化失敗');
+                });
             });
-        });
-        var profile = [];
+            var profile = [];
 
-        function getLastProfile() {
-            var social_id = $('#social_id').val();
+            function getLastProfile() {
+                var social_id = $('#social_id').val();
 
-            $.get('/wash/get_profile/' + social_id, {}, function(data) {
+                $.get('/wash/get_profile/' + social_id, {}, function(data) {
 
-                if (data.result) {
-                    $('#name').val(data.data.name);
+                    if (data.result) {
+                        $('#name').val(data.data.name);
 
-                    $('#phone').val(data.data.phone);
-                    $('#license').val(data.data.license);
-                    $('#model').val(
-                        data.data.model);
-                    $('#car_type').val(data.data.car_type);
-                    $('#project_id').val(data.data.project_id);
-                    profile = data.data;
-                    getProjects();
-                }
-            }, 'json');
-        }
-    </script>
+                        $('#phone').val(data.data.phone);
+                        $('#license').val(data.data.license);
+                        $('#model').val(
+                            data.data.model);
+                        $('#car_type').val(data.data.car_type);
+                        $('#project_id').val(data.data.project_id);
+                        profile = data.data;
+                        getProjects();
+                    }
+                }, 'json');
+            }
+        </script>
+    @endif
     <style>
         body {
             /* padding: 20px; */
@@ -605,41 +607,13 @@
         availableTimes = {!! json_encode(config('wash.business_times')) !!};
         availableTimes.forEach(function(time) {
             select_time = new Date($exit_date + ' ' + time);
-            console.log({
-                time,
-                select_time,
-                min_exit_time,
-                select
-            })
             if (select_time.getTime() >= min_exit_time.getTime()) {
-                console.log({
-                    time
-                })
-
-                select.append('<option value="' + time + '">' + time + '</option>');
+                if ($exit_time == time) var selected = 'selected';
+                else var selected = '';
+                select.append('<option value="' + time + '" ' + selected + '>' + time + '</option>');
             }
 
         });
-
-        if ($exit_time && $exit_time >= min_exit_time.getTime()) {
-            select_time = new Date($exit_date + ' ' + exit_time)
-            if (select_time.getTime() >= min_exit_time.getTime()) {
-                select.val($exit_time);
-            }
-
-
-        }
-
-
-
-
-
-
-
-
-
-
-
 
     }
 
