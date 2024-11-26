@@ -475,14 +475,17 @@
         $.get('/wash/get_projects', {
             car_type: $('#car_type').val()
         }, function(data) {
-            projects = data.projects;
+            // projects = data.projects;
             var select = $('#project');
+            project_id = $('#project').val();
             select.empty();
-            for (var key in projects) {
-                project = projects[key];
+            for (var key in data.projects) {
+                project = data.projects[key];
+                projects[project.id] = project;
                 select.append('<option value="' + project.id + '">' + project.name + '</option>');
             };
-            $('#project_id').val(profile.project_id);
+            if (project_id)
+                $('#project').val(project_id);
             getAdditions();
         }, 'json');
     }
@@ -541,6 +544,7 @@
         }
 
 
+
         totalAmount += parseInt(projects[project_id][use_price][carType]);
 
 
@@ -548,6 +552,7 @@
         //計算總需時間
         user_time += parseFloat(projects[project_id]['use_times'][carType]);
         //js nl2br
+
 
         $('#service_desc').html((addLineNumbers(projects[project_id].description)))
 

@@ -23,15 +23,8 @@ class WashController extends Controller
     public function test()
     {
 
-        $portals = PortalUser::all();
-        $fingerprints = [];
-        foreach ($portals as $portal) {
-            $fingerprints[] = explode(' ', $portal->agent);
-        }
-
-        dump(countMatchingItems($fingerprints[0], $fingerprints[1]));
-        dump(countMatchingItems($fingerprints[1], $fingerprints[2]));
-        dump(countMatchingItems($fingerprints[2], $fingerprints[3]));
+        $wash = Wash::find(135);
+        return  $wash->getTotal($wash->car_type);
     }
 
     public function payFake()
