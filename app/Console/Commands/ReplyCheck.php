@@ -76,6 +76,15 @@ class ReplyCheck extends Command
                 }
             }
         }
+        $washes = \App\Models\Wash::where('updated_at', '<', date('Y-m-d H:i:s', strtotime('-12 minute')))
+            // ->where('updated_at', '=', \App\Models\Wash::CREATED_AT)
+            ->where('status', 'get_pay_link')
+            ->get();
+
+        foreach ($washes as $wash) {
+            (new \App\Http\Controllers\WashController())->paidCheck($wash);
+        }
+
 
         return 0;
     }
