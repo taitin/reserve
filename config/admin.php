@@ -11,7 +11,7 @@ return [
     | login page.
     |
     */
-    'name' => (env('APP_ENV') == 'production') ? '測試環境' : 'Wash Admin',
+    'name' => (env('APP_ENV') != 'production') ? '測試環境' : 'Wash Admin',
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ return [
     | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo' => '<img src="/vendor/dcat-admin/images/logo.png" width="35">' . (env('APP_ENV') == 'production') ? '測試環境' : 'Wash Admin',
+    'logo' => '<img src="/vendor/dcat-admin/images/logo.png" width="35">' . (env('APP_ENV') != 'production') ? '測試環境' : 'Wash Admin',
 
     /*
     |--------------------------------------------------------------------------
