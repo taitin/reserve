@@ -96,9 +96,9 @@ class WashController extends AdminController
             $form->text('model');
             $form->text('parking');
             $form->date('date', '進場日期');
-            $form->date('time', '進場時間');
+            $form->time('time', '進場時間');
             $form->date('exit_date', '取車日期');
-            $form->date('exit_time', '取車時間');
+            $form->time('exit_time', '取車時間');
 
 
             $form->text('status');
