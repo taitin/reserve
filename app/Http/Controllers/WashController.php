@@ -263,16 +263,17 @@ class WashController extends Controller
 
         $wash->pay_auth_result = $input;
 
+        if ($wash->status != 'paid') {
 
-        $wash->status = 'paid';
-        $wash->save();
-        $input = [
-            'keyword' => '付款完成',
-            'value' => $wash->id,
-        ];
-        $line = new LineController();
-        $line->actionTrigger(json_decode(json_encode($input), false), 'customer');
-
+            $wash->status = 'paid';
+            $wash->save();
+            $input = [
+                'keyword' => '付款完成',
+                'value' => $wash->id,
+            ];
+            $line = new LineController();
+            $line->actionTrigger(json_decode(json_encode($input), false), 'customer');
+        }
         return 'ok';
         // return $this->paidCheck($wash);
     }
