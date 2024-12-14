@@ -418,6 +418,7 @@ class WashController extends Controller
         $day = Carbon::parse($date)->dayOfWeek;
         //判斷若日期為今天以前 則 $day = 0 無法預約
         strtotime($date) < strtotime(date('Y-m-d')) ? $day = 0 : $day = $day;
+        dump($day);
 
         if ($day == 0) {
             $available_times = ['*本日已無預約時段，請選擇其他日期'];
