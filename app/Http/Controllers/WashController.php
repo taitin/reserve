@@ -444,12 +444,14 @@ class WashController extends Controller
             }
         }
 
+        dump($washes);
 
 
         //扣掉已預約的時間
         $washes = Wash::where('date', $date)
             ->where('status', '!=', 'cancelled')
             ->get();
+        dump($washes);
         foreach ($washes as $wash) {
             $key = array_search(substr($wash->time, 0, 5), $available_times);
             if ($key !== false) {
