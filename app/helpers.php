@@ -143,7 +143,7 @@ if (!function_exists('countMatchingItems')) {
 
 if (!function_exists('getBusinessTimes')) {
 
-    function getBusinessTimes($date = null): int
+    function getBusinessTimes($date = null)
     {
         if (empty($date)) {
             $date = date('Y-m-d');
