@@ -37,7 +37,7 @@ class ReplyCheck extends Command
      */
     public function handle()
     {
-        $business_times = config('wash.business_times');
+        $business_times = getBusinessTimes();
         $business_days = config('wash.business_days');
         $business_time['start'] = $business_times[0];
         $business_time['end'] = end($business_times);

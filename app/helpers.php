@@ -138,3 +138,21 @@ if (!function_exists('countMatchingItems')) {
         return $count;
     }
 }
+
+
+
+if (!function_exists('getBusinessTimes')) {
+
+    function getBusinessTimes($date = null): int
+    {
+        if (empty($date)) {
+            $date = date('Y-m-d');
+        }
+        $week_day = Carbon\Carbon::parse($date)->dayOfWeek;
+        $business_times =
+            config('wash.business_times_by_day.' . $week_day) ?? config('wash.business_times');
+
+
+        return $business_times;
+    }
+}

@@ -425,7 +425,7 @@ class WashController extends Controller
         if ($day == 0) {
             $available_times = ['*本日已無預約時段，請選擇其他日期'];
         } else {
-            $available_times = config('wash.business_times');
+            $available_times = getBusinessTimes($date);
         }
 
         // 如果 $date 是今天 則扣掉過去的時間
