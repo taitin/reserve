@@ -114,6 +114,8 @@ JS;
                     $form->number($key, $value);
                 }
             });
+            $form->switch('use_discount')->default(1);
+
 
             $form->embeds('discount_price', function (Form\EmbeddedForm $form) {
                 $form->html('<h5 class="title">折扣價及折扣%請擇一輸入即可</h5>');
