@@ -406,63 +406,68 @@
                 <select name="project_id" id="project">
                 </select>
             </div>
-
-
-            <div class="form-group service-details">
-                <div class="main">
-                    依據您的車型，本次服務費用：
-                </div>
-                <div id="price-cavas">
-                    原價：<del id="orgAmount">元</del>
-                    特價：<span id="basicAmount" style="color: red"> 元</span>
-                </div>
-
-                此費用包含
-                <div id="service_desc">
-                </div>
-            </div>
-            <div id="serviceDetails"></div>
-            </div>
-
-
-
-
-
-
-
-
-            <div class="form-group radio addition-service ">
-                <label for="additionService">額外加值服務的內容</label>
-                <div id="additions">
-                    <div><label for="service1">
-                            <input type="checkbox" data-price="600" id="service1" name="addition_services[]"
-                                value="車輛前檔玻璃潑水">
-                            車輛前檔玻璃潑水：600 元</label>
-                    </div>
-                    <div><label for="service2">
-                            <input type="checkbox" data-price="1500" id="service2" name="addition_services[]"
-                                value="全車玻璃潑水">
-                            全車玻璃潑水：1500 元</label>
-                    </div>
-                    <div><label for="service3">
-                            <input type="checkbox" data-price="1500" id="service3" name="addition_services[]"
-                                value="鍍膜維護劑">
-                            鍍膜維護劑：1500 元</label>
-                    </div>
-                </div>
-
-            </div>
-            <div class="form-group ">
-                <label for="totalAmount">總金額</label>
-                <h3 id="totalAmount"></h3>
-            </div>
-
-            <p class="alert" id="step2alert">
+            <p class="alert" id="projectAlert">
                 @if ($errors->any())
                     {{ $errors->first() }}
                 @endif
             </p>
-            <button type="submit" class="btn btn-info btn-block submit-btn">送出預約</button>
+            <section id="select_project">
+                <div class="form-group service-details">
+                    <div class="main">
+                        依據您的車型，本次服務費用：
+                    </div>
+                    <div id="price-cavas">
+                        原價：<del id="orgAmount">元</del>
+                        特價：<span id="basicAmount" style="color: red"> 元</span>
+                    </div>
+
+                    此費用包含
+                    <div id="service_desc">
+                    </div>
+                </div>
+                <div id="serviceDetails"></div>
+                </div>
+
+
+
+
+
+
+
+
+                <div class="form-group radio addition-service ">
+                    <label for="additionService">額外加值服務的內容</label>
+                    <div id="additions">
+                        <div><label for="service1">
+                                <input type="checkbox" data-price="600" id="service1" name="addition_services[]"
+                                    value="車輛前檔玻璃潑水">
+                                車輛前檔玻璃潑水：600 元</label>
+                        </div>
+                        <div><label for="service2">
+                                <input type="checkbox" data-price="1500" id="service2" name="addition_services[]"
+                                    value="全車玻璃潑水">
+                                全車玻璃潑水：1500 元</label>
+                        </div>
+                        <div><label for="service3">
+                                <input type="checkbox" data-price="1500" id="service3" name="addition_services[]"
+                                    value="鍍膜維護劑">
+                                鍍膜維護劑：1500 元</label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group ">
+                    <label for="totalAmount">總金額</label>
+                    <h3 id="totalAmount"></h3>
+                </div>
+
+                <p class="alert" id="step2alert">
+                    @if ($errors->any())
+                        {{ $errors->first() }}
+                    @endif
+                </p>
+                <button type="submit" class="btn btn-info btn-block submit-btn">送出預約</button>
+            </section>
         </section>
     </form>
 </body>
@@ -533,7 +538,14 @@
         var carType = $('select[name="car_type"]').val();
         var project_id = $('select[name="project_id"]').val();
 
-
+        if (!project_id) {
+            $('#select_project').hide();
+            $('#projectAlert').text('請選擇洗車方案').show();
+            return;
+        } else {
+            $('#select_project').show();
+            $('#projectAlert').text('').hide();
+        }
 
         if ($('#is_member').val() == 1) {
             var use_price = 'discount_price';
@@ -588,9 +600,7 @@
 
         $('#totalAmount').html(totalAmount + ' 元 / 需時' + user_time + '小時');
         //exit time 必須 > entry time+user_time
-        if (!project_id) {
-            return;
-        }
+
         if (user_time == 0) {
             user_time = 2;
         }
