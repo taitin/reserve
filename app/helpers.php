@@ -9,6 +9,7 @@ use App\Models\LanguageMap;
 use App\Models\Setting;
 use Dcat\Admin\Admin;
 use GuzzleHttp\Client as GuzzleHttpClient;
+use Illuminate\Support\Facades\Log;
 
 if (!function_exists('myConfig')) {
 
@@ -154,5 +155,31 @@ if (!function_exists('getBusinessTimes')) {
 
 
         return $business_times;
+    }
+}
+
+
+if (!function_exists('showTypeContent')) {
+
+    function showTypeContent($value, $attach = '')
+    {
+        $str = '';
+        foreach ($value as $key => $val) {
+            if (empty($val)) {
+
+                if ($value[$key . '_discount'] ?? false) {
+                    $str .= config('wash.car_types')[$key] . ':' . $value[$key . '_discount'] . '% 折扣<br>';
+                } else  continue;
+            }
+
+            //config('wash.car_types')[$key]  config('wash.car_types')[$key.'_discount'] 有價格優先
+            if (!isset(config('wash.car_types')[$key])) continue;
+            else {
+                if (empty($val))    continue;
+                $str .= config('wash.car_types')[$key] . ':' . $val .  $attach . '<br>';
+            }
+            // $str .= config('wash.car_types')[$key] . ':' . $val .  $attach . '<br>';
+        }
+        return $str;
     }
 }

@@ -473,7 +473,8 @@
 
     function getProjects() {
         $.get('/wash/get_projects', {
-            car_type: $('#car_type').val()
+            car_type: $('#car_type').val(),
+            date: $('#entry_time').val()
         }, function(data) {
             // projects = data.projects;
             var select = $('#project');
@@ -492,7 +493,9 @@
 
     function getAdditions() {
         $.get('/wash/get_additions', {
-            car_type: $('#car_type').val()
+            car_type: $('#car_type').val(),
+            date: $('#entry_time').val()
+
         }, function(data) {
             additions = data.additions;
             var select = $('#additions');
@@ -562,6 +565,13 @@
 
         for (var key in additions) {
 
+            console.log({
+                addition: additions[key],
+                use_price: use_price,
+                carType: carType,
+                p: additions[key][use_price][carType],
+                key: key
+            });
 
             $('#service' + key).attr('data-price', additions[key][use_price][carType]);
             $('#service' + key).parent().find('span').html(additions[key][use_price][carType] + ' 元');
@@ -748,6 +758,7 @@
         getProjects();
         $('#entry_time').change(function() {
             calculateAvailableTime();
+            getProjects();
         });
 
         $('#exit_date').change(function() {

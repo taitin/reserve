@@ -484,8 +484,8 @@ class LineController extends Controller
                     } else  $replys[] = $reply;
 
                     if ($action->target == 'group') {
-                        $group = Group::where('type', '時間到府')->first();
-
+                        // $group = Group::where('type', '時間到府')->first();
+                        $group = Group::where('type', myConfig('mode.status'))->first();
                         $this->replyMessage($group->group_id,   $replys, $action->target);
                     } elseif ($action->target == 'master') {
 

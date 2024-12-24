@@ -22,7 +22,7 @@ class SettingController extends Controller
         $tab->add('LineSetting', LineSetting::make(), request()->lineSetting, 'lineSetting');
 
 
-
+        $tab->add('Mode', Mode::make(), request()->mode, 'mode');
 
         return $content
             ->title(__('setting.labels.Setting'))

@@ -541,11 +541,19 @@ class WashController extends Controller
 
     public function getProjects(Request $request)
     {
-        $rets = \App\Models\Project::where('status', 1)
-            ->orderBy('order')
-            ->get();
+        $query = \App\Models\Project::where('status', 1)
+            ->orderBy('order');
+
+        if ($request->date) {
+            $query = $query->where('project_start', '<=', $request->date);
+            $query = $query->where('project_end', '>=', $request->date);
+        }
+
+        $rets = $query->get();
+        $projects = [];
         //將 id 設為 key
         foreach ($rets as $ret) {
+            $ret->discount_price = $ret->discount;
             if ($request->car_type) {
                 if (!empty($ret->price[$request->car_type])) $projects[] = $ret;
             } else $projects[] = $ret;
@@ -556,9 +564,18 @@ class WashController extends Controller
 
     public function getAdditions(Request $request)
     {
-        $rets  = \App\Models\Addition::where('status', 1)->get();
+        $query  = \App\Models\Addition::where('status', 1)
+            ->orderBy('order');
+        if ($request->date) {
+            $query = $query->where('addition_start', '<=', $request->date);
+            $query = $query->where('addition_end', '>=', $request->date);
+        }
+
+        $rets = $query->get();
         //將 id 設為 key
+        $additions = [];
         foreach ($rets as $ret) {
+            $ret->discount_price = $ret->discount;
             if ($request->car_type) {
                 if (!empty($ret->price[$request->car_type])) $additions[$ret->id] = $ret;
             } else {

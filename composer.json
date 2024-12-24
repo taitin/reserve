@@ -15,7 +15,8 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
-        "linecorp/line-bot-sdk": "^3.6"
+        "linecorp/line-bot-sdk": "^3.6",
+        "pstldz/dcat-admin-grid-sotrable": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

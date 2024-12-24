@@ -33,9 +33,10 @@ return [
     ],
 
     'options' => [
-        'permissions' => [
-
-        ],
+        'permissions' => [],
     ],
-
+    'save_order' => '儲存排序',
+    'cancel_save_order' => '取消排序',
+    'save_succeeded' => '儲存成功 !',
+    'save_cancel' => '已取消 !',
 ];
