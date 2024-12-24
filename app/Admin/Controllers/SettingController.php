@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Forms\LineSetting;
+use App\Admin\Forms\Mode;
 use App\Admin\Repositories\Setting;
 use App\Http\Controllers\Controller;
 use Dcat\Admin\Form;
