@@ -549,15 +549,19 @@
 
         if ($('#is_member').val() == 1) {
             var use_price = 'discount_price';
-            $('#price-cavas').html(
-                '原價：<del id="orgAmount">元</del> 特價：<span id="basicAmount" style="color: red"> 元</span>');
+            if (projects[project_id][use_price][carType]) {
+                $('#price-cavas').html(
+                    '原價：<del id="orgAmount">元</del> 特價：<span id="basicAmount" style="color: red"> 元</span>');
+            } else use_price = 'price';
         } else {
             var use_price = 'price';
-            $('#price-cavas').html('<span id="basicAmount" style="color: red"> 元</span>');
+
 
         }
 
-
+        if (use_price == 'price') {
+            $('#price-cavas').html('<span id="basicAmount" style="color: red"> 元</span>');
+        }
 
         totalAmount += parseInt(projects[project_id][use_price][carType] ?? 0);
 
@@ -576,16 +580,10 @@
 
         for (var key in additions) {
 
-            console.log({
-                addition: additions[key],
-                use_price: use_price,
-                carType: carType,
-                p: additions[key][use_price][carType],
-                key: key
-            });
 
-            $('#service' + key).attr('data-price', additions[key][use_price][carType]);
-            $('#service' + key).parent().find('span').html(additions[key][use_price][carType] + ' 元');
+            var p = additions[key][use_price][carType] ?? additions[key]['price'][carType];
+            $('#service' + key).attr('data-price', p);
+            $('#service' + key).parent().find('span').html(p + ' 元');
 
 
         }
@@ -593,7 +591,9 @@
         // 加值服務的費用
         var additionServices = document.querySelectorAll('input[name="addition_services[]"]:checked');
         additionServices.forEach(function(service) {
-            totalAmount += parseInt(additions[$(service).val()][use_price][carType]);
+            totalAmount += parseInt(additions[$(service).val()][use_price][carType] ?? additions[key]['price'][
+                carType
+            ]);
             user_time += parseFloat(additions[$(service).val()]['use_time']);
         });
         // 顯示總金額
