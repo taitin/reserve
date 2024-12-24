@@ -21,13 +21,14 @@ class GroupController extends AdminController
             $grid->column('id')->sortable();
             $grid->column('name');
             $grid->column('group_id');
-            $grid->column('type');
+            $grid->column('type')->display(function ($type) {
+                return config('wash.modes')[$type] ?? '';
+            });
             $grid->column('created_at');
             $grid->column('updated_at')->sortable();
-        
+
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
-        
             });
         });
     }
@@ -62,8 +63,9 @@ class GroupController extends AdminController
             $form->display('id');
             $form->text('name');
             $form->text('group_id');
-            $form->text('type');
-        
+
+            $form->select('type')->options(config('wash.modes'));
+
             $form->display('created_at');
             $form->display('updated_at');
         });
