@@ -40,4 +40,10 @@ class Addition extends Model implements Sortable
         }
         return $result;
     }
+
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'addition_projects');
+    }
 }

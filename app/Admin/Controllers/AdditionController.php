@@ -37,6 +37,10 @@ class AdditionController extends AdminController
             $grid->column('addition_date')->display(function ($value) {
                 return $this->addition_start . ' ~ ' . $this->addition_end;
             });
+
+            $grid->column('projects', '指定方案')->display(function ($value) {
+                return $this->projects->pluck('name');
+            })->label();
             // $grid->column('created_at');
             // $grid->column('updated_at')->sortable();
 
@@ -98,7 +102,7 @@ JS;
      */
     protected function form()
     {
-        return Form::make(new Addition(), function (Form $form) {
+        return Form::make(new Addition(['projects']), function (Form $form) {
             $form->display('id');
             $form->text('name')->required();
             $form->text('description');
@@ -145,6 +149,18 @@ JS;
             $form->dateRange('addition_start', 'addition_end', '方案執行時間');
 
 
+            $form->multipleSelect('projects', '搭配洗車方案')->options(\App\Models\Project::where('status', 1)
+                ->orderBy('order', 'asc')
+                ->pluck('name', 'id'))
+                ->customFormat(function ($v) {
+                    if (! $v) {
+                        return [];
+                    }
+
+                    // 从数据库中查出的二维数组中转化成ID
+                    return array_column($v, 'id');
+                })
+                ->help('空白表示全方案皆可搭配');
 
             $form->display('created_at');
             $form->display('updated_at');

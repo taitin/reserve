@@ -494,8 +494,8 @@
     function getAdditions() {
         $.get('/wash/get_additions', {
             car_type: $('#car_type').val(),
-            date: $('#entry_time').val()
-
+            date: $('#entry_time').val(),
+            project_id: $('#project').val()
         }, function(data) {
             additions = data.additions;
             var select = $('#additions');
@@ -782,6 +782,10 @@
 
         $('#city').change(function() {
             changeCity()
+        });
+
+        $('#project').change(function() {
+            getAdditions();
         });
     });
     // 初始化計算一次總金額

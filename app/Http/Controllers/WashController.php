@@ -572,9 +572,23 @@ class WashController extends Controller
         }
 
         $rets = $query->get();
+
         //將 id 設為 key
         $additions = [];
         foreach ($rets as $ret) {
+            $assign_projects = $ret->projects->pluck('id')->toArray();
+
+            if (!empty($assign_projects)) {
+                if (!empty($request->project_id)) {
+                    if (!in_array($request->project_id, $assign_projects)) {
+                        continue;
+                        //有指定 且不是現在選的方案 就跳過
+                    }
+                }
+            }
+
+
+
             $ret->discount_price = $ret->discount;
             if ($request->car_type) {
                 if (!empty($ret->price[$request->car_type])) $additions[$ret->id] = $ret;

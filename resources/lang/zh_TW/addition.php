@@ -13,6 +13,7 @@ return [
         'use_time' => '服務工時(小時)',
         'status' => '是否啟用',
         'addition_date' => '方案使用時間',
+        'use_discount' => '使用折扣',
     ],
     'options' => [],
 ];
