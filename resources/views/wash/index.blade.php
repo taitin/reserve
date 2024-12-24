@@ -488,6 +488,7 @@
             if (project_id)
                 $('#project').val(project_id);
             getAdditions();
+            calculateTotalAmount();
         }, 'json');
     }
 
