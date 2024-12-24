@@ -16,7 +16,7 @@ return [
         'use_discount' => '使用折扣',
         'discount_start' => '折扣開始時間',
         'discount_end' => '折扣結束時間',
-        'discount_date' => '方案使用時間',
+        'project_date' => '方案使用時間',
     ],
     'options' => [],
 ];

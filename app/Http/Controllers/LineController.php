@@ -479,7 +479,7 @@ class LineController extends Controller
                         foreach ($photos as $photo) {
                             $reply['images'] =  arrayUrl($photo);
                             $replys[] = $reply;
-                            $reply = [];
+                            $reply = [];debug
                         }
                     } else  $replys[] = $reply;
 
