@@ -549,18 +549,18 @@
 
 
 
-        totalAmount += parseInt(projects[project_id][use_price][carType]);
+        totalAmount += parseInt(projects[project_id][use_price][carType] ?? 0);
 
 
         var user_time = 0;
         //計算總需時間
-        user_time += parseFloat(projects[project_id]['use_times'][carType]);
+        user_time += parseFloat(projects[project_id]['use_times'][carType] ?? 0);
         //js nl2br
 
 
-        $('#service_desc').html((addLineNumbers(projects[project_id].description)))
+        $('#service_desc').html((addLineNumbers(projects[project_id].description ?? '')))
 
-        $('#orgAmount').html(parseInt(projects[project_id].price[carType]) + '元');
+        $('#orgAmount').html(parseInt(projects[project_id].price[carType] ?? 0) + '元');
 
         $('#basicAmount').html(totalAmount + ' 元');
 
