@@ -35,7 +35,12 @@ return [
         '#FF9D6F',
 
     ],
-    'line_url' => 'https://lin.ee/xM9CgpoI'
+    'line_url' => 'https://lin.ee/xM9CgpoI',
+    'modes' => [
+        'formal' => '正式模式',
+        'debug' => '測試模式',
+        'dev' => '開發模式',
+    ]
 
 
 ];
