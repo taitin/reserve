@@ -533,9 +533,7 @@
         var carType = $('select[name="car_type"]').val();
         var project_id = $('select[name="project_id"]').val();
 
-        if (!project_id) {
-            return;
-        }
+
 
         if ($('#is_member').val() == 1) {
             var use_price = 'discount_price';
@@ -590,7 +588,9 @@
 
         $('#totalAmount').html(totalAmount + ' 元 / 需時' + user_time + '小時');
         //exit time 必須 > entry time+user_time
-
+        if (!project_id) {
+            return;
+        }
         if (user_time == 0) {
             user_time = 2;
         }
