@@ -139,7 +139,9 @@ JS;
             $script = <<<JS
             $(function(){
                 $('.embed-discount_price-form').addClass('row');
-                $('.embed-discount_price-form .form-group').addClass('col-6');
+               //奇數項
+               $('.embed-discount_price-form .form-group:odd').addClass('col-5');
+                $('.embed-discount_price-form .form-group:even').addClass('col-7');
                 $('.embed-discount_price-form .title').closest('.form-group').removeClass('col-6').addClass('col-12');
             })
 JS;
