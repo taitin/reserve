@@ -123,7 +123,7 @@ JS;
 
 
             $form->embeds('discount_price', function (Form\EmbeddedForm $form) {
-                $form->html('<h5 class="title">折扣價及折扣%請擇一輸入即可</h5>');
+                $form->html('<h5 class="title">直接輸入「折扣價」或「折扣 %」</h5>');
 
                 foreach (config('wash.car_types') as $key => $value) {
 
@@ -131,7 +131,7 @@ JS;
                     $form->html('<h5></h5>');
 
                     $form->text($key, '折扣價')->width(7, 5);
-                    $form->decimal($key . '_discount', '折扣%')->width(7, 5);
+                    $form->decimal($key . '_discount', '折扣%')->width(7, 5)->placeholder('數字 10 = 定價 x 10%');
                 }
             });
 
