@@ -129,8 +129,8 @@ JS;
                     $form->html('<h4>' . $value . '</h4>');
                     $form->html('<h5></h5>');
 
-                    $form->text($key, '折扣價')->width(7, 5);
-                    $form->decimal($key . '_discount', '折扣%')->width(7, 5)
+                    $form->text($key, '折扣價')->width(8, 4);
+                    $form->decimal($key . '_discount', '折扣%')->width(9, 3)
                         ->placeholder('數字 10 = 定價 x 10%');
                 }
             });
@@ -141,8 +141,8 @@ JS;
                 $('.embed-discount_price-form').addClass('row');
 
                 //奇數項
-                $('.embed-discount_price-form .form-group:odd').addClass('col-5');
-                $('.embed-discount_price-form .form-group:even').addClass('col-7');
+                $('.embed-discount_price-form .form-group:odd').addClass('col-6');
+                $('.embed-discount_price-form .form-group:even').addClass('col-6');
                 $('.embed-discount_price-form .title').closest('.form-group').removeClass('col-6').addClass('col-12');
             })
 JS;
