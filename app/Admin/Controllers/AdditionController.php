@@ -20,9 +20,8 @@ class AdditionController extends AdminController
     {
         return Grid::make(new Addition(), function (Grid $grid) {
             // $grid->column('id')->sortable();
-            $grid->sortable('order');
             $grid->model()->orderBy('order', 'asc');
-            $grid->column('order');
+            $grid->column('order', '頁面排序');
             $grid->column('status')->switch();
 
             $grid->column('name');
@@ -34,6 +33,12 @@ class AdditionController extends AdminController
             $grid->column('discount_price')->display(function ($value) {
                 return showTypeContent($value, '元');
             })->setAttributes(['style' => 'width:220px']);
+            $grid->column('discount_date')->display(function ($value) {
+                return $this->discount_start . ' ~ ' . $this->discount_end;
+            });
+
+
+
             $grid->column('addition_date')->display(function ($value) {
                 return $this->addition_start . ' ~ ' . $this->addition_end;
             });

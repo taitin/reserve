@@ -19,10 +19,10 @@ class ProjectController extends AdminController
     protected function grid()
     {
         return Grid::make(new Project(), function (Grid $grid) {
-            $grid->sortable('order');
+            // $grid->sortable('order');
             $grid->model()->orderBy('order', 'asc');
             // $grid->column('id')->sortable();
-            $grid->column('order');
+            $grid->column('order', '頁面排序');
 
             $grid->column('status')->switch();
             $grid->column('name')->editable();
@@ -38,6 +38,12 @@ class ProjectController extends AdminController
                 return showTypeContent($value, '元');
             })->setAttributes(['style' => 'width:220px']);
             // $grid->column('created_at');
+
+            $grid->column('discount_date')->display(function ($value) {
+                return $this->discount_start . ' ~ ' . $this->discount_end;
+            });
+
+
             $grid->column('project_date')->display(function ($value) {
                 return $this->project_start . ' ~ ' . $this->project_end;
             });
@@ -120,6 +126,7 @@ JS;
 
             $form->switch('use_discount')->default(1);
 
+            $form->dateRange('discount_start', 'discount_end', '折扣時間');
 
 
             $form->embeds('discount_price', function (Form\EmbeddedForm $form) {

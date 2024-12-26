@@ -12,11 +12,13 @@ return [
 
         'price' => '定價',
         'discount_price' => '折扣價',
-        'status' => '是否啟用',
-        'use_discount' => '使用折扣',
+        'status' => '啟用方案',
+        'use_discount' => '啟用折扣',
         'discount_start' => '折扣開始時間',
         'discount_end' => '折扣結束時間',
         'project_date' => '方案使用時間',
+        'discount_date' => '折扣時間',
+
     ],
     'options' => [],
 ];

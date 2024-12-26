@@ -11,9 +11,10 @@ return [
         'discount_price' => '折扣後價錢',
         'status' => '',
         'use_time' => '服務工時(小時)',
-        'status' => '是否啟用',
+        'status' => '啟用方案',
         'addition_date' => '方案使用時間',
-        'use_discount' => '使用折扣',
+        'discount_date' => '折扣時間',
+        'use_discount' => '啟用折扣',
     ],
     'options' => [],
 ];
