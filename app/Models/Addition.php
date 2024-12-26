@@ -33,8 +33,11 @@ class Addition extends Model implements Sortable
             else {
 
                 if (
-                    strtotime(date('Y-m-d')) > strtotime($this->discount_end) ||
-                    strtotime(date('Y-m-d')) < strtotime($this->discount_start)
+                    !empty($this->discount_start) && !empty($this->discount_end) &&
+                    (
+                        strtotime(date('Y-m-d')) > strtotime($this->discount_end) ||
+                        strtotime(date('Y-m-d')) < strtotime($this->discount_start)
+                    )
                 ) $result[$type] = null;
                 else {
                     if (!empty($this->discount_price[$type])) {
