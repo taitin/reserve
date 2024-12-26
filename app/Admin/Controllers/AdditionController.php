@@ -124,6 +124,7 @@ JS;
                 }
             });
             $form->switch('use_discount')->default(1);
+            $form->dateRange('discount_start', 'discount_end', '折扣時間');
 
 
             $form->embeds('discount_price', function (Form\EmbeddedForm $form) {
