@@ -556,9 +556,9 @@
         // } else {
         //     var use_price = 'price';
         // }
-        user_price = 'discount_price';
-        if (!additions[key][use_price][carType]) {
-            user_price = 'price';
+        use_price = 'discount_price';
+        if (!projects[project_id][use_price][carType]) {
+            use_price = 'price';
         }
 
 
@@ -585,7 +585,7 @@
         for (var key in additions) {
 
 
-            var p = additions[key][use_price][carType] ?? additions[key]['price'][carType];
+            var p = additions[key]['discount_price'][carType] ?? additions[key]['price'][carType];
             $('#service' + key).attr('data-price', p);
             $('#service' + key).parent().find('span').html(p + ' 元');
 
