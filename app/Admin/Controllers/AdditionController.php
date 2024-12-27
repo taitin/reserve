@@ -20,6 +20,7 @@ class AdditionController extends AdminController
     {
         return Grid::make(new Addition(), function (Grid $grid) {
             // $grid->column('id')->sortable();
+            $grid->sortable('order');
             $grid->model()->orderBy('order', 'asc');
             $grid->column('order', '頁面排序');
             $grid->column('status')->switch();
