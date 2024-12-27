@@ -19,7 +19,7 @@ class ProjectController extends AdminController
     protected function grid()
     {
         return Grid::make(new Project(), function (Grid $grid) {
-            // $grid->sortable('order');
+            $grid->sortable('order');
             $grid->model()->orderBy('order', 'asc');
             // $grid->column('id')->sortable();
             $grid->column('order', '頁面排序');
