@@ -485,6 +485,7 @@
             var select = $('#project');
             project_id = $('#project').val();
             select.empty();
+            select.append('<option value="">==請選擇洗車方案==</option>');
             for (var key in data.projects) {
                 project = data.projects[key];
                 projects[project.id] = project;
