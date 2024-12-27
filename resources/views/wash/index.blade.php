@@ -558,6 +558,9 @@
         //     var use_price = 'price';
         // }
         use_price = 'discount_price';
+        $('#price-cavas').html(
+            '原價：<del id="orgAmount">元</del> 特價：<span id="basicAmount" style="color: red"> 元</span>');
+
         if (!projects[project_id][use_price][carType]) {
             use_price = 'price';
         }
