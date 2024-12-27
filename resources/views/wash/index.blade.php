@@ -547,17 +547,21 @@
             $('#projectAlert').text('').hide();
         }
 
-        if ($('#is_member').val() == 1) {
-            var use_price = 'discount_price';
-            if (projects[project_id][use_price][carType]) {
-                $('#price-cavas').html(
-                    '原價：<del id="orgAmount">元</del> 特價：<span id="basicAmount" style="color: red"> 元</span>');
-            } else use_price = 'price';
-        } else {
-            var use_price = 'price';
-
-
+        // if ($('#is_member').val() == 1) {
+        //     var use_price = 'discount_price';
+        //     if (projects[project_id][use_price][carType]) {
+        //         $('#price-cavas').html(
+        //             '原價：<del id="orgAmount">元</del> 特價：<span id="basicAmount" style="color: red"> 元</span>');
+        //     } else use_price = 'price';
+        // } else {
+        //     var use_price = 'price';
+        // }
+        user_price = 'discount_price';
+        if (!additions[key][use_price][carType]) {
+            user_price = 'price';
         }
+
+
 
         if (use_price == 'price') {
             $('#price-cavas').html('<span id="basicAmount" style="color: red"> 元</span>');

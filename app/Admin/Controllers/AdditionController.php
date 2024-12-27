@@ -124,6 +124,9 @@ JS;
                 }
             });
             $form->switch('use_discount')->default(1);
+
+            $form->select('by_discount_user', '可使用優惠的使用者')->options(config('wash.discount_user'));
+
             $form->dateRange('discount_start', 'discount_end', '折扣時間');
 
 
