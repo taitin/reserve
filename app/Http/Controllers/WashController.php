@@ -665,10 +665,10 @@ class WashController extends Controller
                     return ['result' => true, 'message' => '會員', 'social_id' => $social_id];
                 }
             }
+            return ['result' => false];
         } else {
             return ['result' => false];
         }
-        dd('checkMember');
 
 
         // $data = [
