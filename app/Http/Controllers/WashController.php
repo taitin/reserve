@@ -640,7 +640,7 @@ class WashController extends Controller
     public function checkMember($social_id)
     {
 
-
+        session(['is_member' => false]);
         $member = AutpoassMember::where('social_id', $social_id)->first();
         if (!empty($member)) {
             session(['is_member' => true]);
@@ -653,7 +653,7 @@ class WashController extends Controller
             foreach ($portals as $portal) {
                 $matches = countMatchingItems(explode(' ', $portal->agent), explode(' ', $_SERVER['HTTP_USER_AGENT']));
                 if ($matches > 6) {
-
+                    session(['is_member' => true]);
                     $member  = new AutpoassMember();
                     $member->social_id = $social_id;
                     $member->ip = $_SERVER['REMOTE_ADDR'];
