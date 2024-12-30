@@ -646,7 +646,6 @@ class WashController extends Controller
             session(['is_member' => true]);
             return ['result' => true, 'message' => '會員', 'social_id' => $social_id];
         }
-        dd('checkMember');
         $portals = PortalUser::where('ip', $_SERVER['REMOTE_ADDR'])
             ->where('created_at', '>', Carbon::now()->subMinutes(180))
             ->get();
@@ -669,6 +668,7 @@ class WashController extends Controller
         } else {
             return ['result' => false];
         }
+        dd('checkMember');
 
 
         // $data = [
