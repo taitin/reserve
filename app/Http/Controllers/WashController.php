@@ -643,7 +643,7 @@ class WashController extends Controller
 
         $member = AutpoassMember::where('social_id', $social_id)->first();
         if (!empty($member)) {
-            session(['is_member' => true]);
+            //  session(['is_member' => true]);
             return ['result' => true, 'message' => '會員', 'social_id' => $social_id];
         }
 
