@@ -261,20 +261,11 @@ class Wash extends Model
     public function getTotal($car_type)
     {
         $hr = 0;
-        if ($this->is_member) {
-            $total =   $this->project->discount_price[$car_type] ?? $this->project->price[$car_type] ?? 0;
-        } else {
-            $total =   $this->project->price[$car_type] ?? 0;
-        }
-
+        $total =   $this->project->discount_price[$car_type] ?? $this->project->price[$car_type] ?? 0;
         $hr += $this->project->use_times[$car_type] ?? 0;
         if ($this->additions) {
             foreach ($this->additions as $service) {
-                if ($this->is_member) {
-                    $total += $service['discount_price'][$car_type] ?? $service['price'][$car_type] ?? 0;
-                } else {
-                    $total += $service['price'][$car_type] ?? 0;
-                }
+                $total += $service['discount_price'][$car_type] ?? $service['price'][$car_type] ?? 0;
                 $hr += $service->use_time;
             }
         }
