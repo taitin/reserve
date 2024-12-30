@@ -553,6 +553,7 @@ class WashController extends Controller
         $projects = [];
         //將 id 設為 key
         foreach ($rets as $ret) {
+            $ret->setMember(session('is_member', false));
             $ret->discount_price = $ret->discount;
             if ($request->car_type) {
                 if (!empty($ret->price[$request->car_type])) $projects[] = $ret;
@@ -576,6 +577,8 @@ class WashController extends Controller
         //將 id 設為 key
         $additions = [];
         foreach ($rets as $ret) {
+            $ret->setMember(session('is_member', false));
+
             $assign_projects = $ret->projects->pluck('id')->toArray();
 
             if (!empty($assign_projects)) {
@@ -640,6 +643,7 @@ class WashController extends Controller
 
         $member = AutpoassMember::where('social_id', $social_id)->first();
         if (!empty($member)) {
+            session(['is_member' => true]);
             return ['result' => true, 'message' => '會員', 'social_id' => $social_id];
         }
 
