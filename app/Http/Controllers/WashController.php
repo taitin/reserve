@@ -604,13 +604,23 @@ class WashController extends Controller
             } else $projects[] = $ret;
         }
 
-        return ['result' => true, 'projects' => $projects, 'is_member' => session('is_member', false), 'is_preview' => session('is_preview', false)];
+        return [
+            'result' => true,
+            'projects' => $projects,
+            'is_member' => session('is_member', false),
+            'is_preview' => session('is_preview', false)
+        ];
     }
 
     public function getAdditions(Request $request)
     {
-        $query  = \App\Models\Addition::where('status', 1)
-            ->orderBy('order');
+
+        $query = new  \App\Models\Addition();
+        if (!session('is_preview', false)) {
+            $query = $query->where('status', 1);
+        }
+        $query = $query->orderBy('order');
+
         if ($request->date) {
             $query = $query->where('addition_start', '<=', $request->date);
             $query = $query->where('addition_end', '>=', $request->date);
@@ -647,7 +657,12 @@ class WashController extends Controller
 
 
 
-        return ['result' => true, 'additions' => $additions];
+        return [
+            'result' => true,
+            'additions' => $additions,
+            'is_member' => session('is_member', false),
+            'is_preview' => session('is_preview', false)
+        ];
     }
 
     public function payFailed(Wash $wash)
