@@ -77,6 +77,7 @@ class AdditionController extends AdminController
 
 JS;
             Admin::script($script);
+            $grid->tools('<a class="btn btn-primary"  href="' . url('wash/preview') . '" target="_blank"><i class="fa fa-eye"></i>預覽設定</a>');
         });
     }
 
