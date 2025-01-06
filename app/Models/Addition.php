@@ -62,4 +62,9 @@ class Addition extends Model implements Sortable
     {
         return $this->belongsToMany(Project::class, 'addition_projects');
     }
+
+    public function setMember($is_member)
+    {
+        $this->is_member = $is_member;
+    }
 }
