@@ -77,6 +77,7 @@ class ProjectController extends AdminController
 
 JS;
             Admin::script($script);
+            $grid->tools('<a class="btn btn-primary"  href="' . url('wash/preview') . '" target="_blank">預覽設定</a>');
         });
     }
 
@@ -132,14 +133,14 @@ JS;
 
 
             $form->embeds('discount_price', function (Form\EmbeddedForm $form) {
-                $form->html('<h5 class="title">直接輸入「折扣價」或「折扣 %」</h5>');
+                $form->html('<h5 class="title">折扣價」或「折扣 %」請擇一填入</h5>');
 
                 foreach (config('wash.car_types') as $key => $value) {
 
                     $form->html('<h4>' . $value . '</h4>');
                     $form->html('<h5></h5>');
 
-                    $form->text($key, '折扣價')->width(8, 4);
+                    $form->text($key, '折扣價')->width(8, 4)->rules();
                     $form->decimal($key . '_discount', '折扣%')->width(9, 3)->placeholder('數字 10 = 定價 x 10%');
                 }
             });
@@ -161,7 +162,17 @@ JS;
             $form->switch('status')->default(1);
             $form->dateRange('project_start', 'project_end', '方案執行時間');
 
-
+            $form->submitted(function (Form $form) {
+                //discount_price 折扣價 根 折扣 只能出現一者
+                $discount_price = $form->discount_price;
+                if (!empty($discount_price)) {
+                    foreach (config('wash.car_types') as $key => $value) {
+                        if ($discount_price[$key] && $discount_price[$key . '_discount']) {
+                            return $form->response()->error('折扣價與折扣%只能填寫一者');
+                        }
+                    }
+                }
+            });
 
 
             $form->display('created_at');

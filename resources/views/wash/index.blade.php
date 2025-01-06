@@ -13,7 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-    @if (env('APP_ENV') != 'local')
+    @if (env('APP_ENV') != 'local' && empty($preview))
         <script>
             $(function() {
                 liff.init({
@@ -36,29 +36,39 @@
                     console.log('初始化失敗');
                 });
             });
-            var profile = [];
-
-            function getLastProfile() {
-                var social_id = $('#social_id').val();
-
-                $.get('/wash/get_profile/' + social_id, {}, function(data) {
-
-                    if (data.result) {
-                        $('#name').val(data.data.name);
-
-                        $('#phone').val(data.data.phone);
-                        $('#license').val(data.data.license);
-                        $('#model').val(
-                            data.data.model);
-                        $('#car_type').val(data.data.car_type);
-                        $('#project_id').val(data.data.project_id);
-                        profile = data.data;
-                        getProjects();
-                    }
-                }, 'json');
-            }
+        </script>
+    @else
+        <script>
+            $(function() {
+                getLastProfile()
+            });
         </script>
     @endif
+
+
+    <script>
+        var profile = [];
+
+        function getLastProfile() {
+            var social_id = $('#social_id').val();
+
+            $.get('/wash/get_profile/' + social_id, {}, function(data) {
+
+                if (data.result) {
+                    $('#name').val(data.data.name);
+                    $('#phone').val(data.data.phone);
+                    $('#license').val(data.data.license);
+                    $('#model').val(
+                        data.data.model);
+                    $('#car_type').val(data.data.car_type);
+                    $('#project_id').val(data.data.project_id);
+                    profile = data.data;
+                    getProjects();
+                }
+            }, 'json');
+        }
+    </script>
+
     <style>
         body {
             /* padding: 20px; */
@@ -324,9 +334,29 @@
 <body>
     <form onsubmit="return validateLicense()" action="/wash" method="post">
         @csrf
-        <input type="hidden" id="social_id" name="social_id" value="">
+
 
         <section id="step1">
+            @if (!empty($preview))
+                <div class="form-group welcome" style="background-color:red">
+                    <div class="main" style="color:white">方案預覽測試頁面</div>
+
+                </div>
+                <div id="">
+                    <div class="form-group">
+                        <label for="model">使用者身分</label>
+                        <select name="social_id" id="social_id" onchange="getLastProfile()">
+                            @foreach (config('wash.discount_user') as $key => $value)
+                                @if ($key != 0)
+                                    <option value="preview_{{ $key }}">{{ $value }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            @else
+                <input type="hidden" id="social_id" name="social_id" value="">
+            @endif
             <div class="form-group welcome">
                 <div class="main">
                     AK STUDIO A 咖專業車體美容 歡迎你！</div>
@@ -334,6 +364,7 @@
                     請先填寫你的基本資訊
                 </div>
             </div>
+
 
 
             <div class="form-group">
@@ -466,7 +497,8 @@
                         {{ $errors->first() }}
                     @endif
                 </p>
-                <button type="submit" class="btn btn-info btn-block submit-btn">送出預約</button>
+                <button type="submit" class="btn btn-info btn-block submit-btn"
+                    {{ empty($preview) ? '' : 'disabled' }}>送出預約</button>
             </section>
         </section>
     </form>

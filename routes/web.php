@@ -38,6 +38,8 @@ Route::any('line/bind', [LineController::class, 'bind']);
 Route::get('test', [WashController::class, 'test']);
 
 Route::get('wash', [WashController::class, 'index'])->name('wash.index');
+Route::get('wash/preview', [WashController::class, 'preview']);
+
 
 Route::get('wash/portal', [WashController::class, 'portal']);;
 

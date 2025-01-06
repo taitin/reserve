@@ -13,6 +13,7 @@ use App\Models\Wash;
 use App\Services\AutopassService;
 use App\Services\LineService;
 use Carbon\Carbon;
+use Dcat\Admin\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -48,6 +49,24 @@ class WashController extends Controller
 
         return view('wash.index', $data);
     }
+
+
+    public function preview(Request $request)
+    {
+
+        //admin login
+        if (empty(Admin::user())) return redirect()->to('/wash');;
+
+
+        $parkings = ModelsParking::all();
+        $data['parkings'] = $parkings->groupBy('city');
+        $data['wash'] = Wash::find($request->id);
+        $data['preview'] = true;
+        //洗車 form
+        return view('wash.index', $data);
+    }
+
+
     public function portal()
     {
 
@@ -64,8 +83,29 @@ class WashController extends Controller
 
     public function getProfile($social_id)
     {
-        //洗車 form
-        $wash =  Wash::where('social_id', $social_id)->orderBy('id', 'desc')->first();
+        if (str_contains($social_id, 'preview')) {
+
+            $p = explode('_', $social_id);
+            $is_member = $p[1] == 1;
+            session(['is_member' =>   $is_member]);
+            session(['is_preview' =>  true]);
+
+            $wash = [
+                'name' => ($is_member) ? '車麻吉會員' : '非車麻吉會員',
+                'phone' => '0912345678',
+                'license' => 'ABC-1234',
+                'model' => 'Toyota',
+                'car_type' => 'house',
+                'is_member' => $is_member,
+            ];
+        } else {
+
+            session(['is_preview' =>  false]);
+
+            //洗車 form
+
+            $wash =  Wash::where('social_id', $social_id)->orderBy('id', 'desc')->first();
+        }
 
         return [
             'result' => true,
@@ -541,9 +581,11 @@ class WashController extends Controller
 
     public function getProjects(Request $request)
     {
-        $query = \App\Models\Project::where('status', 1)
-            ->orderBy('order');
-
+        $query = new  \App\Models\Project();
+        if (!session('is_preview', false)) {
+            $query = $query->where('status', 1);
+        }
+        $query = $query->orderBy('order');
         if ($request->date) {
             $query = $query->where('project_start', '<=', $request->date);
             $query = $query->where('project_end', '>=', $request->date);
@@ -555,12 +597,14 @@ class WashController extends Controller
         foreach ($rets as $ret) {
             $ret->setMember(session('is_member', false));
             $ret->discount_price = $ret->discount;
+
+
             if ($request->car_type) {
                 if (!empty($ret->price[$request->car_type])) $projects[] = $ret;
             } else $projects[] = $ret;
         }
 
-        return ['result' => true, 'projects' => $projects];
+        return ['result' => true, 'projects' => $projects, 'is_member' => session('is_member', false), 'is_preview' => session('is_preview', false)];
     }
 
     public function getAdditions(Request $request)
@@ -639,6 +683,15 @@ class WashController extends Controller
 
     public function checkMember($social_id)
     {
+        if (str_contains($social_id, 'preview')) {
+
+            $p = explode('_', $social_id);
+            $is_member = $p[1] == 1;
+            session(['is_member' =>   $is_member]);
+            return ['result' =>  $is_member, 'message' => '會員', 'social_id' => $social_id];
+        }
+
+
 
         session(['is_member' => false]);
         $member = AutpoassMember::where('social_id', $social_id)->first();

@@ -132,7 +132,7 @@ JS;
 
 
             $form->embeds('discount_price', function (Form\EmbeddedForm $form) {
-                $form->html('<h5 class="title">直接輸入「折扣價」或「折扣 %」</h5>');
+                $form->html('<h5 class="title">折扣價」或「折扣 %」請擇一填入</h5>');
 
                 foreach (config('wash.car_types') as $key => $value) {
 
@@ -175,7 +175,17 @@ JS;
                     return array_column($v, 'id');
                 })
                 ->help('空白表示全方案皆可搭配');
-
+            $form->submitted(function (Form $form) {
+                //discount_price 折扣價 根 折扣 只能出現一者
+                $discount_price = $form->discount_price;
+                if (!empty($discount_price)) {
+                    foreach (config('wash.car_types') as $key => $value) {
+                        if ($discount_price[$key] && $discount_price[$key . '_discount']) {
+                            return $form->response()->error('折扣價與折扣%只能填寫一者');
+                        }
+                    }
+                }
+            });
             $form->display('created_at');
             $form->display('updated_at');
         });
