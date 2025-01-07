@@ -26,7 +26,11 @@ class ProjectController extends AdminController
 
             $grid->column('status')->switch();
             $grid->column('name')->editable();
-            $grid->column('description')->setAttribute(['style' => 'min-width:200px']);
+            $grid->column('description')
+                ->display(function ($value) {
+                    return nl2br($value);
+                })->setAttributes(['style' => 'min-width:200px']);
+
             $grid->column('use_times')->display(function ($value) {
                 return showTypeContent($value, 'hr');
             })->setAttributes(['style' => 'width:180px']);
