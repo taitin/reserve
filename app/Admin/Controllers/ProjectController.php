@@ -163,7 +163,7 @@ JS;
 
 
 
-            $form->switch('status')->default(1);
+            $form->switch('status')->default(0);
             $form->dateRange('project_start', 'project_end', '方案執行時間');
 
             $form->submitted(function (Form $form) {

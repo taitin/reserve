@@ -160,7 +160,7 @@ JS;
             Admin::script($script);
 
 
-            $form->switch('status')->default(1);
+            $form->switch('status')->default(0);
             $form->dateRange('addition_start', 'addition_end', '方案執行時間');
 
 
