@@ -21,11 +21,6 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/schedule', function () {
-    //執行 artisan command
-    Artisan::call('wash:timeout_check');
-    Artisan::call('wash:reply_check');
-});
 
 
 Route::get('/', [IndexController::class, 'index']);
