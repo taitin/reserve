@@ -22,12 +22,12 @@ class Kernel extends ConsoleKernel
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
-    protected function schedule(Schedule $schedule)
+    protected function         Log::debug('schedule run');
+    (Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        Artisan::call('wash:timeout_check');
-        Artisan::call('wash:reply_check');
-        Log::debug('schedule run');
+        $schedule->command('wash:timeout_check')->everyMinute();
+        $schedule->command('wash:reply_check')->everyMinute();
     }
 
     /**
