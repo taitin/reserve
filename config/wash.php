@@ -46,7 +46,8 @@ return [
         1 => '車麻吉會員',
         2 => '非車麻吉會員',
     ],
-    'title' => '車普羅優品鍍膜'
+    'title' => '車普羅優品鍍膜',
+    'map' => 'https://www.google.com.tw/maps/place/車普羅優品鍍膜/@25.0828118,121.560982,17z/data=!3m1!4b1!4m6!3m5!1s0x3442ad4981f9f51d:0xf314642c71c6afd6!8m2!3d25.082807!4d121.5635569!16s%2Fg%2F11wq50jfrj?entry=ttu&g_ep=EgoyMDI1MDQyMS4wIKXMDSoASAFQAw%3D%3D'
 
 
 ];
