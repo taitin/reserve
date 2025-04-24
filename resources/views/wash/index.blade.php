@@ -359,7 +359,7 @@
             @endif
             <div class="form-group welcome">
                 <div class="main">
-                    AK STUDIO A 咖專業車體美容 歡迎你！</div>
+                    {{ config('wash.title') }} 歡迎你！</div>
                 <div id="">
                     請先填寫你的基本資訊
                 </div>
