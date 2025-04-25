@@ -46,9 +46,10 @@ class WashController extends Controller
         $parkings = ModelsParking::all();
         $data['parkings'] = $parkings->groupBy('city');
         $data['wash'] = Wash::find($request->id);
+        if (env('APP_ENV') == 'production') {
+            return view('wash.close', ['message' => '本系統已經停止服務。']);
+        }
 
-
-        return view('wash.close', ['message' => '本系統已經停止服務。']);
         return view('wash.index', $data);
     }
 
