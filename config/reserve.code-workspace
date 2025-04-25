@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"name": "SSH FS - autopass",
+			"uri": "ssh://autopass/var/www/html"
+		}
+	],
+	"settings": {}
+}

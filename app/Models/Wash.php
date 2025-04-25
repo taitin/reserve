@@ -181,7 +181,7 @@ class Wash extends Model
     {
 
         $data = $this->getNewBooking();
-        $data['link'] = 'https://www.google.com/maps/place/AK+STUDIO+-+A%E5%92%96%E5%B0%88%E6%A5%AD%E8%BB%8A%E9%AB%94%E7%BE%8E%E5%AE%B9%EF%BC%88%E6%B4%97%E8%BB%8A%E6%89%93%E8%A0%9F%2F%E9%8D%8D%E8%86%9C%2F%E6%B1%BD%E8%BB%8A%E7%BE%8E%E5%AE%B9%EF%BC%89/@25.0716714,121.579073,17z/data=!3m1!4b1!4m6!3m5!1s0x3442addffedbf703:0x3f3a4a8525361143!8m2!3d25.0716714!4d121.5816533!16s%2Fg%2F11vwwb7y66?entry=ttu&g_ep=EgoyMDI0MDkyMi4wIKXMDSoASAFQAw%3D%3D';;
+        $data['link']    = 'https://www.google.com.tw/maps/place/%E8%BB%8A%E6%99%AE%E7%BE%85%E5%84%AA%E5%93%81%E9%8D%8D%E8%86%9C/@25.0828118,121.560982,17z/data=!3m1!4b1!4m6!3m5!1s0x3442ad4981f9f51d:0xf314642c71c6afd6!8m2!3d25.082807!4d121.5635569!16s%2Fg%2F11wq50jfrj?entry=ttu&g_ep=EgoyMDI1MDQyMS4wIKXMDSoASAFQAw%3D%3D';
         return $data;
     }
 
