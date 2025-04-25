@@ -10,7 +10,6 @@ class IndexController extends Controller
 
     public function index(Request $request)
     {
-        dd(env('APP_ENV'));
         if (env('APP_ENV') == 'production') {
             return view('wash.close', ['message' => '本系統已經停止服務。']);
         }
